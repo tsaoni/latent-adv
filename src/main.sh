@@ -20,4 +20,5 @@ python main.py \
  --save_top_k 1 \
  --num_train_epochs 1 \
  --gradient_accumulation_steps 1 \
- --logger_name wandb
+ --logger_name wandb \
+ --val_metric val_avg_loss

@@ -133,18 +133,9 @@ class TrainingModule(pl.LightningModule):
         return [optimizer], [scheduler]
     
     def configure_callbacks(self):
-        # Define your callbacks here
         logging_callback = LoggingCallback(self.callback_args_dict['log'], self.output_dir)
-        """
-        checkpoint_callback = pl.callbacks.ModelCheckpoint(
-            dirpath='./checkpoints',
-            filename='model-{epoch:02d}-{val_loss:.2f}',
-            save_top_k=3,
-            monitor='val_loss',
-            mode='min'
-        )
-        """
-        return [logging_callback]
+        checkpoint_callback = CheckpointCallback(self.callback_args_dict['ckpt'], self.output_dir)
+        return [logging_callback, checkpoint_callback]
     
     def _feature_file(self, mode):
         return os.path.join(
@@ -239,41 +230,46 @@ class TrainingModule(pl.LightningModule):
     def generate_step(self, batch: dict, prefix='val') -> dict:
         # todo: add batch eval metric
         bsz = batch["input_ids"].size(0)
-        if self.is_seq2seq:
+        if self.model.model_type in ['seq2seq', 'tgwv']:
             t0 = time.time()
             generated_ids = self.model.generate(batch)
             preds: List[str] = self.model.ids_to_clean_text(generated_ids)
             target: List[str] = self.model.ids_to_clean_text(batch["labels"])
             gen_time = (time.time() - t0) / batch["input_ids"].shape[0]
             loss_tensors = self(batch)
+            loss = loss_tensors[0].item()
             # print('INPUT:', self.ids_to_clean_text(batch["input_ids"]))
             # print(preds, target)
             #rouge: Dict = self.calc_generative_metrics(preds, target)
             summ_len = np.mean(lmap(len, generated_ids))
-            base_metrics = dict(gen_time=gen_time, gen_len=summ_len)# , preds=preds, target=target)#, **rouge)
+            base_metrics = dict(loss=loss, gen_time=gen_time, gen_len=summ_len)# , preds=preds, target=target)#, **rouge)
             seq_kwargs = dict(
                 predictions=preds, 
                 references=target, 
             )
             metric_kwargs = {'seq2seq_kwargs': seq_kwargs}
         
-        elif self.model.args.model_mode == 'sequence-classification':
+        elif self.model.model_type == 'cls':
             outputs = self.model(**batch)
             preds: torch.Tensor(List[int]) = outputs.logits.argmax(dim=-1)
             target: torch.Tensor(List[int]) = batch["labels"]
             loss_tensors = self(batch)
+            loss = loss_tensors[0].item()
             #base_metrics = {name: loss for name, loss in zip(self.loss_names, loss_tensors)}
             base_metrics = dict()
             batch_acc = sum([1 if p == t else 0 for p, t in zip(preds, target)]) / bsz
-            base_metrics.update(accuracy=batch_acc) #, preds=preds.tolist(), target=target.tolist())
+            base_metrics.update(acc=batch_acc, loss=loss) #, preds=preds.tolist(), target=target.tolist())
             seq_kwargs = dict(
                 predictions=preds, 
                 references=target, 
             )
             metric_kwargs = {'result_kwargs': seq_kwargs}
 
-        
         self.metric.add_batch_metric(base_metrics, type_path=prefix, **metric_kwargs)
+        # log metric to checkpoint callback. 
+        if len(self.metric.metric_dicts['val']) > 0:
+            metric_name = self.callback_args_dict['ckpt'].val_metric
+            self.log(metric_name, self.metric.metric_dicts['val'][-1][metric_name])
 
         return base_metrics
 

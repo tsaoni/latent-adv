@@ -49,7 +49,7 @@ class LoggingCallback(pl.Callback):
             references = pl_module.metric.result_dicts[-1]['references']
             for p, r in zip(predictions, references):
                 pred_ref_list.append({'pred': p, 'ref': r})
-            with open(generations_file.name, 'w') as f:
+            with open(generations_file, 'w') as f:
                 json.dump(pred_ref_list, f, indent=4)
 
         pl_module.metric.result_dicts = [] # clean up preds for save memory (?)
@@ -66,7 +66,7 @@ class LoggingCallback(pl.Callback):
         os.makedirs(od, exist_ok=True)
         if len(pl_module.metric.metric_dicts[type_path]) > 0:
             metric = pl_module.metric.metric_dicts[type_path][-1] 
-            with open(results_file.name, 'w') as f:
+            with open(results_file, 'w') as f:
                 json.dump(metric, f, indent=4)
 
     @rank_zero_only
@@ -126,9 +126,18 @@ class LoggingCallback(pl.Callback):
         return LoggingArguments
 
 class CheckpointCallback(pl.callbacks.ModelCheckpoint):
-    def __init__(self, args):
+    def __init__(self, args, output_dir):
         self.args = args
-        super().__init__()
+        checkpoint_path = os.path.join(output_dir, 'checkpoints')
+        os.makedirs(checkpoint_path, exist_ok=True)
+        super().__init__(
+            dirpath=checkpoint_path,
+            filename='model-{epoch:02d}-{' + args.val_metric + ':.2f}',
+            save_top_k=args.save_top_k,
+            monitor=args.val_metric,
+            mode='min' if 'loss' in args.val_metric else 'max', 
+            save_last=True, 
+        )
 
     @staticmethod
     def add_specific_args():
