@@ -1,5 +1,4 @@
 from lib import *
-from metric import Metric
 
 def count_trainable_parameters(model):
     model_parameters = filter(lambda p: p.requires_grad, model.parameters())
@@ -130,6 +129,7 @@ class CheckpointCallback(pl.callbacks.ModelCheckpoint):
         self.args = args
         checkpoint_path = os.path.join(output_dir, 'checkpoints')
         os.makedirs(checkpoint_path, exist_ok=True)
+        
         super().__init__(
             dirpath=checkpoint_path,
             filename='model-{epoch:02d}-{' + args.val_metric + ':.2f}',

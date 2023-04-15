@@ -4,6 +4,7 @@ from lib import *
 from model import *
 from dataset import *
 from callback import *
+from metric import *
 from utils import (
     use_task_specific_params, 
     pickle_save, 
@@ -17,10 +18,10 @@ from utils import (
 class TrainingModule(pl.LightningModule):
     def __init__(
         self,
-        hparams: argparse.Namespace, 
-        model,
-        callback_args_dict, # keys: ckpt, log
-        output_dir_kwargs=None, 
+        hparams: argparse.Namespace = None, 
+        model = None,
+        callback_args_dict = None, # keys: ckpt, log
+        output_dir_kwargs = None, 
         **kwargs, # attr: gpus, sortish_sampler, max_tokens_per_batch, train_batch_size, gradient_accumulation_steps, dataset_len
         # num_train_epochs, 
     ):
@@ -33,8 +34,8 @@ class TrainingModule(pl.LightningModule):
         pickle_save(self.hparams, self.hparams_save_path)
         self.check_sampler_usage()
         self.step_count = 0
-        self.model = model
-        self.callback_args_dict = callback_args_dict
+        self.set_attr('model', model)
+        self.set_attr('callback_args_dict', callback_args_dict)
         self.metric = Metric(
             model_mode=self.model.model_type,
             val_metric_name=self.callback_args_dict['ckpt'].val_metric, 
@@ -42,12 +43,19 @@ class TrainingModule(pl.LightningModule):
         )
         self.metadata = dict() # use for logs
     
+    def set_attr(self, attr, attr_value, obj=None):
+        if obj is None: obj = self
+        if hasattr(self.hparams, attr):
+            setattr(obj, attr, getattr(self.hparams, attr))
+        else:
+            setattr(obj, attr, attr_value)
 
     def create_output_dir(self, kwargs):
+        self.set_attr('output_dir_kwargs', kwargs)
         if self.hparams.output_dir is None:
-            assert kwargs is not None
+            assert self.output_dir_kwargs is not None
             output_dir_name_list = []
-            for key, value in kwargs.items():
+            for key, value in self.output_dir_kwargs.items():
                 output_dir_name_list.append(f"{key}={value}")
 
             output_dir_name = "_".join(output_dir_name_list)
@@ -58,9 +66,11 @@ class TrainingModule(pl.LightningModule):
                         + 'w={}_'.format(self.hparams.weight_decay) + 's={}'.format(self.hparams.seed)
             """
             self.output_dir = os.path.join('../models', output_dir_name)
-            Path(self.output_dir).mkdir(parents=True, exist_ok=True)
         else:
             self.output_dir = os.path.join('../models', self.hparams.output_dir)
+
+        Path(self.output_dir).mkdir(parents=True, exist_ok=True)
+        self.hparams.output_dir = self.output_dir
 
         print(f'the current output_dir is {self.output_dir}')
         if len(os.listdir(self.output_dir)) > 3 and self.hparams.do_train:
@@ -79,7 +89,7 @@ class TrainingModule(pl.LightningModule):
 
     def set_extra_attrs(self, kwargs):
         for key, value in kwargs.items():
-            setattr(self.hparams, key, value)
+            self.set_attr(key, value, obj=self.hparams)
      
     @property
     def total_steps(self) -> int:
@@ -260,8 +270,8 @@ class TrainingModule(pl.LightningModule):
             batch_acc = sum([1 if p == t else 0 for p, t in zip(preds, target)]) / bsz
             base_metrics.update(acc=batch_acc, loss=loss) #, preds=preds.tolist(), target=target.tolist())
             seq_kwargs = dict(
-                predictions=preds, 
-                references=target, 
+                predictions=preds.tolist(), 
+                references=target.tolist(), 
             )
             metric_kwargs = {'result_kwargs': seq_kwargs}
 

@@ -14,6 +14,7 @@ from pathlib import Path
 
 # callback
 from pytorch_lightning.loggers import WandbLogger
+import wandb
 
 # trainer
 import abc

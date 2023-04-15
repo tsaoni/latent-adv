@@ -1,11 +1,13 @@
 from lib import *
 
+os.environ['CUDA_VISIBLE_DEVICES'] = '0'
 sys.path.append('..')
 
 from module import *
 from model import *
 from dataset import *
 from callback import *
+from perturb_eval import *
 
 from utils import (
     check_argument_setting,
@@ -70,6 +72,14 @@ class ScriptArguments:
         metadata={"help": "-1 means never early stop. "
         "early_stopping_patience is measured in validation checks, not epochs. "
         "So val_check_interval will effect it."}
+    )
+    tgwv_local_ckpt: Optional[str] = field(
+        default=None, 
+        metadata={"help": "use model from checkpoints. "}
+    )
+    tgwv_v_mode: Optional[str] = field(
+        default=None, 
+        metadata={"help": "options: `softmax`, `raw`, `drop`. "}
     )
 
 
@@ -163,13 +173,13 @@ def trainer_kwargs(script_args: Namespace, model_mode=None, logger=None, callbac
     return kwargs
 
 def get_trainer(args, output_dir, logger_name, seed=None, model_mode=None):
-    logger = LoggingCallback.get_logger(logger_name, output_dir)
+    #logger = LoggingCallback.get_logger(logger_name, output_dir)
     #callbacks = get_callback(module, new_args, dict(mode="max", save_top_k=new_args.main.save_top_k))
     return pl.Trainer(
         **trainer_kwargs(
             args, 
             model_mode=model_mode, 
-            logger=logger, 
+            logger=None, 
             callbacks=None, 
         ), 
         **train_settings(args, seed=seed),
@@ -182,6 +192,8 @@ def get_kwargs(
         loader_args, 
         script_args, 
         model_mode=None,
+        cls_model_name=None, 
+        v_mode='default', 
         type=None
     ):
     assert type in ['extra_module_attrs', 'output_dir_kwargs']
@@ -203,10 +215,13 @@ def get_kwargs(
     elif type == 'output_dir_kwargs':
         data_dir = getattr(data_args, d_model_mode+'_data_dir').replace('/', '#')
         model_name = getattr(model_args, m_model_mode+'_model_name_or_path').replace('/', '.')
+        if cls_model_name is not None: cls_model_name = cls_model_name.replace('/', '.')
+        tgwv_kwargs = {'cls_m': cls_model_name, "v_mode": v_mode} if model_mode == 'tgwv' else {}
         kwargs = dict(
             t=model_mode, # task
             m=model_name, # model
             d=data_dir, # data
+            **tgwv_kwargs, 
         )
 
     return kwargs
@@ -255,6 +270,7 @@ def main():
         'cls_tokenizer':cls_model.tokenizer, 
         'cls_model':cls_model, 
         'padding_num':tgwv_args.d_model - tgwv_model.original_embed_dim - cls_model.args.num_labels, 
+        'v_mode': script_args.tgwv_v_mode, 
     }
     tgwv_loader = DataModule(loader_args, cls_data_args, 'tgwv', **tgwv_kwargs)
 
@@ -268,7 +284,13 @@ def main():
     cls_output_dir_kwargs = get_kwargs(*cls_list_args, *common_args, model_mode='cls', type='output_dir_kwargs')
     # set tgwv
     tgwv_attr_kwargs = get_kwargs(*tgwv_list_args, *common_args, model_mode='tgwv', type='extra_module_attrs')
-    tgwv_output_dir_kwargs = get_kwargs(*tgwv_list_args, *common_args, model_mode='tgwv', type='output_dir_kwargs')
+    tgwv_output_dir_kwargs = get_kwargs(
+        *tgwv_list_args, *common_args, 
+        model_mode='tgwv', 
+        cls_model_name=cls_model.args.model_name_or_path, 
+        v_mode=script_args.tgwv_v_mode, 
+        type='output_dir_kwargs'
+    )
     """ move to top
     args_dict = dict(
         seq2seq=seq2seq_args, 
@@ -284,36 +306,46 @@ def main():
         args_dict[key] = argparse.Namespace(**value.__dict__)
     """
     print('start init seq module ...')
-    callback_args_dict = dict(log=logging_args, ckpt=ckpt_args)
+    callback_args_dict = dict(log=args_dict['logging'], ckpt=args_dict['ckpt'])
     seq_module = TrainingModule(
-        args_dict['train'], 
-        model, 
-        callback_args_dict, 
+        hparams=args_dict['train'], 
+        model=model, 
+        callback_args_dict=callback_args_dict, 
         output_dir_kwargs=seq_output_dir_kwargs, 
         **seq_attr_kwargs
     )
     print('start init cls module ...')
     cls_module = TrainingModule(
-        args_dict['train'], 
-        cls_model, 
-        callback_args_dict, 
+        hparams=args_dict['train'], 
+        model=cls_model, 
+        callback_args_dict=callback_args_dict, 
         output_dir_kwargs=cls_output_dir_kwargs, 
         **cls_attr_kwargs
     )
     print('start init tgwv module ...')
     # set tgwv
-    tgwv_module = TrainingModule(
-        args_dict['train'], 
-        tgwv_model, 
-        callback_args_dict, 
-        output_dir_kwargs=tgwv_output_dir_kwargs, 
-        **tgwv_attr_kwargs
-    )
+    if script_args.tgwv_local_ckpt is None:
+        tgwv_module = TrainingModule(
+            hparams=args_dict['train'], 
+            model=tgwv_model, 
+            callback_args_dict=callback_args_dict, 
+            output_dir_kwargs=tgwv_output_dir_kwargs, 
+            **tgwv_attr_kwargs
+        )
+    else: # load ckpt
+        tgwv_module = TrainingModule.load_from_checkpoint(
+            script_args.tgwv_local_ckpt, 
+            model=tgwv_model, 
+            callback_args_dict=callback_args_dict, 
+            output_dir_kwargs=tgwv_output_dir_kwargs, 
+            #**tgwv_attr_kwargs
+        )
+        print(f'load from {script_args.tgwv_local_ckpt}, success! ')
     """
-    seq_trainer = get_trainer(
-        script_args, seq_module.output_dir, logging_args.logger_name, 
-        seed=seq_module.hparams.seed, 
-        model_mode='seq2seq'
+    cls_trainer = get_trainer(
+        script_args, cls_module.output_dir, logging_args.logger_name, 
+        seed=cls_module.hparams.seed, 
+        model_mode='cls'
     )
     """
     tgwv_trainer = get_trainer(
@@ -321,12 +353,28 @@ def main():
         seed=tgwv_module.hparams.seed, 
         model_mode='tgwv', 
     )
-
+    
 
     if script_args.do_train:
         tgwv_trainer.fit(tgwv_module, datamodule=tgwv_loader)
     if script_args.do_eval:
         result = tgwv_trainer.test(tgwv_module, datamodule=tgwv_loader)
+
+    import pdb 
+    pdb.set_trace()
+
+    # do perturb
+    ptb_eval = PerturbEval(
+        tgwv_model, cls_model.tokenizer, cls_model.model, 
+        tgwv_loader.get_dataloader(type_path='val', shuffle=True), 
+        embed_type='unify', 
+        perturb_range=(0, 2), 
+        use_wandb=True, 
+        output_dir=tgwv_module.output_dir, 
+        max_source_length=tgwv_loader.dataset_args.max_source_length, 
+        ptb_mode=script_args.tgwv_v_mode, 
+    )
+    ptb_eval.eval_loop()
 
     import pdb
     pdb.set_trace()

@@ -256,7 +256,7 @@ class TextGenerationWithVectorInputModel(Seq2SeqModel):
         return outputs
 
     def generate(self, batch: dict, return_ids=True):
-        print('for deocoding, eval_max_length={}, eval_min_length={}, eval_beams={}'\
+        print('for decoding, eval_max_length={}, eval_min_length={}, eval_beams={}'\
             .format(self.args.eval_max_gen_length, self.args.eval_min_gen_length, self.args.eval_beams))
 
         seq2seq_model_type = (

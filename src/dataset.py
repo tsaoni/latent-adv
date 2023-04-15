@@ -5,6 +5,7 @@ from utils import (
     encode_line, 
     label_to_tensor, 
     trim_batch, 
+    pickle_load, 
 )
 
 class BaseDataset(Dataset):
@@ -196,6 +197,10 @@ class Seq2SeqDataset(BaseDataset):
 
  
 class ClassificationDataset(BaseDataset):
+    name_with_no_token_type_ids = [
+        'textattack/roberta-base-rotten_tomatoes', 
+        'textattack/distilbert-base-uncased-rotten-tomatoes', 
+    ]
     def __init__(self, args, tokenizer, type_path='train'):
         self.args = set_specific_attr(args, get_dataset_specific_attr())
         n_observations_per_split = {
@@ -226,20 +231,28 @@ class ClassificationDataset(BaseDataset):
 
         source_ids = [x["input_ids"].squeeze() for x in source_inputs]
         src_mask = [x["attention_mask"].squeeze() for x in source_inputs]
-        src_token_type_ids = [x["token_type_ids"].squeeze() for x in source_inputs]
+        if self.tokenizer.name_or_path in self.name_with_no_token_type_ids:
+            src_token_type_ids = None
+        else:
+            src_token_type_ids = [x["token_type_ids"].squeeze() for x in source_inputs]
         target_ids = target_inputs
                 
         input_ids = torch.stack(source_ids)
         masks = torch.stack(src_mask)
-        token_type_ids = torch.stack(src_token_type_ids)
+        token_type_ids = None if src_token_type_ids is None else torch.stack(src_token_type_ids)
         target_ids = torch.stack(target_ids).squeeze().to(torch.long)
         pad_token_id = self.pad_token_id
-        source_ids, source_mask, source_token_type_ids = trim_batch(input_ids, token_type_ids, pad_token_id, attention_mask=masks)
+        trim_batch_tuple = trim_batch(input_ids, token_type_ids, pad_token_id, attention_mask=masks)
+        if len(trim_batch_tuple) == 3:
+            source_ids, source_mask, source_token_type_ids = trim_batch_tuple
+        else:
+            source_ids, source_mask = trim_batch_tuple
+        token_type_ids_kwargs = {} if token_type_ids is None else {"token_type_ids": source_token_type_ids, }
         batch_encoding = {
             "input_ids": source_ids,
             "attention_mask": source_mask,
-            "token_type_ids": source_token_type_ids,
             "labels": target_ids,
+            **token_type_ids_kwargs, 
         }
 
         # batch_encoding["ids"] = torch.tensor([x["id"] for x in batch])
@@ -278,11 +291,18 @@ class ClassificationDataset(BaseDataset):
         return DataArguments
 
 class TGWVDataset(ClassificationDataset):
-    def __init__(self, args, seq_tokenizer, cls_tokenizer, cls_model, padding_num: int, type_path='train'):
+    def __init__(
+            self, 
+            args, seq_tokenizer, cls_tokenizer, cls_model, 
+            padding_num: int, 
+            type_path='train', 
+            v_mode='softmax', 
+        ):
         super().__init__(args, cls_tokenizer, type_path=type_path)
         self.seq_tokenizer = seq_tokenizer
         self.cls_model = cls_model
         self.padding_num = padding_num
+        self.v_mode = v_mode
 
     def __getitem__(self, index) -> Dict[str, str]:
         index = index + 1  # linecache starts at 1
@@ -304,25 +324,83 @@ class TGWVDataset(ClassificationDataset):
         ).data
         seq_len = batch_encoding['input_ids'].shape[1]
         cls_batch = super().collate_fn(batch)
-        cls_logits = text_generation_with_vector_input_collate_fn(seq_len, cls_batch, self.cls_model, self.padding_num)
-        batch_encoding.update({"cls_logits": cls_logits})
+        mask_id = self.tokenizer.mask_token_id
+        cls_logits = text_generation_with_vector_input_collate_fn(
+            seq_len, cls_batch, self.cls_model, self.padding_num, 
+            mask_id=mask_id, 
+            mode=self.v_mode, 
+        )
+        cls_labels = cls_batch['labels']
+        batch_encoding.update({"cls_logits": cls_logits, "cls_labels": cls_labels})
 
         # batch_encoding["ids"] = torch.tensor([x["id"] for x in batch])
         return batch_encoding
 
-def text_generation_with_vector_input_collate_fn(seq_len, cls_batch, cls_model, padding_num: int):
+def text_generation_with_vector_input_collate_fn(
+        seq_len, 
+        cls_batch, 
+        cls_model, 
+        padding_num: int, 
+        mask_id=None, 
+        mode='softmax', # options: raw, softmax, drop
+    ):
+    assert mask_id is not None or not mode == 'drop'
     outs = cls_model(**cls_batch)
-    logits = outs.logits.detach()
-    pad_logits = torch.nn.functional.pad(
-        logits, 
+    softmax_fn = torch.nn.Softmax(dim=-1)
+    logits = softmax_fn(outs.logits.detach()) if mode in ['softmax', 'drop'] else outs.logits.detach()
+    stack_logits = torch.stack(tuple([logits] * seq_len), dim=1)
+    if mode in ['softmax', 'raw']:
+        pad_logits = torch.nn.functional.pad(
+            stack_logits, 
+            pad=(0, padding_num), 
+            mode='constant', 
+            value=0.0, 
+        )
+        return pad_logits
+    else: # drop
+        return word_importance_logits(cls_batch, cls_model, stack_logits, padding_num, mask_id)
+
+def word_importance_logits(cls_batch, cls_model, unmasked_outs, padding_num: int, mask_id):
+    """
+     "input_ids": source_ids,
+            "attention_mask": source_mask,
+            "labels": target_ids,
+            **token_type_ids_kwargs, 
+    """
+    stacked_cls_batch = dict()
+    bz, seq_len = cls_batch['input_ids'].shape
+    for key in cls_batch.keys():
+        reshape_size = (-1, ) if key == 'labels' else (-1, seq_len)
+        stacked_cls_batch[key] = torch.stack([cls_batch[key]] * seq_len, dim=1)
+        if key == 'input_ids':
+            # set mask id
+            mask_tensor = torch.diag(torch.tensor([True] * seq_len))
+            mask_tensor = torch.stack([mask_tensor] * bz, dim=0)
+            stacked_cls_batch[key][mask_tensor] = mask_id
+        stacked_cls_batch[key] = torch.reshape(stacked_cls_batch[key], reshape_size)
+    
+    stacked_out = cls_model(**stacked_cls_batch)
+    softmax_fn = torch.nn.Softmax(dim=-1)
+    stacked_out_logits = softmax_fn(stacked_out.logits.detach())
+    stacked_out_logits = torch.reshape(stacked_out_logits, (bz, seq_len, -1))
+    # calc word important logits
+    seq2seq_batch_len = unmasked_outs.shape[1]
+    if seq_len < seq2seq_batch_len: # pad
+        padding = [stacked_out_logits[:, -1:, :]] * (seq2seq_batch_len - seq_len)
+        stacked_out_logits = torch.cat([stacked_out_logits, *padding], dim=1)
+    else:
+        stacked_out_logits = stacked_out_logits[:, :seq2seq_batch_len, :]
+    word_important_logits = unmasked_outs - stacked_out_logits
+    # word_important_logits = softmax_fn(word_important_logits) # the values are similar
+
+    stacked_out_pad_logits = torch.nn.functional.pad(
+        word_important_logits, 
         pad=(0, padding_num), 
         mode='constant', 
         value=0.0
     )
-    pad_logits.unsqueeze(1)
-    stack_pad_logits = torch.stack(tuple([pad_logits] * seq_len), dim=1)
-    
-    return stack_pad_logits
+    return stacked_out_pad_logits
+
 
 def get_dataset_specific_attr():
     return ['max_source_length', 'sortish_sampler', 'n_train', 'n_val', 
@@ -350,7 +428,7 @@ class DataModule(pl.LightningDataModule):
         assert dataset_mode in self.DATASET_CLS.keys()
         self.dataset_class = self.DATASET_CLS[dataset_mode]
         self.tokenizer = tokenizer
-        self.args, self.dataset_args = args, dataset_args
+        self.args, self.dataset_args = args, set_specific_attr(dataset_args, get_dataset_specific_attr())
         self.b_size = {
             'train': args.train_batch_size, 
             'val': args.eval_batch_size, 
@@ -359,9 +437,11 @@ class DataModule(pl.LightningDataModule):
         self.gpus = gpus
         if not dataset_mode == 'tgwv':
             self.dataset_arguments = [dataset_args, self.tokenizer]
+            self.dataset_kwargs = {}
         else: # args, seq_tokenizer, cls_tokenizer, cls_model, padding_num: int,
             self.dataset_arguments = [dataset_args, 
             *[tgwv_kwargs[x] for x in ['seq_tokenizer', 'cls_tokenizer', 'cls_model', 'padding_num']]]
+            self.dataset_kwargs = {'v_mode': tgwv_kwargs['v_mode']}
 
         if mode == 'fit':
             self.train_loader = self.get_dataloader("train", shuffle=True)
@@ -370,6 +450,7 @@ class DataModule(pl.LightningDataModule):
         dataset = self.dataset_class(
             *self.dataset_arguments, 
             type_path=type_path,
+            **self.dataset_kwargs, 
         )
         return dataset
 
