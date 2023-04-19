@@ -11,7 +11,7 @@ class PerturbEval():
         self, generator, eval_tokenizer, eval_model, data_loader, 
         embed_type='unify', 
         perturb_range=(0, 2), 
-        use_wandb=True, 
+        use_wandb=False, 
         output_dir=None, 
         max_source_length=10, 
         ptb_mode='softmax', 
@@ -22,7 +22,7 @@ class PerturbEval():
             max_perturb_step=10, 
             embed_type=embed_type, # unify, drop, 
             perturb_range=perturb_range, 
-            use_wandb=False, #use_wandb, 
+            use_wandb=use_wandb, #use_wandb, 
             output_dir=None, # for wandb proj name, beware not to exceed 128 chars
             max_source_length=max_source_length, 
             ptb_mode=ptb_mode, 
@@ -80,6 +80,7 @@ class PerturbEval():
                     )})
                     # finish
                     wandb.finish()
+        """
         else:
             import matplotlib.pyplot as plt
             for l in range(0, 2):
@@ -92,7 +93,7 @@ class PerturbEval():
             plt.title(title)
             plt.legend()
             plt.savefig('../img/'+title+'.png', dpi=300, bbox_inches='tight')
-
+        """
 
     def eval_loop(self):
         step = 0

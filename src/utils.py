@@ -178,3 +178,239 @@ def check_nli_dataset(dataset_name):
     if dataset_name in nli:
         return True
     return False
+
+def get_diff_substr(src: str, tgt: str) -> Dict:
+    n = len(src)
+    m = len(tgt)
+    dist_m = np.zeros([n + 1, m + 1], dtype=int).tolist()
+    for i in range(n + 1):
+        for j in range(m + 1):
+            if i == 0: dist_m[0][j] = j
+            elif j == 0: dist_m[i][0] = i
+            elif src[i - 1] == tgt[j - 1]:
+                dist_m[i][j] = dist_m[i - 1][j - 1]
+            else:
+                dist_m[i][j] = 1 + min(dist_m[i - 1][j], dist_m[i][j - 1])
+
+    """ debug
+    tmp = copy.deepcopy(dist_m)
+    for i in range(n + 1):
+        for j in range(m + 1):
+            tmp[i][j] = str(tmp[i][j])
+    tgt_list, src_list = ['#', '#'], ['#']
+    tgt_list += [tgt[i] for i in range(m)]
+    print(tgt_list)
+    src_list += [src[i] for i in range(n)]
+    for i in range(n+1):
+        r = [src_list[i]] + tmp[i]
+        print(r)
+
+    tgt_list = ['#']
+    tgt_list += [tgt[i] for i in range(m)]
+    """
+    # find ins/del substrings
+    substr = {'ins': [''], 'del': ['']}
+    i, j = n, m
+    while i + j > 0:
+        # print(f'i={i}, src={src_list[i]}, j={j}, tgt={tgt_list[j]}')
+        if i == 0:
+            substr['ins'][0] = tgt[j - 1] + substr['ins'][0]
+            j -= 1
+        elif j == 0:
+            substr['del'][0] = src[i - 1] + substr['del'][0]
+            i -= 1
+        elif src[i - 1] == tgt[j - 1]:
+            i -= 1
+            j -= 1
+            for k in substr.keys():
+                if not substr[k][0] == '':
+                    substr[k].insert(0, '')
+        elif dist_m[i][j - 1] + 1 == dist_m[i][j]:
+            substr['ins'][0] = tgt[j - 1] + substr['ins'][0]
+            j -= 1
+        else:
+            substr['del'][0] = src[i - 1] + substr['del'][0]
+            i -= 1
+
+    # remove strings with empty spaces
+    for k in substr.keys():
+        striped = np.array(list(map(lambda x: x.strip(), substr[k])))
+        substr[k] = striped[striped != ''].tolist()
+
+    return substr
+
+def show_texts_in_html(df=None, colored_text_list=None, mode_list=['del', 'ins'], show_html=False):
+    #assert df.shape == np(colored_texts).shape[:-1]
+    import pandas as pd
+    # create a sample dataframe
+    df = pd.DataFrame({'original': ['i am a very cute tsaoni. ', 'she was doing laundries. '],
+                    'perturb1': ['there is a cute horse.', 'he is doing laundry. '],})
+                    #'perturb2': ['it was eating tsai tsai.', 'doing laundry is his favorite. '],
+                    #'perturb3': ['so curious the tsaoni is.', 'he dont like doing hw. '],})
+
+    n, m = df.shape
+    colored_text_list = []
+    for i in range(n):
+        single_colored_text_list = []
+        for j in range(1, m):
+            substr_dict = get_diff_substr(df.iloc[i][0], df.iloc[i][j])
+            single_colored_text_list.append([substr_dict['del'], substr_dict['ins']])
+        colored_text_list.append(single_colored_text_list)
+    
+    """
+    # create a function to apply color styles to text
+    def color_text(text):
+        if text == 'Alice':
+            return 'color: red'
+        elif text == 'Bob':
+            return 'color: green'
+        elif text == 'Charlie':
+            return 'color: blue'
+        else:
+            return 'color: black'
+
+    # apply the color_text function to the entire dataframe
+    styled_df = df.style.applymap(color_text)
+    """
+
+    class TextColorInfo:
+        mode_color = {
+            'ins': (255, 0, 0), 
+            'del': (0, 0, 255), 
+            'ptb': [], 
+            'bg': (0, 0, 0), 
+        }
+
+        def __init__(self, multi_color_texts: List =None):
+            if multi_color_texts is not None:
+                self.multi_text_color_info = []
+                for text in multi_color_texts:
+                    self.multi_text_color_info.append([{'text': x, 'color': -1, 'replace_num': 0} for x in text])
+                max_n = 100
+                if m > 2: color_list = [x * int(max_n / (m - 2)) for x in range(m - 1)]
+                else: color_list = [0, 100]
+                for color in color_list: self.set_color('ptb', color)
+
+        def get_color(self, mode=None, ptb_idx=None, pos: Tuple =None):
+            if pos is not None:
+                i, j = pos
+                color = self.multi_text_color_info[i][j]['color']
+                if color == -1: 
+                    color = (0, 0, 0)
+                else: # colored
+                    color = get_color_mapping(color)
+            elif mode == 'ptb':
+                color = get_color_mapping(self.mode_color[mode][ptb_idx])
+            else:
+                color = self.mode_color[mode]
+            return f'rgb({color[0]}, {color[1]}, {color[2]})'
+
+        def set_color(self, mode, color: Union[Tuple, int]):
+            if mode == 'ptb':
+                self.mode_color[mode].append(color) # store int
+            else:
+                self.mode_color[mode] = color
+        
+        def single_colored_text(self, s, colored_texts, ptb_idx=None, mode=None):
+            text_color_info = []
+            for text in colored_texts:
+                split_list = s.split(text)
+                text_color_info += [
+                    {'text': split_list[0], 'color': self.get_color('bg'), }, 
+                    {'text': text, 'color': self.get_color(ptb_idx=ptb_idx, mode=mode), }, 
+                ]
+                del_text = split_list[0] + text
+                s = s[len(del_text):] if len(s) > len(del_text) else ''
+
+            text_color_info.append({'text': s, 'color': self.get_color('bg'), })
+            return text_color_info
+
+        def multi_colored_text(self, idx, s=None, colored_texts=None, ptb_idx=None, action=None):
+            if action == 'set':
+                def get_colored_idxs(s, colored_text):
+                    split_list = s.split(colored_text)
+                    if len(split_list) == 1: return []
+                    start, end = len(split_list[0]), len(split_list[0] + colored_text)
+                    return [x for x in range(start, end)]
+                colored_idxs = []
+                for text in colored_texts:
+                    colored_idxs += get_colored_idxs(s, text) 
+                # reset color
+                interpolate_fn = lambda l1, l2: sum([l1[i] * l2[i] for i in range(2)]) / sum(l2)
+                color = self.mode_color['ptb'][ptb_idx]
+                for i in colored_idxs:
+                    l1 = (self.multi_text_color_info[idx][i]['color'], color)
+                    l2 = (self.multi_text_color_info[idx][i]['replace_num'], 1)
+                    self.multi_text_color_info[idx][i]['color'] = interpolate_fn(l1, l2)
+                    self.multi_text_color_info[idx][i]['replace_num'] += 1
+
+            elif action == 'get':
+                text_color_info = []
+                for i, x in enumerate(self.multi_text_color_info[idx]):
+                    info = copy.deepcopy(x)
+                    info['color'] = self.get_color(pos=(idx, i))
+                    text_color_info.append(info)
+                return text_color_info
+            else:
+                raise ValueError('action should be one of the values, `set` and `get`. ')
+
+    multi_colored_texts = df.iloc[:, 0].tolist()
+    color_info_opt = TextColorInfo(multi_colored_texts)
+    def highlight_text(s, s_origin=None, idx=None, ptb_idx=None, colored_texts=None, mode='ptb'):
+        #if mode in ['ins', 'del']:
+        #    text_color_info = color_info_opt.single_colored_text(s, colored_texts, mode)
+        if mode == 'ptb':
+            if ptb_idx == -1:
+                text_color_info = color_info_opt.multi_colored_text(idx, action='get')
+            else:
+                text_color_info = color_info_opt.single_colored_text(s, colored_texts[1], ptb_idx=ptb_idx, mode=mode)
+                color_info_opt.multi_colored_text(idx, s=s_origin, 
+                                            colored_texts=colored_texts[0], ptb_idx=ptb_idx, action='set')
+
+        #words = s.split()
+        highlighted_words = []
+        for info in text_color_info:
+            highlighted_words.append(f'<span style="color:{info["color"]};">{info["text"]}</span>')
+        return ''.join(highlighted_words)
+
+    # colored_text_list dim:: 0: sent num, 1: ptb num, 2: 2, 3: colored num
+    for i in range(n):
+        for j in range(1, m):
+            df.iloc[i][j] = highlight_text(df.iloc[i][j], s_origin=df.iloc[i][0], 
+                                           idx=i, ptb_idx=j-1, colored_texts=colored_text_list[i][j-1])
+        df.iloc[i][0] = highlight_text(df.iloc[i][0], idx=i, ptb_idx=-1, )
+    html_table = df.to_html(escape=False)
+    #styled_df = highlight_text(df)
+
+    # render the styled dataframe as an HTML table
+    #html_table = styled_df.render()
+
+    # print the HTML table
+    #print(html_table)
+    with open('text.html', 'w') as f:
+        f.write(html_table)
+    if show_html:
+        os.system('python -m http.server --directory .')
+
+def get_color_mapping(num, min_n=0, max_n=100, ub="ba08ba", lb="08ba08"):
+    assert num >= min_n and num <= max_n
+    def hex_to_TupleInt(hex_s: str):
+        assert len(hex_s) == 6
+        return tuple([int(hex_s[idx:idx+2], 16) for idx in range(0, 6, 2)])
+    
+    ub = hex_to_TupleInt(ub) if isinstance(ub, str) else ub
+    lb = hex_to_TupleInt(lb) if isinstance(lb, str) else lb
+    
+    dist = int(sum([abs(x - y) for x, y in zip(ub, lb)]) / (max_n - min_n) * (max_n - num))
+    ret_color = list(copy.deepcopy(ub))
+
+    def reduce(dist, idx, ub, lb):
+        direct = 1 if ub[idx] - lb[idx] > 0 else -1
+        return direct * min(dist, abs(ub[idx] - lb[idx]))
+
+    for i in range(3):
+        if dist > 0:
+            ret_color[i] = ret_color[i] - reduce(dist, i, ub, lb)
+            dist -= abs(ub[i] - lb[i])
+        
+    return tuple(ret_color)
