@@ -16,6 +16,7 @@ class LoggingCallback(pl.Callback):
     ):
         super().__init__()
         self.args = args
+        self.output_dir = output_dir
         self.logging_dir = os.path.join(output_dir, 'log')
         os.makedirs(self.logging_dir, exist_ok=True)
 
@@ -37,7 +38,7 @@ class LoggingCallback(pl.Callback):
     ) -> None:
         self.logger.info(f"***** {type_path} results at step {trainer.global_step:05d} *****")
         # Log results
-        od = os.path.join(self.logging_dir, f"{trainer.global_step:05d}")
+        od = self.logging_dir if type_path == "test" else os.path.join(self.logging_dir, f"{trainer.global_step:05d}")
         generations_file = os.path.join(od, f"{type_path}_generations.json")
         os.makedirs(od, exist_ok=True)
     
@@ -60,7 +61,7 @@ class LoggingCallback(pl.Callback):
         pl_module: pl.LightningModule, 
         type_path: str, 
     ) -> None:
-        od = os.path.join(self.logging_dir, f"{trainer.global_step:05d}")
+        od = self.logging_dir if type_path == "test" else os.path.join(self.logging_dir, f"{trainer.global_step:05d}")
         results_file = os.path.join(od, f"{type_path}_results.json")
         os.makedirs(od, exist_ok=True)
         if len(pl_module.metric.metric_dicts[type_path]) > 0:
@@ -113,17 +114,6 @@ class LoggingCallback(pl.Callback):
 
         return logger
 
-    @staticmethod
-    def add_specific_args():
-        @dataclass
-        class LoggingArguments:
-            logger_name: Optional[str] = field(
-                default=None, 
-                metadata={"help": "choices: wandb, default, "}
-            )
-
-        return LoggingArguments
-
 class CheckpointCallback(pl.callbacks.ModelCheckpoint):
     def __init__(self, args, output_dir):
         self.args = args
@@ -139,22 +129,17 @@ class CheckpointCallback(pl.callbacks.ModelCheckpoint):
             save_last=True, 
         )
 
-    @staticmethod
-    def add_specific_args():
-        @dataclass
-        class CheckpointArguments:
-            val_metric: Optional[str] = field(
-                default=None, 
-                metadata={"help": "choices: bleu, rouge2, loss, accuracy, "}
-            )
-            save_top_k: Optional[int] = field(
-                default=1, 
-                metadata={"help": "how many checkpoints to save. "}
-            )
+class LatentCallback(pl.Callback):
+    logger = logging.getLogger(__name__)
 
-        return CheckpointArguments
+    def __init__(self, output_dir):
+        self.output_dir = os.path.join(output_dir, "latent")
 
-
+    @rank_zero_only
+    def on_validation_end(self, trainer: pl.Trainer, pl_module: pl.LightningModule):
+        output_file = os.path.join(self.output_dir, f"{trainer.global_step:05d}.pt")
+        self.logger.info(f"***** latent results at step {trainer.global_step:05d} *****")
+        torch.save(pl_module.model.model.classification_head.state_dict(), output_file)
 
 class OthersSeq2SeqLoggingCallback(pl.Callback):
 

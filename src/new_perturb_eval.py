@@ -27,10 +27,11 @@ def max_common_substring(seq1, seq2, ret_pos='first'):
     }
     return ret_pos_dict[ret_pos]
 
+
 class PerturbEval():
     def __init__(
         self, generator, eval_tokenizer, eval_model, data_loader, 
-        embed_type='unify', 
+        embed_type='probing', 
         perturb_range=(0, 1), 
         use_wandb=False, 
         output_dir=None, 
@@ -70,35 +71,13 @@ class PerturbEval():
     def perturb(
         self, data, ptb_param, ptb_len, 
         ptb_length: Union[int, float]= 0.5, 
+        probing_l_step=1.0, 
     ):
         ptb_bz, *_ = ptb_param.shape
         bz, seq_len = data['input_ids'].shape
         eval_beams = int(ptb_bz / bz)
 
-        # FGIM 
-        if self.ptb_model is not None:
-            self.ptb_model.eval()
-            import pdb 
-            pdb.set_trace()
-            epsilon = ptb_length
-            pool_fn = LatentClassfier.pooling_options[self.pool]
-            # ptb_param = nn.Parameter(ptb_param)
-            ptb_param.requires_grad = False
-            pooled_ptb_param = pool_fn(ptb_param)
-            pooled_ptb_param = pooled_ptb_param.detach()
-            pooled_ptb_param = nn.Parameter(pooled_ptb_param, requires_grad=True)
-            pooled_ptb_param.requires_grad = True
-            output = self.ptb_model(pooled_ptb_param)
-            target = data['cls_labels'].repeat_interleave(eval_beams, dim=0)
-
-            dis_criterion = CrossEntropyLoss() # nn.BCELoss(size_average=True)
-            loss = dis_criterion(output, target)
-            self.ptb_model.zero_grad()
-            loss.backward()
-            ptb_param = ptb_param - epsilon * ptb_param.grad.data
-            return ptb_param, [(0, 0)] * bz
-
-
+    
         def get_word_range(text, ptb_length, method='random'):
             text_len = len(text.split())
             if text.split()[-1] == '.': text_len -= 1
@@ -162,80 +141,13 @@ class PerturbEval():
                 #        tmp = torch.stack((cls_logits[b_idx, :, idx], bds[i](seq_len)), dim=-1)
                 #        cls_logits[b_idx, :, idx] = bd_check_fn[i](tmp, dim=-1).values
 
+        elif self.config.embed_type == 'probing':
+            param_shape = ptb_param.shape
+            g_noise = torch.randn(*param_shape).to(ptb_param.device) * probing_l_step
+            ptb_param += g_noise
+
         return ptb_param, word_range_list
 
-    ''' not used '''
-    def perturb_on_data(
-        self, data, ptb_len, 
-        ptb_length: Union[int, float]= 3, 
-    ):
-        cls_logits = data['cls_logits']
-        bz, seq_len, _ = cls_logits.shape
-
-        def get_word_range(text, ptb_length, method='random'):
-            text_len = len(text.split())
-            if text.split()[-1] == '.': text_len -= 1
-            if isinstance(ptb_length, float):
-                ptb_length = int(text_len * ptb_length)
-
-            if method == 'random':
-                if ptb_length > text_len: return (0, text_len)
-                else: 
-                    rand_range = (0, text_len - ptb_length)
-                    import random
-                    start = random.randint(*rand_range)
-                    return (start, start + ptb_length)
-
-        def frac_to_seq_range(
-            seq_len, ptb_range, 
-            text=None, 
-            tokenizer=None, 
-            frac='text', 
-        ):
-            assert frac in ['encode', 'text']
-            ptb_seq_range = []
-            if frac == 'encode':
-                map_to_seq_range = lambda r: tuple([int(seq_len * i) for i in r])
-                for r in ptb_range:
-                    ptb_seq_range.append(map_to_seq_range(r))
-            elif frac == 'text':
-                text_list = text.split()
-                for r in ptb_range:
-                    span_text = ' '.join(text_list[slice(*r)])
-                    span_text = span_text if r[0] == 0 else f' {span_text}'
-                    span_text_enc = tokenizer.encode(span_text)[1:-1] # remove start and end token
-                    text_enc = tokenizer.encode(text)
-                    ptb_seq_range.append(max_common_substring(text_enc, span_text_enc))
-
-            return ptb_seq_range
-
-        word_range_list = []
-        if self.config.embed_type == 'unify':
-            for b_idx in range(bz):
-                text = data['src_texts'][b_idx]
-                word_range = get_word_range(text, ptb_length)
-                word_range_list.append(word_range)
-                ptb_seq_range = frac_to_seq_range(-1, [word_range], text=text, tokenizer=self.eval_tokenizer)
-
-                l = data['cls_labels'][b_idx].item()
-                # binary cases
-                if l == 0: 
-                    ptb, bds, bd_check_fn = (ptb_len, -ptb_len), (torch.zeros, torch.ones), (torch.max, torch.min)
-                else:
-                    ptb, bds, bd_check_fn = (-ptb_len, ptb_len), (torch.ones, torch.zeros), (torch.min, torch.max)
-                if self.config.ptb_mode in ['drop', 'raw']: # perturb without bound checking
-                    for i, idx in enumerate(range(*self.config.perturb_range)):
-                        for r in ptb_seq_range:
-                            cls_logits[b_idx, slice(*r), idx] = cls_logits[b_idx, slice(*r), idx] - ptb[i]
-                        # cls_logits[b_idx, :, idx] = cls_logits[b_idx, :, idx] - ptb[i]
-                else: # softmax
-                    for i, idx in enumerate(range(*self.config.perturb_range)):
-                        for r in ptb_seq_range:
-                            cls_logits[b_idx, slice(*r), idx] = cls_logits[b_idx, slice(*r), idx] - ptb[i]
-                        tmp = torch.stack((cls_logits[b_idx, :, idx], bds[i](seq_len)), dim=-1)
-                        cls_logits[b_idx, :, idx] = bd_check_fn[i](tmp, dim=-1).values
-
-        return data, word_range_list
         
     def wandb_log(self, log_type: str, data: dict):
         if self.config.use_wandb: 
@@ -255,26 +167,16 @@ class PerturbEval():
                     )})
                     # finish
                     wandb.finish()
-        """
-        else:
-            import matplotlib.pyplot as plt
-            for l in range(0, 2):
-                plt_data = data[f'label_{l}']
-                x = [d[0] for d in plt_data]
-                y = [d[1] for d in plt_data]
-                label_name = '_'.join([f"l={l}"])
-                plt.scatter(x, y, label=label_name)
-            title = '_'.join([f"{k[0]}={data[k]}" for k in ['ptb-size', 'cls-acc']] + [f"m={self.config.ptb_mode}"])
-            plt.title(title)
-            plt.legend()
-            plt.savefig('../img/'+title+'.png', dpi=300, bbox_inches='tight')
-        """
 
-    def generate(self, data, ptb_len):
-        ptb_fn = lambda ptb_param: self.perturb(copy.deepcopy(data), ptb_param, ptb_len)
-        out_sents = self.generator.generate(data, return_ids=False, perturb_fn=ptb_fn)
-        batch_word_range = self.generator.batch_word_range
-
+    def generate(self, data, ptb_len, mode="normal"):
+        
+        if mode == "normal":
+            ptb_fn = lambda ptb_param: self.perturb(copy.deepcopy(data), ptb_param, ptb_len)
+            out_sents = self.generator.generate(data, return_ids=False, perturb_fn=ptb_fn)
+            batch_word_range = self.generator.batch_word_range
+        else: # probing
+            out_sents = probing()
+            # todo: deal with batch_word_range
         return out_sents, batch_word_range
 
     def calc_max_corr_attr(self, ptb_corr, top_k=5):

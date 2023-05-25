@@ -1,12 +1,6 @@
 from lib import *
 
-from utils import (
-    set_specific_attr, 
-    encode_line, 
-    label_to_tensor, 
-    trim_batch, 
-    pickle_load, 
-)
+from utils import *
 
 class BaseDataset(Dataset):
 
@@ -28,16 +22,18 @@ class BaseDataset(Dataset):
         super().__init__()
         # read file
         #check_variable_status(data_dir, name='data_dir', status='None')
+        self.data_dir = data_dir
         self.src_file = Path(data_dir).joinpath(type_path + ".source")
         self.tgt_file = Path(data_dir).joinpath(type_path + ".target")
         self.len_file = Path(data_dir).joinpath(type_path + ".len")
-        if os.path.exists(self.len_file):
+        # if os.path.exists(self.len_file):
+        if False: # haven't use sampler ...
             self.src_lens = pickle_load(self.len_file)
             self.used_char_len = False
         else:
             self.src_lens = self.get_char_lens(self.src_file)
             self.used_char_len = True
-        self.max_source_length = max_source_length
+        self.set_max_source_length(max_source_length)
         self.max_target_length = max_target_length
         assert min(self.src_lens) > 0, f"found empty line in {self.src_file}"
         self.tokenizer = tokenizer
@@ -50,6 +46,15 @@ class BaseDataset(Dataset):
 
     def __len__(self):
         return len(self.src_lens)
+
+    def set_max_source_length(self, max_source_length):
+        if os.path.exists(self.len_file):
+            f = open(self.len_file)
+            self.max_source_length = np.asarray(f.read().split('\n'), dtype=int).max()
+            print(f'the max source length is {self.max_source_length}, calculate from len file. ')
+        else:
+            self.max_source_length = max_source_length
+            print(f'the max source length is {self.max_source_length}, use argument value. ')
 
     @staticmethod
     def get_char_lens(data_file):
@@ -140,66 +145,15 @@ class Seq2SeqDataset(BaseDataset):
             max_target_length=self.max_target_length,
             return_tensors="pt",
         ).data
-        # batch_encoding["ids"] = torch.tensor([x["id"] for x in batch])
+        batch_encoding["ids"] = [x["id"] for x in batch] #torch.tensor([x["id"] for x in batch])
         return batch_encoding
-
-    @staticmethod
-    def add_specific_args():
-        @dataclass
-        class DataArguments:
-            seq2seq_max_source_length: Optional[int] = field(
-                default=1024, 
-                metadata={"help": ""}
-            )
-            seq2seq_sortish_sampler: bool = field(
-                default=False, 
-                metadata={"help": ""}
-            )
-            seq2seq_n_train: Optional[int] = field(
-                default=-1, 
-                metadata={"help": ""}
-            )
-            seq2seq_n_val: Optional[int] = field(
-                default=-1, 
-                metadata={"help": ""}
-            )
-            seq2seq_n_test: Optional[int] = field(
-                default=-1, 
-                metadata={"help": ""}
-            )
-            seq2seq_data_dir: Optional[str] = field(
-                default=None, 
-                metadata={"help": ""}
-            )
-            max_target_length: Optional[int] = field(
-                default=1024, 
-                metadata={"help": ""}
-            )
-            val_max_target_length: Optional[int] = field(
-                default=1024, 
-                metadata={"help": ""}
-            )
-            test_max_target_length: Optional[int] = field(
-                default=1024, 
-                metadata={"help": ""}
-            )
-            src_lang: Optional[str] = field(
-                default=None, 
-                metadata={"help": ""}
-            )
-            tgt_lang: Optional[str] = field(
-                default=None, 
-                metadata={"help": ""}
-            )
-            
-        
-        return DataArguments
 
  
 class ClassificationDataset(BaseDataset):
     name_with_no_token_type_ids = [
         'textattack/roberta-base-rotten_tomatoes', 
         'textattack/distilbert-base-uncased-rotten-tomatoes', 
+        'facebook/bart-large', 
     ]
     def __init__(self, args, tokenizer, type_path='train'):
         self.args = set_specific_attr(args, get_dataset_specific_attr())
@@ -254,41 +208,10 @@ class ClassificationDataset(BaseDataset):
             "labels": target_ids,
             **token_type_ids_kwargs, 
         }
+        batch_encoding.update({"ids": [x["id"] for x in batch]})
 
         # batch_encoding["ids"] = torch.tensor([x["id"] for x in batch])
         return batch_encoding
-
-    @staticmethod
-    def add_specific_args():
-        @dataclass
-        class DataArguments:
-            cls_max_source_length: Optional[int] = field(
-                default=1024, 
-                metadata={"help": ""}
-            )
-            cls_sortish_sampler: bool = field(
-                default=False, 
-                metadata={"help": ""}
-            )
-            cls_n_train: Optional[int] = field(
-                default=-1, 
-                metadata={"help": ""}
-            )
-            cls_n_val: Optional[int] = field(
-                default=-1, 
-                metadata={"help": ""}
-            )
-            cls_n_test: Optional[int] = field(
-                default=-1, 
-                metadata={"help": ""}
-            )
-            cls_data_dir: Optional[str] = field(
-                default=None, 
-                metadata={"help": ""}
-            )
-            
-        
-        return DataArguments
 
 class TGWVDataset(ClassificationDataset):
     def __init__(
@@ -303,6 +226,8 @@ class TGWVDataset(ClassificationDataset):
         self.cls_model = cls_model
         self.padding_num = padding_num
         self.v_mode = v_mode
+        global max_source_length
+        max_source_length = self.max_source_length
 
     def __getitem__(self, index) -> Dict[str, str]:
         index = index + 1  # linecache starts at 1
@@ -325,87 +250,36 @@ class TGWVDataset(ClassificationDataset):
         seq_len = batch_encoding['input_ids'].shape[1]
         cls_batch = super().collate_fn(batch)
         mask_id = self.tokenizer.mask_token_id
+
+        assert hasattr(self, 'batch_size') and hasattr(self, 'type_path'), \
+            'should have attribute `batch_size` and `type_path` before loading wir. '
+        batch_idx = int(batch[0]['id'] / self.batch_size)
         cls_logits = text_generation_with_vector_input_collate_fn(
             seq_len, cls_batch, self.cls_model, self.padding_num, 
             mask_id=mask_id, 
             mode=self.v_mode, 
+            wir_pt_path=os.path.join(self.data_dir, "wir", self.type_path), 
+            batch_idx=batch_idx, 
+            id_list=[x["id"] for x in batch], 
+            load=True, 
         )
         cls_labels = cls_batch['labels']
         batch_encoding.update({"cls_logits": cls_logits, "cls_labels": cls_labels})
+        batch_encoding.update({"src_texts": [x["src_texts"] for x in batch]})
+        batch_encoding.update({"ids": [x["id"] for x in batch]})
 
         # batch_encoding["ids"] = torch.tensor([x["id"] for x in batch])
         return batch_encoding
-
-def text_generation_with_vector_input_collate_fn(
-        seq_len, 
-        cls_batch, 
-        cls_model, 
-        padding_num: int, 
-        mask_id=None, 
-        mode='softmax', # options: raw, softmax, drop
-    ):
-    assert mask_id is not None or not mode == 'drop'
-    outs = cls_model(**cls_batch)
-    softmax_fn = torch.nn.Softmax(dim=-1)
-    logits = softmax_fn(outs.logits.detach()) if mode in ['softmax', 'drop'] else outs.logits.detach()
-    stack_logits = torch.stack(tuple([logits] * seq_len), dim=1)
-    if mode in ['softmax', 'raw']:
-        pad_logits = torch.nn.functional.pad(
-            stack_logits, 
-            pad=(0, padding_num), 
-            mode='constant', 
-            value=0.0, 
-        )
-        return pad_logits
-    else: # drop
-        return word_importance_logits(cls_batch, cls_model, stack_logits, padding_num, mask_id)
-
-def word_importance_logits(cls_batch, cls_model, unmasked_outs, padding_num: int, mask_id):
-    """
-     "input_ids": source_ids,
-            "attention_mask": source_mask,
-            "labels": target_ids,
-            **token_type_ids_kwargs, 
-    """
-    stacked_cls_batch = dict()
-    bz, seq_len = cls_batch['input_ids'].shape
-    for key in cls_batch.keys():
-        reshape_size = (-1, ) if key == 'labels' else (-1, seq_len)
-        stacked_cls_batch[key] = torch.stack([cls_batch[key]] * seq_len, dim=1)
-        if key == 'input_ids':
-            # set mask id
-            mask_tensor = torch.diag(torch.tensor([True] * seq_len))
-            mask_tensor = torch.stack([mask_tensor] * bz, dim=0)
-            stacked_cls_batch[key][mask_tensor] = mask_id
-        stacked_cls_batch[key] = torch.reshape(stacked_cls_batch[key], reshape_size)
-    
-    stacked_out = cls_model(**stacked_cls_batch)
-    softmax_fn = torch.nn.Softmax(dim=-1)
-    stacked_out_logits = softmax_fn(stacked_out.logits.detach())
-    stacked_out_logits = torch.reshape(stacked_out_logits, (bz, seq_len, -1))
-    # calc word important logits
-    seq2seq_batch_len = unmasked_outs.shape[1]
-    if seq_len < seq2seq_batch_len: # pad
-        padding = [stacked_out_logits[:, -1:, :]] * (seq2seq_batch_len - seq_len)
-        stacked_out_logits = torch.cat([stacked_out_logits, *padding], dim=1)
-    else:
-        stacked_out_logits = stacked_out_logits[:, :seq2seq_batch_len, :]
-    word_important_logits = unmasked_outs - stacked_out_logits
-    # word_important_logits = softmax_fn(word_important_logits) # the values are similar
-
-    stacked_out_pad_logits = torch.nn.functional.pad(
-        word_important_logits, 
-        pad=(0, padding_num), 
-        mode='constant', 
-        value=0.0
-    )
-    return stacked_out_pad_logits
 
 
 def get_dataset_specific_attr():
     return ['max_source_length', 'sortish_sampler', 'n_train', 'n_val', 
             'n_test', 'data_dir', ]
 
+def get_specific_key(args, key_name):
+    for key in args.__dict__.keys():
+        if key_name in key:
+            return getattr(args, key)
 
 class DataModule(pl.LightningDataModule):
     DATASET_CLS = {
@@ -426,6 +300,7 @@ class DataModule(pl.LightningDataModule):
     ):
         super().__init__() 
         assert dataset_mode in self.DATASET_CLS.keys()
+        self.dataset_mode = dataset_mode
         self.dataset_class = self.DATASET_CLS[dataset_mode]
         self.tokenizer = tokenizer
         self.args, self.dataset_args = args, set_specific_attr(dataset_args, get_dataset_specific_attr())
@@ -435,16 +310,41 @@ class DataModule(pl.LightningDataModule):
             'test': args.eval_batch_size, 
         }
         self.gpus = gpus
+        global max_source_length
+        max_source_length = get_specific_key(dataset_args, "max_source_length")
         if not dataset_mode == 'tgwv':
             self.dataset_arguments = [dataset_args, self.tokenizer]
             self.dataset_kwargs = {}
-        else: # args, seq_tokenizer, cls_tokenizer, cls_model, padding_num: int,
-            self.dataset_arguments = [dataset_args, 
-            *[tgwv_kwargs[x] for x in ['seq_tokenizer', 'cls_tokenizer', 'cls_model', 'padding_num']]]
+        else: # args, seq_tokenizer, cls_tokenizer, cls_model, padding_num: int, 
+            self.dataset_arguments = [dataset_args]
+            self.dataset_arguments += [tgwv_kwargs[x] for x in ['seq_tokenizer', 'cls_tokenizer', 'cls_model', 'padding_num']]
             self.dataset_kwargs = {'v_mode': tgwv_kwargs['v_mode']}
+           
 
         if mode == 'fit':
             self.train_loader = self.get_dataloader("train", shuffle=True)
+
+    def save_wir_at_start(self, dataset, batch_size):
+        wir_pt_path = os.path.join(dataset.data_dir, "wir", dataset.type_path)
+
+        if self.dataset_class == TGWVDataset and not os.path.exists(wir_pt_path):
+            print('iterate all the data to save wir. ')
+            loader = DataLoader(
+                dataset,
+                batch_size=batch_size,
+                collate_fn=dataset.collate_fn,
+                shuffle=False,
+                num_workers=self.args.num_workers,
+                sampler=None,
+            )
+            try:
+                loader = iter(loader)
+                while True:
+                    next(loader)
+            except StopIteration:
+                print('the wir should be saved during iteration. ')
+        else:
+            print('the wir path already exists. ')
 
     def get_dataset(self, type_path):
         dataset = self.dataset_class(
@@ -462,6 +362,8 @@ class DataModule(pl.LightningDataModule):
     ) -> DataLoader:
         dataset = self.get_dataset(type_path)
         batch_size = self.b_size[type_path] if batch_size is None else batch_size
+        dataset.batch_size, dataset.type_path = batch_size, type_path
+        if self.dataset_mode == "seq2seq": self.save_wir_at_start(dataset, batch_size)
 
         if dataset.args.sortish_sampler and type_path != "test":
             sampler = dataset.make_sortish_sampler(batch_size, distributed=self.gpus > 1)
@@ -472,6 +374,7 @@ class DataModule(pl.LightningDataModule):
                 shuffle=False,
                 num_workers=self.args.num_workers,
                 sampler=sampler,
+                drop_last=True, 
             )
 
         elif self.args.max_tokens_per_batch is not None and type_path != "test":
@@ -485,16 +388,19 @@ class DataModule(pl.LightningDataModule):
                 # shuffle=False,
                 num_workers=self.args.num_workers,
                 # batch_size=None,
+                drop_last=True, 
             )
         else:
-            return DataLoader(
+            loader = DataLoader(
                 dataset,
                 batch_size=batch_size,
                 collate_fn=dataset.collate_fn,
                 shuffle=shuffle,
                 num_workers=self.args.num_workers,
                 sampler=None,
+                drop_last=True, # just used for fixing the problem that load data separately in last batch
             )
+            return loader
 
     def train_dataloader(self):
         return self.train_loader
@@ -504,29 +410,6 @@ class DataModule(pl.LightningDataModule):
 
     def test_dataloader(self):
         return self.get_dataloader("test", shuffle=False)
-
-    @staticmethod
-    def add_specific_args():
-        @dataclass
-        class DataModuleArguments:
-            train_batch_size: Optional[int] = field(
-                default=10, 
-                metadata={"help": ""}
-            )
-            eval_batch_size: Optional[int] = field(
-                default=10, 
-                metadata={"help": ""}
-            )
-            max_tokens_per_batch: Optional[int] = field(
-                default=None, 
-                metadata={"help": ""}
-            )
-            num_workers: Optional[int] = field(
-                default=4, 
-                metadata={"help": ""}
-            )
-
-        return DataModuleArguments
 
 
 class SortishSampler(Sampler):

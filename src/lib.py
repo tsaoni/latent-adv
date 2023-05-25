@@ -25,6 +25,7 @@ import argparse
 import torch
 import evaluate
 import numpy as np
+import pandas as pd
 import pytorch_lightning as pl
 from pathlib import Path
 from typing import List, Tuple, Dict, Any, Union
@@ -49,6 +50,10 @@ from transformers import (
     AutoTokenizer,
     PretrainedConfig,
     PreTrainedTokenizer,
+    BartTokenizer,
+    BartForSequenceClassification, 
+    BartConfig, 
+    BartModel, 
 )
 from transformers.optimization import (
     Adafactor,
@@ -57,10 +62,27 @@ from transformers.optimization import (
     get_linear_schedule_with_warmup,
     get_polynomial_decay_schedule_with_warmup,
 )
-from transformers.models.bart.modeling_bart import shift_tokens_right # for seq2seq model
+from transformers.models.bart.modeling_bart import (
+    shift_tokens_right,  # for seq2seq model
+    Seq2SeqSequenceClassifierOutput, 
+    BartClassificationHead, 
+    Seq2SeqModelOutput, 
+    BaseModelOutput, 
+    BartEncoder, 
+)
+
 
 # model
 import torch.nn as nn
+from torch.autograd import Variable
+import inspect
+#import torchvision.transforms as transforms
+#from PIL import Image
+from torch.nn import (
+    MSELoss, 
+    CrossEntropyLoss, 
+    BCEWithLogitsLoss, 
+)
 
 # utils
 import argparse
@@ -78,9 +100,7 @@ from torch.utils.data import Dataset, Sampler
 from rouge_score import rouge_scorer, scoring
 from pytorch_lightning.callbacks import EarlyStopping, ModelCheckpoint
 from pytorch_lightning.utilities import rank_zero_only
-from transformers import (
-    BartTokenizer,
-)
+from transformers.utils import ModelOutput
 
 from transformers.optimization import (
     Adafactor,
@@ -89,6 +109,8 @@ from transformers.optimization import (
     get_linear_schedule_with_warmup,
     get_polynomial_decay_schedule_with_warmup,
 )
+
+# from transformers.models.bart.modeling_bart import *
 
 
 try:

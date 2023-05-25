@@ -1,15 +1,11 @@
 from lib import *
+from args import *
 from module import *
 from model import *
 from dataset import *
 from callback import *
-from perturb_eval import *
-from utils import (
-    check_argument_setting,
-    get_scheduler_info,
-)
+from new_perturb_eval import *
 
-# sys.path.append('..')
 
 if not sys.warnoptions:
     import warnings
@@ -21,102 +17,6 @@ wandb.login()
 use_tgwv = os.environ.get('USE_TGWV') == 'true'
 
 
-@dataclass
-class ScriptArguments:
-    do_train_seq2seq: bool = field(
-        default=False, 
-        metadata={"help": "do training if set to true. "}
-    )
-    do_eval_seq2seq: bool = field(
-        default=False, 
-        metadata={"help": "do evaluation if set to true. "}
-    )
-    do_train_cls: bool = field(
-        default=False, 
-        metadata={"help": "do training if set to true. "}
-    )
-    do_eval_cls: bool = field(
-        default=False, 
-        metadata={"help": "do evaluation if set to true. "}
-    )
-    fp16: bool = field(
-        default=False, 
-        metadata={"help": ""}
-    )
-    gpus: Optional[int] = field(
-        default=1, 
-        metadata={"help": ""}
-    )
-    n_tpu_cores: Optional[int] = field(
-        default=1, 
-        metadata={"help": ""}
-    )
-    fp16_opt_level: Optional[str] = field(
-        default="O2", 
-        metadata={"help": "For fp16: Apex AMP optimization level selected in ['O0', 'O1', 'O2', and 'O3']. "}
-    )
-    num_train_epochs: Optional[int] = field(
-        default=5, 
-        metadata={"help": ""}
-    )
-    max_train_steps: Optional[int] = field(
-        default=400, 
-        metadata={"help": ""}
-    )
-    max_eval_steps: Optional[int] = field(
-        default=400, 
-        metadata={"help": ""}
-    )
-    gradient_accumulation_steps: Optional[int] = field(
-        default=1, 
-        metadata={"help": ""}
-    )
-    gradient_clip_val: Optional[float] = field(
-        default=1.0, 
-        metadata={"help": ""}
-    )
-    early_stopping_patience: Optional[int] = field(
-        default=-1, 
-        metadata={"help": "-1 means never early stop. "
-        "early_stopping_patience is measured in validation checks, not epochs. "
-        "So val_check_interval will effect it."}
-    )
-    seq_local_ckpt: Optional[str] = field(
-        default=None, 
-        metadata={"help": "use seq2seq model from checkpoints. "}
-    )
-    cls_local_ckpt: Optional[str] = field(
-        default=None, 
-        metadata={"help": "use classification model from checkpoints. "}
-    )
-    tgwv_local_ckpt: Optional[str] = field(
-        default=None, 
-        metadata={"help": "use model from checkpoints. "}
-    )
-    tgwv_v_mode: Optional[str] = field(
-        default=None, 
-        metadata={"help": "options: `softmax`, `raw`, `drop`. "}
-    )
-    attr_dim: Optional[int] = field(
-        default=0, 
-        metadata={"help": "the dim used for attribute. "}
-    )
-    ptb_param: Optional[str] = field(
-        default='embed', 
-        metadata={"help": "options: `embed`, `enc_out`. "}
-    )
-    loss_ratio: Optional[float] = field(
-        default=0.6, 
-        metadata={"help": "the ratio of the reconstruction loss. "}
-    )
-    latent_ckpt: Optional[str] = field(
-        default=None, 
-        metadata={"help": "checkpoint of the latent classifier. "}
-    )
-    pool: Optional[str] = field(
-        default="mean", 
-        metadata={"help": "the pooling function used in latent classifier. "}
-    )
 
 def get_callback(args):
     if args.main.early_stopping_patience >= 0:
@@ -167,12 +67,12 @@ def trainer_kwargs(script_args: Namespace, model_mode=None, logger=None, callbac
             #min_steps=100,
             max_epochs=script_args.num_train_epochs, 
             min_epochs=script_args.num_train_epochs, 
-            check_val_every_n_epoch=1,
+            check_val_every_n_epoch=script_args.check_val_every_n_epoch,
             # log_every_n_steps=20,
             gradient_clip_val=script_args.gradient_clip_val,
             gpus=script_args.gpus, 
             # limit_train_batches=1.0,
-            # limit_val_batches=1.0,
+            limit_val_batches=script_args.limit_val_batches,
         )
     elif model_mode == 'cls': # classification
         kwargs = dict(
@@ -285,19 +185,19 @@ def main():
         os.makedirs(data_dir, exist_ok=True)
 
     # todo: put the class in add_specific_args to args.py
-    parser = HfArgumentParser((
-        ClassificationModel.add_specific_args(),
-        Seq2SeqDataset.add_specific_args(), 
-        ClassificationDataset.add_specific_args(), 
-        DataModule.add_specific_args(), 
-        TrainingModule.add_specific_args(), 
-        *TextGenerationWithVectorInputModel.add_specific_args(), 
-        LoggingCallback.add_specific_args(), 
-        CheckpointCallback.add_specific_args(), 
+    parser = HfArgumentParser(( 
+        SeqModelArguments,
+        ClsModelArguments,
+        SeqDataArguments, 
+        ClsDataArguments, 
+        DataModuleArguments, 
+        TrainingArguments, 
+        LoggingArguments, 
+        CheckpointArguments, 
         ScriptArguments, 
     ))
-    cls_args, seq_data_args, cls_data_args, loader_args, train_args, seq2seq_args, \
-        tgwv_args, logging_args, ckpt_args, script_args = parser.parse_args_into_dataclasses()
+    seq2seq_args, cls_args, seq_data_args, cls_data_args, loader_args, train_args,  \
+        logging_args, ckpt_args, script_args = parser.parse_args_into_dataclasses()
     args_dict = dict(
         seq2seq=seq2seq_args, 
         cls=cls_args, 
@@ -305,7 +205,6 @@ def main():
         cls_data=cls_data_args, 
         loader=loader_args, 
         train=train_args, 
-        tgwv=tgwv_args, 
         logging=logging_args, 
         ckpt=ckpt_args, 
         script=script_args, 
@@ -314,27 +213,15 @@ def main():
         args_dict[key] = argparse.Namespace(**value.__dict__)
     
     script_to_seq2seq_args(script_args, seq2seq_args)
-    
-    #d_loader = DataModule(loader_args, seq_data_args, 'seq2seq', tokenizer=model.tokenizer)
-    #cls_loader = DataModule(loader_args, cls_data_args, 'classification', tokenizer=cls_model.tokenizer)
-
+    tokenizer_name = seq2seq_args.seq2seq_model_name_or_path if seq2seq_args.seq2seq_tokenizer_name is None else seq2seq_args.seq2seq_tokenizer_name
+    tokenizer = AutoTokenizer.from_pretrained(tokenizer_name)
+    seq_loader = DataModule(args_dict["loader"], args_dict["seq_data"], 'seq2seq', tokenizer=tokenizer)
     model = Seq2SeqModel(seq2seq_args)
-    cls_model = ClassificationModel(cls_args)
-    tgwv_kwargs = {
-        'seq_tokenizer':model.tokenizer, 
-        'cls_tokenizer':cls_model.tokenizer, 
-        'cls_model':cls_model, 
-        'padding_num':0, #tgwv_args.d_model - tgwv_model.original_embed_dim - cls_model.args.num_labels, 
-        'v_mode': script_args.tgwv_v_mode, 
-    }
-    cls_loader = DataModule(args_dict["loader"], args_dict["cls_data"], 'classification', tokenizer=cls_model.tokenizer, **tgwv_kwargs)
-    tgwv_loader = DataModule(args_dict["loader"], args_dict["cls_data"], 'tgwv', **tgwv_kwargs)
-    model.reset_encoder()
-
+    
     common_args = [args_dict["loader"], script_args, ]
 
     print('start init seq module ...')
-    seq_list_args = [len(tgwv_loader.get_dataset('train')), seq_data_args, seq2seq_args, ]
+    seq_list_args = [len(seq_loader.get_dataset('train')), seq_data_args, seq2seq_args, ]
     seq_attr_kwargs = get_kwargs(*seq_list_args, *common_args, model_mode='seq2seq', type='extra_module_attrs')
     seq_output_dir_kwargs = get_kwargs(*seq_list_args, *common_args, model_mode='seq2seq', type='output_dir_kwargs')
 
@@ -359,74 +246,28 @@ def main():
         )
         print(f'load from {script_args.seq_local_ckpt}, success! ')
 
-    print('start init cls module ...')
-    cls_list_args = [len(tgwv_loader.get_dataset('train')), args_dict["cls_data"], cls_args, ]
-    cls_attr_kwargs = get_kwargs(*cls_list_args, *common_args, model_mode='cls', type='extra_module_attrs')
-    cls_output_dir_kwargs = get_kwargs(*cls_list_args, *common_args, model_mode='cls', type='output_dir_kwargs')
+    # temporary show the result
+    os.makedirs("tmp", exist_ok=True)
+    dataloader = seq_loader.get_dataloader(type_path="val")
+    gen_data_list = []
+    l = 1.0
+    perturb_mode = "latent"
+    for k in range(1, 10):
+        l_step = float(k) * l
+        for i, batch in enumerate(dataloader):
+            if i == 1: break
+            gen_data_list += seq_module.model.probing(batch, l_step=l_step, perturb_mode=perturb_mode)
+        with open(f"tmp/l={l_step}.m={perturb_mode}.json", "w") as f:
+            json.dump(gen_data_list, f, indent=4)
 
-    if script_args.cls_local_ckpt is None:
-        cls_module = TrainingModule(
-            hparams=args_dict['train'], 
-            model=cls_model, 
-            callback_args_dict=callback_args_dict, 
-            output_dir_kwargs=cls_output_dir_kwargs, 
-            **cls_attr_kwargs
-        )
-    else: # load ckpt
-        cls_module = TrainingModule.load_from_checkpoint(
-            script_args.cls_local_ckpt, 
-            model=cls_model, 
-            callback_args_dict=callback_args_dict, 
-            output_dir_kwargs=cls_output_dir_kwargs, 
-            **cls_attr_kwargs
-            #**tgwv_attr_kwargs
-        )
-        print(f'load from {script_args.cls_local_ckpt}, success! ')
-  
-    # set tgwv
-    if use_tgwv:
-        print('start init tgwv module ...')
-        tgwv_list_args = [len(tgwv_loader.get_dataset('train')), cls_data_args, seq2seq_args, ]
-        tgwv_attr_kwargs = get_kwargs(*tgwv_list_args, *common_args, model_mode='tgwv', type='extra_module_attrs')
-        tgwv_output_dir_kwargs = get_kwargs(
-            *tgwv_list_args, *common_args, 
-            model_mode='tgwv', 
-            cls_model_name=cls_model.args.model_name_or_path, 
-            v_mode=script_args.tgwv_v_mode, 
-            type='output_dir_kwargs'
-        )
+    import pdb 
+    pdb.set_trace()
 
-        tgwv_model = TextGenerationWithVectorInputModel(seq2seq_args, tgwv_args)
-        if script_args.tgwv_local_ckpt is None:
-            tgwv_module = TrainingModule(
-                hparams=args_dict['train'], 
-                model=tgwv_model, 
-                callback_args_dict=callback_args_dict, 
-                output_dir_kwargs=tgwv_output_dir_kwargs, 
-                **tgwv_attr_kwargs
-            )
-        else: # load ckpt
-            tgwv_module = TrainingModule.load_from_checkpoint(
-                script_args.tgwv_local_ckpt, 
-                model=tgwv_model, 
-                callback_args_dict=callback_args_dict, 
-                output_dir_kwargs=tgwv_output_dir_kwargs, 
-                #**tgwv_attr_kwargs
-            )
-            print(f'load from {script_args.tgwv_local_ckpt}, success! ')
-    
-    cls_trainer = get_trainer(
-        args_dict["script"], cls_module.output_dir, logging_args.logger_name, 
-        seed=cls_module.hparams.seed, 
-        model_mode='cls', 
+    seq_trainer = get_trainer(
+        args_dict["script"], seq_module.output_dir, logging_args.logger_name, 
+        seed=seq_module.hparams.seed, 
+        model_mode='seq2seq', 
     )
-    """
-    tgwv_trainer = get_trainer(
-        script_args, tgwv_module.output_dir, logging_args.logger_name, 
-        seed=tgwv_module.hparams.seed, 
-        model_mode='tgwv', 
-    )
-    """
 
     if script_args.do_train_seq2seq or script_args.do_eval_seq2seq:
         seq_trainer = get_trainer(
@@ -435,20 +276,9 @@ def main():
             model_mode='seq2seq', 
         )
     if script_args.do_train_seq2seq:
-        seq_trainer.fit(seq_module, datamodule=tgwv_loader)
+        seq_trainer.fit(seq_module, datamodule=seq_loader)
     if script_args.do_eval_seq2seq:
         if False: result = seq_trainer.test(seq_module, datamodule=tgwv_loader)
-
-    if script_args.do_train_cls or script_args.do_eval_cls:
-        cls_trainer = get_trainer(
-            args_dict["script"], cls_module.output_dir, logging_args.logger_name, 
-            seed=cls_module.hparams.seed, 
-            model_mode='cls', 
-        )
-    if script_args.do_train_cls:
-        cls_trainer.fit(cls_module, datamodule=cls_loader)
-    if script_args.do_eval_cls:
-        result = cls_trainer.test(cls_module, datamodule=cls_loader)
 
     import pdb 
     pdb.set_trace()

@@ -179,6 +179,221 @@ def check_nli_dataset(dataset_name):
         return True
     return False
 
+def check_same_model_weight(model1, model2):
+    for (name1, param1), (name2, param2) in zip(model1.named_parameters(), model2.named_parameters()):
+        if not torch.equal(param1, param2):
+            print(f"Weight mismatch found: {name1}")
+
+def text_generation_with_vector_input_collate_fn(
+        seq_len, 
+        cls_batch, 
+        cls_model, 
+        padding_num: int, 
+        mask_id=None, 
+        mode='softmax', # options: raw, softmax, drop
+        wir_pt_path=None, 
+        batch_idx=None, 
+        id_list=None, 
+        load=True, 
+        #dataset_path=None, 
+        #cls_model_name=None, 
+    ):
+    assert mask_id is not None or not mode == 'drop'
+    outs = cls_model(**cls_batch)
+    softmax_fn = torch.nn.Softmax(dim=-1)
+    logits = softmax_fn(outs.logits.detach()) if mode in ['softmax', 'drop'] else outs.logits.detach()
+    stack_logits = torch.stack(tuple([logits] * seq_len), dim=1)
+    if mode in ['softmax', 'raw']:
+        pad_logits = torch.nn.functional.pad(
+            stack_logits, 
+            pad=(0, padding_num), 
+            mode='constant', 
+            value=0.0, 
+        )
+        return pad_logits
+    else: # drop
+        return word_importance_logits(cls_batch, cls_model, stack_logits, padding_num, mask_id, \
+                                      wir_pt_path=wir_pt_path, batch_idx=batch_idx, id_list=id_list, load=load)
+
+def load_wir_from_file(wir_pt_path, id_list, seq_len):
+    # print(f'load wir tensor from {batch_idx * bz} to {upper_bd}. ')
+    wir_file_name = [os.path.join(wir_pt_path, f"{idx}.pt") for idx in id_list]
+    wir_list = []
+    max_wir_len = 0
+    for pth in wir_file_name:
+        wir = torch.load(pth)
+        wir_list.append(wir)
+        if len(wir) > max_wir_len: max_wir_len = len(wir)
+    
+    # pad to same length first, then pad/truncate to seq_len
+    for i, wir in enumerate(wir_list):
+        wir_list[i] = torch.nn.functional.pad(
+            wir, 
+            pad=(0, 0, 0, max_wir_len - len(wir)), 
+            mode='constant', 
+            value=0.0, 
+        )
+    if max_wir_len > seq_len:
+        batch_wir = torch.stack(wir_list, dim=0).narrow(1, 0, seq_len)
+    else:
+        batch_wir = torch.nn.functional.pad(
+            torch.stack(wir_list, dim=0), 
+            pad=(0, 0, 0, seq_len - max_wir_len), 
+            mode='constant', 
+            value=0.0, 
+        )
+
+    return batch_wir
+
+def save_wir_to_file(wir_batch_tensor, wir_pt_path, id_list):
+    wir_file_name = [os.path.join(wir_pt_path, f"{idx}.pt") for idx in id_list ]
+    for pth, wir_tensor in zip(wir_file_name, wir_batch_tensor):
+        torch.save(wir_tensor, pth)
+
+def word_importance_logits(
+        cls_batch, cls_model, unmasked_outs, padding_num: int, mask_id, 
+        wir_pt_path=None, 
+        batch_idx=None, 
+        id_list=None, 
+        load=True, 
+    ):
+    """
+     "input_ids": source_ids,
+            "attention_mask": source_mask,
+            "labels": target_ids,
+            **token_type_ids_kwargs, 
+    """
+    bz, seq_len = cls_batch['input_ids'].shape
+    seq2seq_batch_len = unmasked_outs.shape[1]
+
+    first_load_f = None
+    if wir_pt_path is not None and load:
+        first_load_f = os.path.join(wir_pt_path, f"{batch_idx * bz}.pt")
+        if os.path.exists(first_load_f):
+            return load_wir_from_file(wir_pt_path, id_list, seq2seq_batch_len)
+    else:
+        stacked_cls_batch = dict()
+        for key in cls_batch.keys():
+            reshape_size = (-1, ) if key == 'labels' else (-1, seq_len)
+            stacked_cls_batch[key] = torch.stack([cls_batch[key]] * seq_len, dim=1)
+            if key == 'input_ids':
+                # set mask id
+                mask_tensor = torch.diag(torch.tensor([True] * seq_len))
+                mask_tensor = torch.stack([mask_tensor] * bz, dim=0)
+                stacked_cls_batch[key][mask_tensor] = mask_id
+            stacked_cls_batch[key] = torch.reshape(stacked_cls_batch[key], reshape_size)
+        
+        stacked_out = cls_model(**stacked_cls_batch)
+        softmax_fn = torch.nn.Softmax(dim=-1)
+        stacked_out_logits = softmax_fn(stacked_out.logits.detach())
+        stacked_out_logits = torch.reshape(stacked_out_logits, (bz, seq_len, -1))
+        # calc word important logits
+        if seq_len < seq2seq_batch_len: # pad
+            padding = [stacked_out_logits[:, -1:, :]] * (seq2seq_batch_len - seq_len)
+            stacked_out_logits = torch.cat([stacked_out_logits, *padding], dim=1)
+        else:
+            stacked_out_logits = stacked_out_logits[:, :seq2seq_batch_len, :]
+        word_important_logits = unmasked_outs - stacked_out_logits
+        # word_important_logits = softmax_fn(word_important_logits) # the values are similar
+
+        stacked_out_pad_logits = torch.nn.functional.pad(
+            word_important_logits, 
+            pad=(0, padding_num), 
+            mode='constant', 
+            value=0.0, 
+        )
+        if first_load_f is not None and not os.path.exists(first_load_f):
+            os.makedirs(wir_pt_path, exist_ok=True)
+            save_wir_to_file(stacked_out_pad_logits, wir_pt_path, id_list)
+
+        return stacked_out_pad_logits
+
+def is_special_token(token, tokenizer):
+    special_tokens = np.unique([v for k, v in tokenizer.init_kwargs.items() if k[-5:] == 'token']).tolist()
+    return token in special_tokens
+
+def wir_logit_to_color_range(logits):
+    logit_min_mask = logits < 0
+    logits_pos = torch.abs(logits)
+    logits_pos_biased = logits_pos / logits_pos[logits_pos > 0].min()
+    log_logits = torch.log(logits_pos_biased)
+    log_logits[log_logits == -torch.inf] = 0.0
+    w, b = torch.max(log_logits) - torch.min(log_logits), torch.min(log_logits)
+    log_logits = (log_logits - b) / w
+    log_logits[logit_min_mask] = 0.0
+    return log_logits
+
+def show_wir_in_html(
+        opts=None,
+        seq_len=None, 
+        ptb_len=None, 
+        cls_batch=None, 
+        cls_model=None, 
+        cls_tokenizer=None, 
+        display_filename=None,  
+    ):
+    assert set(opts).issubset(['insert', 'write', 'show'])
+    global display_texts
+    if 'display_texts' not in globals().keys(): 
+        display_texts = defaultdict(list)
+
+    if 'insert' in opts:
+        cls_logits = text_generation_with_vector_input_collate_fn(
+            seq_len, cls_batch, cls_model, 
+            padding_num=0, 
+            mask_id=cls_tokenizer.mask_token_id, 
+            mode='drop',
+            #id_list=cls_batch['ids'], 
+            load=False, 
+        )
+
+        cls_logits = wir_logit_to_color_range(cls_logits)
+        for ids, logits in zip(cls_batch['input_ids'], cls_logits):
+            disp_text_info_list = []
+            for id, logit in zip(ids, logits):
+                def get_color_info(token, logit):
+                    if is_special_token(token, cls_tokenizer): return []
+
+                    def range_mapping(num, src_range=(0, 1), tgt_range=(0, 255)):
+                        diff_fn = lambda x: x[1] - x[0]
+                        return int(tgt_range[0] + (num - src_range[0]) * diff_fn(tgt_range) / diff_fn(src_range))
+                    
+                    if np.argmax(logit) == 0: color = (0, 0, range_mapping(logit[0]))
+                    else: color = (range_mapping(logit[1]), 0, 0)
+                    return [{"text": token, "color": color}]
+                
+                disp_text_info_list += get_color_info(cls_tokenizer.decode([id]), logit)
+
+            # turn display text info list into colored text
+            final_disp_info_list = []
+            for info in disp_text_info_list:
+                if "##" == info['text'][0:2]:
+                    if len(final_disp_info_list) > 0:
+                        elementwise_add_fn = lambda x, y: tuple([m+n for m, n in zip(x, y)])
+                        final_disp_info_list[-1]['color'] = elementwise_add_fn(final_disp_info_list[-1]['color'], info['color'])
+                        final_disp_info_list[-1]['text'] += info['text'][2:]
+                        final_disp_info_list[-1]['subword_num'] += 1
+                else:
+                    final_disp_info_list.append(info)
+                    final_disp_info_list[-1].update({'subword_num': 1})
+            colored_text = lambda x: '<span style="color:rgb{};">{}</span>'.format(
+                tuple([int(i / x['subword_num']) for i in x['color']]), x['text'], 
+            )
+            text_list = [colored_text(info) for info in final_disp_info_list]
+            disp_text = " ".join(text_list)
+            display_texts['ptb={:.2f}'.format(ptb_len)].append(disp_text)
+
+
+    if 'write' in opts:
+        pd.set_option('display.max_colwidth', 60)
+        df = pd.DataFrame(display_texts)
+        html_table = df.to_html(escape=False)
+        with open(display_filename, 'w') as f:
+            f.write(html_table)
+    if 'show' in opts:
+        os.system('python -m http.server --directory .')
+
+
 def get_diff_substr(src: str, tgt: str) -> Dict:
     n = len(src)
     m = len(tgt)
@@ -239,15 +454,25 @@ def get_diff_substr(src: str, tgt: str) -> Dict:
 
     return substr
 
-def show_texts_in_html(df=None, colored_text_list=None, mode_list=['del', 'ins'], show_html=False):
-    #assert df.shape == np(colored_texts).shape[:-1]
-    import pandas as pd
-    # create a sample dataframe
+def colored_in_html(label, tuple_num):
+    if not label == np.argmax(tuple_num):
+        print(label, tuple_num)
+    if tuple_num[0] > tuple_num[1]:
+        color = "blue" #if label == np.argmax(tuple_num) else "green"
+        return '(<span style="color:{};">{:.4f}</span>, {:.4f})'.format(color, *tuple_num)
+    else:
+        color = "red" #if label == np.argmax(tuple_num) else "green"
+        return '({:.4f}, <span style="color:{};">{:.4f}</span>)'.format(tuple_num[0], color, tuple_num[1])
+    
+def show_texts_in_html(df, ptb_len=None, df_out=None, word_range=None, show_html=False, html_name='text.html'): # colored_text_list=None, mode_list=['del', 'ins'], 
+    # special bug: the dataframe can be modified when create in local scope
+    df = copy.deepcopy(df)
+    """
     df = pd.DataFrame({'original': ['i am a very cute tsaoni. ', 'she was doing laundries. '],
                     'perturb1': ['there is a cute horse.', 'he is doing laundry. '],})
                     #'perturb2': ['it was eating tsai tsai.', 'doing laundry is his favorite. '],
                     #'perturb3': ['so curious the tsaoni is.', 'he dont like doing hw. '],})
-
+    """
     n, m = df.shape
     colored_text_list = []
     for i in range(n):
@@ -256,7 +481,7 @@ def show_texts_in_html(df=None, colored_text_list=None, mode_list=['del', 'ins']
             substr_dict = get_diff_substr(df.iloc[i][0], df.iloc[i][j])
             single_colored_text_list.append([substr_dict['del'], substr_dict['ins']])
         colored_text_list.append(single_colored_text_list)
-    
+
     """
     # create a function to apply color styles to text
     def color_text(text):
@@ -364,7 +589,7 @@ def show_texts_in_html(df=None, colored_text_list=None, mode_list=['del', 'ins']
                 text_color_info = color_info_opt.multi_colored_text(idx, action='get')
             else:
                 text_color_info = color_info_opt.single_colored_text(s, colored_texts[1], ptb_idx=ptb_idx, mode=mode)
-                color_info_opt.multi_colored_text(idx, s=s_origin, 
+                color_info_opt.multi_colored_text(idx, s=s_origin, \
                                             colored_texts=colored_texts[0], ptb_idx=ptb_idx, action='set')
 
         #words = s.split()
@@ -373,13 +598,34 @@ def show_texts_in_html(df=None, colored_text_list=None, mode_list=['del', 'ins']
             highlighted_words.append(f'<span style="color:{info["color"]};">{info["text"]}</span>')
         return ''.join(highlighted_words)
 
+    def ptb_word_range_highlight(s, ptb_len, word_range):
+        color = (255, int(ptb_len * 255), 0)
+        s_len = len(s.split())
+        prv, nxt = (0, word_range[0]), (word_range[1], s_len)
+        prv_str = '' if word_range[0] == 0 else ' '.join([*s.split()[slice(*prv)], ''])
+        nxt_str = '' if word_range[1] == s_len else ' '.join(['', *s.split()[slice(*nxt)]])
+        highlight_s = ' '.join(s.split()[slice(*word_range)])
+        color_fn = lambda c: f'rgb{c}'
+        html_s = f'<span style="background-color:{color_fn(color)};">{highlight_s}</span>'
+        return ''.join([prv_str, html_s, nxt_str])
+
     # colored_text_list dim:: 0: sent num, 1: ptb num, 2: 2, 3: colored num
+
     for i in range(n):
         for j in range(1, m):
-            df.iloc[i][j] = highlight_text(df.iloc[i][j], s_origin=df.iloc[i][0], 
+            ptb_range_text = ptb_word_range_highlight(df.iloc[i][0], ptb_len, word_range[j-1][i])
+            diff_text = highlight_text(df.iloc[i][j], s_origin=df.iloc[i][0], \
                                            idx=i, ptb_idx=j-1, colored_texts=colored_text_list[i][j-1])
+            df.iloc[i][j] = '<br><br>'.join([ptb_range_text, diff_text])
+            
         df.iloc[i][0] = highlight_text(df.iloc[i][0], idx=i, ptb_idx=-1, )
-    html_table = df.to_html(escape=False)
+
+    pd.set_option('display.max_colwidth', 60)
+    if df_out is not None:
+        final_df = pd.concat([pd.concat([df.iloc[[i]], df_out.iloc[[i]]]) for i in range(len(df))])
+        html_table = final_df.to_html(escape=False)
+    else:
+        html_table = df.to_html(escape=False)
     #styled_df = highlight_text(df)
 
     # render the styled dataframe as an HTML table
@@ -387,7 +633,7 @@ def show_texts_in_html(df=None, colored_text_list=None, mode_list=['del', 'ins']
 
     # print the HTML table
     #print(html_table)
-    with open('text.html', 'w') as f:
+    with open(html_name, 'w') as f:
         f.write(html_table)
     if show_html:
         os.system('python -m http.server --directory .')
@@ -414,3 +660,26 @@ def get_color_mapping(num, min_n=0, max_n=100, ub="ba08ba", lb="08ba08"):
             dist -= abs(ub[i] - lb[i])
         
     return tuple(ret_color)
+
+def generate_len_file(src_file_name, len_file_name):
+    with open(src_file_name, 'r') as src_f, open(len_file_name, 'w') as len_f:
+        lens = []
+        for line in src_f:
+            words = line.split()
+            lens.append(f"{len(words)}")
+        len_f.write('\n'.join(lens))
+
+def get_dataset_global(global_name):
+    import dataset
+    return getattr(dataset, global_name)
+
+def get_module_global(global_name):
+    import module
+    return getattr(module, global_name)
+
+def get_model_global(global_name):
+    import model
+    return getattr(model, global_name)
+
+def sigmoid(x: torch.FloatTensor, a=1.0):
+    return 1. / (1. + torch.exp(-a*x))

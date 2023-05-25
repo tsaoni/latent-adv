@@ -13,6 +13,7 @@ from utils import (
     flatten_list,
     check_parameter_value,
     get_scheduler_info,
+    wir_logit_to_color_range, 
 )
 
 class TrainingModule(pl.LightningModule):
@@ -23,12 +24,12 @@ class TrainingModule(pl.LightningModule):
         callback_args_dict = None, # keys: ckpt, log
         output_dir_kwargs = None, 
         **kwargs, # attr: gpus, sortish_sampler, max_tokens_per_batch, train_batch_size, gradient_accumulation_steps, dataset_len
-        # num_train_epochs, 
+        # num_train_epochs, attr_dim, ptb_param
     ):
         super().__init__()
         self.save_hyperparameters(hparams)
         self.set_extra_attrs(kwargs)
-    
+
         self.create_output_dir(output_dir_kwargs)
         self.hparams_save_path = os.path.join(self.output_dir, "hparams.pkl")
         pickle_save(self.hparams, self.hparams_save_path)
@@ -67,15 +68,18 @@ class TrainingModule(pl.LightningModule):
             """
             self.output_dir = os.path.join('../models', output_dir_name)
         else:
-            self.output_dir = os.path.join('../models', self.hparams.output_dir)
+            model_dir = '../models/'
+            prefix = '' if model_dir in self.hparams.output_dir else model_dir
+            self.output_dir = prefix + self.hparams.output_dir
 
         Path(self.output_dir).mkdir(parents=True, exist_ok=True)
         self.hparams.output_dir = self.output_dir
 
         print(f'the current output_dir is {self.output_dir}')
-        if len(os.listdir(self.output_dir)) > 3 and self.hparams.do_train:
-            print('Output directory ({}) already exists and is not empty, overwrite to it...'.format(self.output_dir))
-
+        if len(os.listdir(self.output_dir)) > 3:
+            print('Output directory ({}) already exists and is not empty, may overwrite to it...'.format(self.output_dir))
+        global output_dir
+        output_dir = self.output_dir
 
     def check_sampler_usage(self):
         if self.hparams.sortish_sampler and self.hparams.gpus > 1:
@@ -101,8 +105,13 @@ class TrainingModule(pl.LightningModule):
 
     @property
     def is_seq2seq(self) -> bool:
-        seq2seq = ["summarization", "translation"]
+        seq2seq = ["summarization", "translation", "ptb"]
         return self.model.args.model_mode in seq2seq
+    
+    @property
+    def is_classification(self) -> bool:
+        classification = ["sequence-classification", "latent"]
+        return self.model.args.model_mode in classification
 
     def get_lr_scheduler(self):
         arg_to_scheduler = get_scheduler_info()['arg_to_scheduler']
@@ -113,9 +122,18 @@ class TrainingModule(pl.LightningModule):
         scheduler = {"scheduler": scheduler, "interval": "step", "frequency": 1}
         return scheduler
 
+    def set_requires_grad(self):
+        if hasattr(self.model.args, "use_vae") and self.model.args.use_vae is not None:
+            for n, p in self.model.named_parameters():
+                p.requires_grad = True if "vae" in n else False
+
     def configure_optimizers(self):
         """Prepare optimizer and schedule (linear warmup and decay)"""
-        model = self.model
+        if self.model.args.model_mode == "latent": model = self.model.model.classification_head
+        elif hasattr(self.model.args, "use_vae") and self.model.args.use_vae is not None:
+            model = self.model.model.model.encoder.vae
+        else: model = self.model
+        self.set_requires_grad()
         no_decay = ["bias", "LayerNorm.weight"]
         optimizer_grouped_parameters = [
             {
@@ -143,9 +161,12 @@ class TrainingModule(pl.LightningModule):
         return [optimizer], [scheduler]
     
     def configure_callbacks(self):
+        checkpoint_callback_list = []
         logging_callback = LoggingCallback(self.callback_args_dict['log'], self.output_dir)
-        checkpoint_callback = CheckpointCallback(self.callback_args_dict['ckpt'], self.output_dir)
-        return [logging_callback, checkpoint_callback]
+        checkpoint_callback_list.append(CheckpointCallback(self.callback_args_dict['ckpt'], self.output_dir))
+        if self.model.args.model_mode == "latent":
+            checkpoint_callback_list.append(LatentCallback(self.output_dir))
+        return [logging_callback, *checkpoint_callback_list, ]
     
     def _feature_file(self, mode):
         return os.path.join(
@@ -166,28 +187,52 @@ class TrainingModule(pl.LightningModule):
             tgt_ids = batch['labels']
             pad_token_id = self.model.tokenizer.pad_token_id
             
+            # reconstruct
             if self.hparams.label_smoothing == 0:
                 # Same behavior as modeling_bart.py, besides ignoring pad_token_id
                 ce_loss_fct = torch.nn.CrossEntropyLoss(ignore_index=pad_token_id)
-
                 assert lm_logits.shape[-1] == self.model.config.vocab_size
                 # print(lm_logits.shape, tgt_ids.shape, lm_logits.shape[-1] )
-                loss = ce_loss_fct(lm_logits.view(-1, lm_logits.shape[-1]), tgt_ids.view(-1))
+                rec_loss = ce_loss_fct(lm_logits.view(-1, lm_logits.shape[-1]), tgt_ids.view(-1))
             else:
                 lprobs = torch.nn.functional.log_softmax(lm_logits, dim=-1)
-                loss, nll_loss = label_smoothed_nll_loss(
+                rec_loss, nll_loss = label_smoothed_nll_loss(
                     lprobs, tgt_ids, self.hparams.label_smoothing, ignore_index=pad_token_id
                 )
 
-        elif self.model.args.model_mode == 'sequence-classification':
+            training_loss = self.hparams.vae_loss_ratio * VAE_encoder.loss[0]\
+                                 + (1. - self.hparams.vae_loss_ratio) * rec_loss
+
+            return (training_loss, *VAE_encoder.loss, rec_loss, )
+            # attribute
+            cls_logits = batch['cls_logits']
+            log_cls_logits = wir_logit_to_color_range(cls_logits)
+            # bart case
+            def norm(t, f='z-prob'):
+                if f == 'z-prob':
+                    return (t - torch.mean(t)) / torch.std(t)
+                elif f == 'l2':
+                    return torch.nn.functional.normalize(torch.unsqueeze(t, dim=0)).squeeze(0)
+            ptb_param = outputs.inputs_embeds if self.hparams.ptb_param == 'embed' else outputs.encoder_last_hidden_state
+            ce_loss_fct = torch.nn.CrossEntropyLoss()
+            mse_loss_fct = torch.nn.MSELoss()
+            norm_ptb_param, norm_cls_logits = norm(ptb_param[:, :, self.hparams.attr_dim]), norm(log_cls_logits[:, :, 1])
+            attr_loss = mse_loss_fct(norm_ptb_param, norm_cls_logits)
+            
+            # do weighted sum on two loss
+            loss = self.hparams.loss_ratio * rec_loss + (1 - self.hparams.loss_ratio) * attr_loss
+
+            return (loss, rec_loss, attr_loss, )
+
+        elif self.is_classification:
             # todo: use default loss, which can be changed to customized one
             if self.hparams.label_smoothing == 0:
                 loss = outputs['loss']
             else:
                 # todo: implement label smoothing
                 loss = outputs['loss']
-            
-        return (loss,)
+        
+            return (loss, )
 
     def get_metadata(self, batch, reset=False):
         #logs = {name: loss for name, loss in zip(self.loss_names, loss_tensors)}
@@ -207,7 +252,9 @@ class TrainingModule(pl.LightningModule):
         self.step_count += 1
         loss_tensors = self(batch)
         logs = self.get_metadata(batch)
-        self.metric.add_batch_metric(dict(loss=loss_tensors[0].item(), **logs))
+        loss_name = ['loss', 'vae_Loss', 'vae_MSE', 'vae_KLD', 'CELoss'] if self.is_seq2seq else ['loss']
+        loss_d = {name: loss.item() for name, loss in zip(loss_name, loss_tensors)}
+        self.metric.add_batch_metric(dict(**loss_d, **logs))
         #self.logger.log_metrics({'loss': loss_tensors[0]}, step=self.step_count)
 
         return {"loss": loss_tensors[0], "log": logs}
@@ -237,12 +284,12 @@ class TrainingModule(pl.LightningModule):
         return self.validation_epoch_end(outputs, prefix="test")
     """
 
-    def generate_step(self, batch: dict, prefix='val') -> dict:
+    def generate_step(self, batch: dict, prefix='val', visual_layer=False) -> dict:
         # todo: add batch eval metric
         bsz = batch["input_ids"].size(0)
         if self.model.model_type in ['seq2seq', 'tgwv']:
             t0 = time.time()
-            generated_ids = self.model.generate(batch)
+            generated_ids = self.model.generate(batch, visual_layer=visual_layer)
             preds: List[str] = self.model.ids_to_clean_text(generated_ids)
             target: List[str] = self.model.ids_to_clean_text(batch["labels"])
             gen_time = (time.time() - t0) / batch["input_ids"].shape[0]
@@ -292,6 +339,11 @@ class TrainingModule(pl.LightningModule):
         print('Saving the the checkpoint.')
         return
     
+    @pl.utilities.rank_zero_only
+    def save_specific_model_checkpoint(self, output_dir, model, tokenizer=None):
+        
+        pass
+
     """
     @pl.utilities.rank_zero_only
     def on_save_checkpoint(self, checkpoint: Dict[str, Any], filepath='checkpoint') -> None:
@@ -307,63 +359,6 @@ class TrainingModule(pl.LightningModule):
         self.tokenizer.save_pretrained(save_path)
         print('SAVING TO checkpoint {}'.format(save_path))
     """
-    
-    @staticmethod
-    def add_specific_args():
-        scheduler_dict = get_scheduler_info()
-        @dataclass
-        class TrainingArguments:
-            adafactor: bool = field(
-                default=False, 
-                metadata={"help": ""}
-            )
-            adam_epsilon: Optional[float] = field(
-                default=1e-8, 
-                metadata={"help": "Epsilon for Adam optimizer. "}
-            )
-            seed: Optional[int] = field(
-                default=112, 
-                metadata={"help": "the magic seed. "}
-            )
-            warmup_steps: Optional[int] = field(
-                default=100, 
-                metadata={"help": ""}
-            )
-            learning_rate: Optional[float] = field(
-                default=5e-05, 
-                metadata={"help": "the learning rate"}
-            )
-            weight_decay: Optional[float] = field(
-                default=0.0, 
-                metadata={"help": ""}
-            )
-            dropout: Optional[float] = field(
-                default=0.0, 
-                metadata={"help": "dropout rate. "}
-            )
-            label_smoothing: Optional[float] = field(
-                default=0.0, 
-                metadata={"help": "label smoothing rate. "}
-            )
-            max_grad_norm: Optional[float] = field(
-                default=1.0, 
-                metadata={"help": ""}
-            )
-            lr_scheduler: Optional[str] = field(
-                default='linear', 
-                metadata={
-                    "help": "Learning rate scheduler", 
-                    "choices": scheduler_dict['arg_to_scheduler_choices'], 
-                    "metavar": scheduler_dict['arg_to_scheduler_metavar'],
-                }
-            )
-            output_dir: Optional[str] = field(
-                default=None, 
-                metadata={"help": ""}
-            )
-
-          
-        return TrainingArguments
     
 if __name__ == '__main__':
     parser = HfArgumentParser((Seq2SeqModel.add_specific_args(), 
