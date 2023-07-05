@@ -1,21 +1,5 @@
 from lib import *
 
-def same_seeds(seed):
-	torch.manual_seed(seed)
-	if torch.cuda.is_available():
-		torch.cuda.manual_seed(seed)
-		torch.cuda.manual_seed_all(seed)
-	np.random.seed(seed)
-	random.seed(seed)
-	torch.backends.cudnn.benchmark = False
-	torch.backends.cudnn.deterministic = True
-
-def get_kwargs(config, l_name):
-    kwargs = {}
-    for name in l_name:
-        if hasattr(config, name):
-            kwargs[name] = getattr(config, name, None)
-    return kwargs
 
 def get_scheduler_info():
     # update this and the import above to support new schedulers from transformers.optimization
@@ -38,6 +22,16 @@ def get_scheduler_info():
 
     return scheduler_dict
 
+def set_specific_attr(args, attrs):
+    args = argparse.Namespace(**args.__dict__)
+    args_dict = copy.deepcopy(args.__dict__)
+    for key, value in args_dict.items():
+        for a in attrs:
+            if a in key:
+                setattr(args, a, value)
+                delattr(args, key)
+                print(f'the original attribute is {key}, new attribute is {a}. the value is set to {value}')
+    return args
 
 def label_to_tensor(label: str):
     return torch.Tensor([int(label)])
@@ -116,6 +110,16 @@ def pickle_save(obj, path):
     with open(path, "wb") as f:
         return pickle.dump(obj, f)
 
+def use_task_specific_params(model, task=None):
+    """Update config with summarization specific params."""
+    if task is not None:
+        task_specific_params = model.config.task_specific_params
+
+        if task_specific_params is not None:
+            pars = task_specific_params.get(task, {})
+            check_task_specific_params_type(pars)
+            print(f"using task specific params for {task}: {pars}")
+            model.config.update(pars)
 
 def check_task_specific_params_type(pars):
     int_params = ['num_labels']
@@ -140,6 +144,40 @@ def load_json(path):
     with open(path) as f:
         return json.load(f)
 
+''' check functions '''
+
+def check_argument_setting(args, arg_name):
+    if arg_name == 'task':
+        assert args.task in ['agnews', 'mrpc', 'news-summary']
+    elif arg_name == 'model_mode':
+        assert args.model_mode in ['base', 'sequence-classification', 'question-answering', \
+            'pretraining', 'token-classification', 'language-modeling', \
+            'summarization', 'translation']
+
+def check_variable_status(variable, name="", status='None'):
+    if status == 'None':
+        if variable is None:
+            raise ValueError('{} parameter should not be none. '.format(name))
+
+def check_parameter_value(hparams, param_name_list, check_all=False):
+    if isinstance(hparams, argparse.Namespace):
+        hparams = vars(hparams)
+    # not_none_param = ['model_mode', 'model_name_or_path', 'config_name', 'tokenizer_name']
+    check_exist = False
+    for param_name in param_name_list:
+        if hparams[param_name] is None:
+            if check_all:
+                raise ValueError('{} parameter should not be none. '.format(param_name))
+        else:
+            check_exist = True
+    if not check_exist:
+        raise ValueError('paramters in list should have at least one not none value. ')
+
+def check_nli_dataset(dataset_name):
+    nli = []
+    if dataset_name in nli:
+        return True
+    return False
 
 def check_same_model_weight(model1, model2):
     for (name1, param1), (name2, param2) in zip(model1.named_parameters(), model2.named_parameters()):

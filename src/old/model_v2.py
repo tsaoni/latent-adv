@@ -1,4 +1,5 @@
 from lib import *
+from perturb import *
 from utils import *
 
 import torch.nn as nn
@@ -23,9 +24,10 @@ MODEL_MODES = {
     "language-modeling": AutoModelWithLMHead,
     "summarization": AutoModelForSeq2SeqLM,
     "translation": AutoModelForSeq2SeqLM,
+    "paraphrase": AutoModelForSeq2SeqLM, 
 }
 
-class Attacker(nn.Module):
+class Seq2SeqWithNoisyAdapter(nn.Module):
     def __init__(
         self, 
         config, 
@@ -40,7 +42,47 @@ class Attacker(nn.Module):
             eval_max_gen_length=50, 
         )
         self.model = AutoModelForSeq2SeqLM.from_pretrained(model_name_or_path, config=config)
-      
+        adp_config = AdapterConfig(mh_adapter=True, output_adapter=True, reduction_factor=16, non_linearity="relu")
+        self.model.add_adapter("bottleneck_adapter", config=adp_config)
+        self.model.set_active_adapters("bottleneck_adapter")
+        #self.add_noisy_input_layer()
+
+    def add_hook(self):
+        def hook_fn(module, input, output):
+            print(f"Module: {module} is used. ")
+            #print(f"Input: {input}")
+            #print(f"Output: {output}")
+            self.inp, self.out = input, output
+        hook = self.model.model.encoder.layers[0].attention_adapters.register_forward_hook(hook_fn)
+
+    def add_noisy_input_layer(self):
+        encoder_noisy_adapter_names = ["attention_adapters", "output_adapters"]
+        decoder_noisy_adapter_names = ["attention_adapters"]
+        for i, layer in enumerate(self.model.model.encoder.layers):
+            for n in encoder_noisy_adapter_names:
+                layer = getattr(layer, n, None)
+                setattr(self.model.model.encoder.layers[i], n, PerturbLayer(Namespace(), layer))
+
+
+        for i, layer in enumerate(self.model.model.decoder.layers):
+            for n in decoder_noisy_adapter_names:
+                layer = getattr(layer, n, None)
+                setattr(self.model.model.decoder.layers[i], n, PerturbLayer(Namespace(), layer))
+
+    def extra_settings(self, ):
+        if isinstance(self.model, BartForConditionalGeneration):
+            extra_model_params = ("encoder_layerdrop", "decoder_layerdrop", "dropout", "attention_dropout")
+            for p in extra_model_params:
+                if getattr(self.args, p, None):
+                    assert hasattr(self.config, p), f"model config doesn't have a `{p}` attribute"
+                    setattr(self.config, p, getattr(self.args, p))
+
+        if self.model.config.decoder_start_token_id is None and isinstance(self.tokenizer, MBartTokenizer):
+            self.decoder_start_token_id = self.tokenizer.lang_code_to_id[self.hparams.tgt_lang]
+            self.model.config.decoder_start_token_id = self.decoder_start_token_id
+        else:
+            self.decoder_start_token_id = self.model.config.decoder_start_token_id
+
     def forward(self, **batch):
         pad_token_id = self.model.config.pad_token_id
         decoder_start_token_id = self.model.config.decoder_start_token_id
@@ -57,6 +99,10 @@ class Attacker(nn.Module):
             tgt_ids=None
             decoder_input_ids = None
 
+        # outputs = self(src_ids, attention_mask=src_mask, decoder_input_ids=decoder_input_ids, use_cache=False,
+        #                use_prefix=True, return_dict=True, labels=tgt_ids)
+        #
+        # return (outputs.loss,)
 
         outputs = self.model(
             src_ids, 
@@ -65,6 +111,10 @@ class Attacker(nn.Module):
             use_cache=False,
             labels=tgt_ids, 
         )
+        # use_prefix=True)
+
+        inputs_embeds = self.model.get_input_embeddings()(src_ids)
+        outputs.inputs_embeds = inputs_embeds
 
         return outputs
 
@@ -125,3 +175,28 @@ class Attacker(nn.Module):
             generated_ids, skip_special_tokens=True, clean_up_tokenization_spaces=True
         )
         return lmap(str.strip, gen_text)
+
+
+
+def get_model_from_args(args, **config_kwargs):
+    config = AutoConfig.from_pretrained(
+        args.config_name if args.config_name else args.model_name_or_path,
+        **({"num_labels": args.num_labels} if args.num_labels is not None else {}),
+        cache_dir=args.cache_dir,
+        **config_kwargs,
+    )
+    tokenizer = AutoTokenizer.from_pretrained(
+        args.tokenizer_name if args.tokenizer_name else args.model_name_or_path,
+        cache_dir=args.cache_dir,
+    )
+    model_type = MODEL_MODES[args.model_mode]
+    model = model_type.from_pretrained(
+        args.model_name_or_path,
+        from_tf=bool(".ckpt" in args.model_name_or_path),
+        config=config,
+        cache_dir=args.cache_dir,
+        ignore_mismatched_sizes=True, 
+    )
+
+    return config, tokenizer, model
+

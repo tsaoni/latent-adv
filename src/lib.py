@@ -1,120 +1,53 @@
-# all
-from dataclasses import dataclass, field
-
-# main
-import os, sys
+# libraries
+import argparse
 import json
-import argparse
-import pytorch_lightning as pl
-from typing import List, Optional
-from argparse import Namespace
-from pathlib import Path
-# from transformers import (
-# )
-
-# callback
-from pytorch_lightning.loggers import WandbLogger
-import wandb
-
-# trainer
-import abc
-import os, sys
-import time
-import copy
-import argparse
-import torch
-import evaluate
-import numpy as np
-import pandas as pd
-import pytorch_lightning as pl
-from pathlib import Path
-from typing import List, Tuple, Dict, Any, Union
-from collections import defaultdict
-from torch.utils.data import DataLoader
-from transformers import (
-    HfArgumentParser, 
-    BartForConditionalGeneration,
-    MBartTokenizer, 
-    GPT2Tokenizer, 
-    GPT2LMHeadModel, 
-    T5ForConditionalGeneration, 
-    AdamW,
-    AutoConfig,
-    AutoModel,
-    AutoModelForPreTraining,
-    AutoModelForQuestionAnswering,
-    AutoModelForSeq2SeqLM,
-    AutoModelForSequenceClassification,
-    AutoModelForTokenClassification,
-    AutoModelWithLMHead,
-    AutoTokenizer,
-    PretrainedConfig,
-    PreTrainedTokenizer,
-    BartTokenizer,
-    BartForSequenceClassification, 
-    BartConfig, 
-    BartModel, 
-)
-from transformers.optimization import (
-    Adafactor,
-    get_cosine_schedule_with_warmup,
-    get_cosine_with_hard_restarts_schedule_with_warmup,
-    get_linear_schedule_with_warmup,
-    get_polynomial_decay_schedule_with_warmup,
-)
-from transformers.models.bart.modeling_bart import (
-    shift_tokens_right,  # for seq2seq model
-    Seq2SeqSequenceClassifierOutput, 
-    BartClassificationHead, 
-    Seq2SeqModelOutput, 
-    BaseModelOutput, 
-    BartEncoder, 
-)
-
-
-# model
-import torch.nn as nn
-from torch.autograd import Variable
-import inspect
-#import torchvision.transforms as transforms
-#from PIL import Image
-from torch.nn import (
-    MSELoss, 
-    CrossEntropyLoss, 
-    BCEWithLogitsLoss, 
-)
-
-# utils
-import argparse
-import pickle
-import itertools
-import linecache
 import logging
+import math
 import os
-import numpy as np
-import pytorch_lightning as pl
-from functools import cached_property
-from typing import Callable, Dict, Iterable, List, Union
+import random
 from pathlib import Path
-from torch.utils.data import Dataset, Sampler
-from rouge_score import rouge_scorer, scoring
-from pytorch_lightning.callbacks import EarlyStopping, ModelCheckpoint
-from pytorch_lightning.utilities import rank_zero_only
-from transformers.utils import ModelOutput
 
-from transformers.optimization import (
-    Adafactor,
-    get_cosine_schedule_with_warmup,
-    get_cosine_with_hard_restarts_schedule_with_warmup,
-    get_linear_schedule_with_warmup,
-    get_polynomial_decay_schedule_with_warmup,
+import datasets
+import evaluate
+import torch
+from accelerate import Accelerator
+from accelerate.logging import get_logger
+from accelerate.utils import set_seed
+from datasets import load_dataset
+from huggingface_hub import Repository, create_repo
+from torch.utils.data import DataLoader
+from tqdm.auto import tqdm
+
+import transformers
+from transformers import (
+    AutoModelForSeq2SeqLM, 
+    AutoModelWithLMHead, 
+    AutoConfig,
+    AutoModelForSequenceClassification,
+    AutoTokenizer,
+    DataCollatorWithPadding,
+    PretrainedConfig,
+    SchedulerType,
+    default_data_collator,
+    get_scheduler,
+    default_data_collator,
+    DataCollatorWithPadding,
 )
+from transformers.utils import check_min_version, get_full_repo_name, send_example_telemetry
+from transformers.utils.versions import require_version
 
-# from transformers.models.bart.modeling_bart import *
+# global variables cross files
+logger = get_logger(__name__)
 
-
-try:
-    from fairseq.data.data_utils import batch_by_size
-    FAIRSEQ_AVAILABLE = True
-except (ImportError, ModuleNotFoundError):
-    FAIRSEQ_AVAILABLE = False
+task_to_keys = {
+    "cola": ("sentence", None),
+    "mnli": ("premise", "hypothesis"),
+    "mrpc": ("sentence1", "sentence2"),
+    "qnli": ("question", "sentence"),
+    "qqp": ("question1", "question2"),
+    "rte": ("sentence1", "sentence2"),
+    "sst2": ("sentence", None),
+    "stsb": ("sentence1", "sentence2"),
+    "wnli": ("sentence1", "sentence2"),
+    "multi_nli": ("premise", "hypothesis"),
+}
