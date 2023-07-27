@@ -1,0 +1,12 @@
+2023-07-13 10:56:11.558537: I tensorflow/core/util/port.cc:110] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+2023-07-13 10:56:11.604479: I tensorflow/core/platform/cpu_feature_guard.cc:182] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 AVX512F AVX512_VNNI FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2023-07-13 10:56:12.882567: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:38] TF-TRT Warning: Could not find TensorRT
+ARGS:  Namespace(task='ag_news', model_checkpoint='textattack/bert-base-uncased-ag-news', tokenizer_checkpoint='bert-base-uncased', decode_mode='Bert', victim_model_checkpoint='textattack/roberta-base-ag-news', victim_tokenizer_checkpoint='textattack/roberta-base-ag-news', data_local_path=None, cuda_device=5, victim_device=-1, start=0, end=5, decode_layer=8, perturb_layer=0, num_seg_steps=100, num_adv_steps=20, adv_lr=15.0, init_mag=3.0, decode_weight=-1.0, bs_lower_limit=0.3, bs_upper_limit=0.95, local_victim=None, local_model=None, target_metric='use', stop_random_cover=False, eval_lower_limit=0.0)
+running process on cuda: 5
+Traceback (most recent call last):
+  File "/home/yuling/myproject/latent-adv-unfinished/T-PGD/RunTsaoni.py", line 65, in <module>
+    from tsaoni import Prober, Attacker
+  File "/home/yuling/myproject/latent-adv-unfinished/T-PGD/tsaoni/Attacker.py", line 14, in <module>
+    from run_pplm import pplm_config, run_pplm_example
+ModuleNotFoundError: No module named 'run_pplm'
