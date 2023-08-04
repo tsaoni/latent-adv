@@ -1,0 +1,45 @@
+	adv_loss: cw
+	adv_samples_folder: adv_samples/
+	attack_target: premise
+	batch_size: 10
+	calibrate_every: 10
+	calibrate_type: none
+	constraint: bertscore_idf
+	data_folder: ./data
+	dataset: ag_news
+	device: cuda
+	dump_path: 
+	embed_layer: -1
+	end_sample_cond: none
+	finetune: True
+	gpt2_checkpoint_folder: result/
+	gumbel_samples: 10
+	init: origin
+	initial_coeff: 15
+	k_filter: 20
+	kappa: 5
+	lam_adv: -1.0
+	lam_perp: 1.0
+	lam_sim: -1
+	lr: 0.3
+	mlm_prob: 0.2
+	mnli_option: matched
+	model: dunn-gpt
+	num_iters: 100
+	num_samples: 20
+	p_assist: 0.5
+	p_cali: 0.5
+	print_every: 10
+	ref_model: gpt2-large
+	result_folder: result/
+	sample_algo: gumbel
+	start_index: 0
+ppl model parameters: 738.17 MB
+Outputting files to adv_samples/dunn-gpt_ag_news_finetune_0-20_iters=100_cw_kappa=5_lambda_sim=-1_lambda_perp=1.0_emblayer=-1_bertscore_idf.pth
+> /home/yuling/myproject/latent-adv-unfinished/text-adversarial-attack/whitebox_attack.py(144)main()
+-> tokenizer.model_max_length = 512
+(Pdb) --KeyboardInterrupt--
+(Pdb) --KeyboardInterrupt--
+(Pdb) (Pdb) --KeyboardInterrupt--
+(Pdb) (Pdb) --KeyboardInterrupt--
+(Pdb) (Pdb) 

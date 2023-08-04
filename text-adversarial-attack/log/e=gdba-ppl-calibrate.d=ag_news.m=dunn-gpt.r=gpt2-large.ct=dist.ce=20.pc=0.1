@@ -1,0 +1,302 @@
+	adv_loss: cw
+	adv_samples_folder: adv_samples/
+	attack_target: premise
+	batch_size: 10
+	calibrate_every: 20
+	calibrate_type: dist
+	constraint: bertscore_idf
+	data_folder: ./data
+	dataset: ag_news
+	device: cuda
+	dump_path: 
+	embed_layer: -1
+	end_sample_cond: none
+	finetune: True
+	gpt2_checkpoint_folder: result/
+	gumbel_samples: 10
+	init: origin
+	initial_coeff: 15
+	k_filter: 20
+	kappa: 5
+	lam_adv: -1.0
+	lam_perp: 1.0
+	lam_sim: -1
+	lr: 0.3
+	mlm_prob: 0.2
+	mnli_option: matched
+	model: dunn-gpt
+	num_iters: 100
+	num_samples: 20
+	p_assist: 0.5
+	p_cali: 0.1
+	print_every: 10
+	ref_model: gpt2-large
+	result_folder: result/
+	sample_algo: gumbel
+	start_index: 0
+ppl model parameters: 738.17 MB
+Outputting files to adv_samples/dunn-gpt_ag_news_finetune_0-20_iters=100_cw_kappa=5_lambda_sim=-1_lambda_perp=1.0_emblayer=-1_bertscore_idf.pth
+LABEL
+2
+TEXT
+McTeer: Lonesome Dove to be an Aggie NEW YORK (CNN/Money) - A New Economy champion, a lover of the Texas picker poets who write lovesick country songs...and, oh, by the way, a member of the Federal Reserve system for 36 years.
+LOGITS
+tensor([[-2.8443, -2.8929, -0.4298, -1.6192]])
+Iteration 1: loss = 6.2286, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.2286, entropy=14.5421, time=0.31
+temp txt:  cheer lonesome move no by  Aggies NE OK Money   new economy champion  over  The was picked posts The wrote homesick county longhand oh  The way  members  The federal reserve foster of 31 years
+Iteration 11: loss = 4.2677, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 4.2677, entropy=3.7019, time=29.48
+Iteration 21: loss = 4.1221, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 4.1221, entropy=3.2254, time=32.66
+temp txt:  cheer lonesome move no by  Aggies NE OK Money   new economy champion  over  The was picked posts The wrote homesick county longhand oh  The way  members  The federal reserve foster of 31 years
+Iteration 31: loss = 6.7076, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.7076, entropy=3.0156, time=63.19
+Iteration 41: loss = 6.5790, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.5790, entropy=4.2305, time=66.38
+temp txt:  career Handsome more   juries No On money no money campaign ever  an kicked costs  vote homes County England of  was number  generally preserve further  1 years  members  The federal reserve foster of 31 years
+Iteration 51: loss = 6.3070, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.3070, entropy=13.2505, time=79.75
+Iteration 61: loss = 6.1566, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.1566, entropy=12.6684, time=82.94
+temp txt:  charge some for jurors Notes many  many  campaign  an grand  an further over-all  The  number  preserve further  1 year The years  members  The federal reserve bank of ever years
+Iteration 71: loss = 5.5724, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.5724, entropy=18.5885, time=94.34
+Iteration 81: loss = 5.1999, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.1999, entropy=15.7543, time=97.54
+temp txt:  charge from for any charge    all  deserves   Bar year number  generally number   further  1 year The years  members  The federal reserve bank of The years
+Iteration 91: loss = 4.3033, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 4.3033, entropy=17.2054, time=113.95
+CLEAN TEXT
+Teer: Lonesome Dove to be an Aggie NEW YORK (CNN/Money) - A New Economy champion, a lover of the Texas picker poets who write lovesick country songs...and, oh, by the way, a member of the Federal Reserve system for 36 years
+clean text perplexity: 59.42042922973633
+ADVERSARIAL TEXT
+er for any charge          year   an number      year The   members  The  members  of The  members  The  The now of 31 of the years, a member of the Federal Reserve Board for the years
+adversarial text perplexity: 39.742027282714844
+
+CLEAN LOGITS
+tensor([[-2.8443, -2.8929, -0.4298, -1.6192]])
+ADVERSARIAL LOGITS
+tensor([[-4.4733, -3.4195, -1.7809, -0.8467]])
+LABEL
+0
+TEXT
+Peru Gov't: Police Killed in Self-Defense Peru's interior minister said Wednesday that police acted in self-defense when they killed three coca farmers who were part of a group that hurled rocks and tried to burn a police lieutenant alive to protest U.S.-backed eradication of their cocaine producing crop.
+LOGITS
+tensor([[-2.9326, -2.7971, -0.3827, -1.3246]])
+Iteration 1: loss = 5.9813, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.9813, entropy=15.2692, time=0.33
+temp txt:  Per Gov. place filled an self-defense Wert's interim ministers Grand remedy The Police act an self-defeat The the filled the coco farmer The term party   drop The hurler rock an tied no born  Police veteran live no protect high-backed education  the combine reducing crops
+Iteration 11: loss = 3.6355, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 3.6355, entropy=2.9751, time=23.93
+Iteration 21: loss = 3.3032, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 3.3032, entropy=1.4034, time=27.18
+temp txt:  Per Gov. place filled an self-defense Wert's interim ministers Grand remedy The Police act an self-defeat The the filled the coco farmer The term party   drop The hurler rock an tied no born  Police veteran live no protect high-backed education  the combine reducing crops
+Iteration 31: loss = 7.8103, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 7.8103, entropy=6.9722, time=55.50
+Iteration 41: loss = 7.4379, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 7.4379, entropy=11.6479, time=58.75
+temp txt:  Peru place  self-defense term Ministers  recent  place an  self-defeating  The filled The cost farmer  Jury Party drop  hurdle Jock  no   place voters lived  protected high-tailed election The  reduce cross reducing crops
+Iteration 51: loss = 6.7650, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.7650, entropy=15.3241, time=74.38
+Iteration 61: loss = 5.9592, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.9592, entropy=13.0737, time=77.63
+temp txt:  Peru self-defense The The  self-help an self-defeating   The cost farmer  Jury  hurdle  high-priced  no  reduce high-tailed election The  reduce crops crops
+Iteration 71: loss = 6.0390, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.0390, entropy=19.9272, time=95.44
+Iteration 81: loss = 5.4404, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.4404, entropy=15.3288, time=98.70
+temp txt:  Per self-defense defenseless self self  sell   higher-priced  produced  produced cross high-priced  The  reduce high-tailed election The   crops crops
+Iteration 91: loss = 5.3760, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.3760, entropy=15.4494, time=119.12
+CLEAN TEXT
+u Gov't: Police Killed in Self-Defense Peru's interior minister said Wednesday that police acted in self-defense when they killed three coca farmers who were part of a group that hurled rocks and tried to burn a police lieutenant alive to protest U.S.-backed eradication of their cocaine producing crop
+clean text perplexity: 27.103771209716797
+ADVERSARIAL TEXT
+u-- def- The- self  sell  -  self     self--    - high  no  The     The  reduce  crops high- the  The  the no reducing high-backed education  the of the crops, crops
+adversarial text perplexity: 184.92074584960938
+
+CLEAN LOGITS
+tensor([[-2.9326, -2.7971, -0.3827, -1.3246]])
+ADVERSARIAL LOGITS
+tensor([[-1.8076, -1.4673,  0.9963, -0.7390]])
+LABEL
+3
+TEXT
+SpaceShipOne Rolls Toward Victory MOJAVE, California -- A Southern California aerospace team took a big step toward capturing the \$10 million Ansari X Prize Wednesday, but not without surviving a scary moment when the pilot found himself in a rapid spin as he roared across the threshold 
+LOGITS
+tensor([[-3.1751, -3.0065, -0.0285, -0.4678]])
+Iteration 1: loss = 6.6820, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.6820, entropy=14.0574, time=0.31
+temp txt:  spaceship polls toward victory COAHR Clifford   other Clifford Aerospace term of  bit steps wards catering The $10 William Ankara  Price Wednesday by no Without serving  carry modest The The plot find itself an  said pin an The reared cost The these
+Iteration 11: loss = 4.7291, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 4.7291, entropy=4.7896, time=21.78
+Iteration 21: loss = 4.4418, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 4.4418, entropy=3.1224, time=24.93
+temp txt:  spaceship polls toward victory COAHR Clifford   other Clifford Aerospace term of  bit steps wards catering The $10 William Ankara  Price Wednesday by no Without serving  carry modest The The plot find itself an  said pin an The reared cost The these
+Iteration 31: loss = 8.3636, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 8.3636, entropy=3.2910, time=50.59
+Iteration 41: loss = 8.3135, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 8.3135, entropy=7.4300, time=53.73
+temp txt:  spaces well wards history CTA afford the afford persuade Jury  it term Wards entering  $100 will near prices remedy   that saving Harry most   lot in items  Grand in   feared best  the reared cost The these
+Iteration 51: loss = 6.9712, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.9712, entropy=16.0184, time=61.59
+Iteration 61: loss = 6.7498, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.7498, entropy=13.5539, time=64.72
+temp txt:  spaces well wards CTA The effort personnel in Jury   1 well year $100 savings remedy  not an steps  an items  The feared best  the best  The cent no The 
+Iteration 71: loss = 6.1220, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.1220, entropy=14.7229, time=73.57
+Iteration 81: loss = 5.9752, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.9752, entropy=13.3267, time=76.72
+temp txt:  space was Wards   The The an   was    no    featured  The been    items  The feared best  the best  The cent no The would
+Iteration 91: loss = 5.5517, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.5517, entropy=14.6536, time=91.55
+CLEAN TEXT
+ShipOne Rolls Toward Victory MOJAVE, California -- A Southern California aerospace team took a big step toward capturing the \$10 million Ansari X Prize Wednesday, but not without surviving a scary moment when the pilot found himself in a rapid spin as he roared across the threshold
+clean text perplexity: 68.09747314453125
+ADVERSARIAL TEXT
+aces well wards   The The the       W    $  not an    items  The feared best  the best  The cent no The   itself an  the re an cost The these cost The the it out the 
+adversarial text perplexity: 176.76234436035156
+
+CLEAN LOGITS
+tensor([[-3.1751, -3.0065, -0.0285, -0.4678]])
+ADVERSARIAL LOGITS
+tensor([[-2.1531, -2.4193,  0.7383, -0.4590]])
+LABEL
+1
+TEXT
+Cards unfazed by Series deficit Monday #39;s workout at Busch Stadium contained a few more St. Louis Cardinals than you #39;d expect considering it was optional, but you could understand why they #39;d want to 
+LOGITS
+tensor([[-3.3145, -2.9199, -0.7469, -0.4462]])
+Iteration 1: loss = 6.9620, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.9620, entropy=12.1185, time=0.26
+temp txt:  Wards unfired  series offices Friday 39 work an Bush Station obtained  new for Lt. Court tardiness that of 23d expects conducted in an optional by of would understanding who the 23d wait no
+Iteration 11: loss = 5.4189, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.4189, entropy=5.2924, time=14.30
+Iteration 21: loss = 5.0248, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.0248, entropy=6.4475, time=16.94
+temp txt:  Wards unfired  series offices Friday 39 work an Bush Station obtained  new for Lt. Court tardiness that of 23d expects conducted in an optional by of would understanding who the 23d wait no
+Iteration 31: loss = 8.0550, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 8.0550, entropy=2.8375, time=35.19
+Iteration 41: loss = 8.0596, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 8.0596, entropy=2.9261, time=37.85
+temp txt:  said fired services often said 31 took  such nation obtain no of L. County Marines The  had expected produced an  option   should underlying The The had said  the 23d wait no
+Iteration 51: loss = 7.4296, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 7.4296, entropy=12.1031, time=43.98
+Iteration 61: loss = 7.2436, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 7.2436, entropy=10.2704, time=46.62
+temp txt:  standards fired Grand 1 of 31 took    . no of  said hard   said produced   said Grand The had The no said  the 23d wait no
+Iteration 71: loss = 6.0224, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.0224, entropy=16.6937, time=56.57
+Iteration 81: loss = 5.7087, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.7087, entropy=13.1491, time=59.21
+temp txt:  Standard une    1    Grand had Grand   said  Grand The Grand The no The no said no 23d wait no
+Iteration 91: loss = 5.3459, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.3459, entropy=13.1671, time=68.64
+CLEAN TEXT
+ards unfazed by Series deficit Monday #39;s workout at Busch Stadium contained a few more St. Louis Cardinals than you #39;d expect considering it was optional, but you could understand why they #39;d want to
+clean text perplexity: 127.27210235595703
+ADVERSARIAL TEXT
+ards    1    Grand had no     Grand The  The no The no said no 23d wait no said  the said  the nod the nod wait no the #39;s want to
+adversarial text perplexity: 147.4073486328125
+
+CLEAN LOGITS
+tensor([[-3.3145, -2.9199, -0.7469, -0.4462]])
+ADVERSARIAL LOGITS
+tensor([[-4.0067, -3.4155, -0.6332, -0.6738]])
+LABEL
+3
+TEXT
+Spawn of X Prize on Horizon Innovators take note: The folks behind the X Prize vow there will soon be more competitions in several disciplines. Also: The da Vinci team presses ahead in Canada.... Rubicon team plans another launch attempt. By Dan Brekke.
+LOGITS
+tensor([[-3.0425, -2.4475, -0.8744, -1.8634]])
+Iteration 1: loss = 7.1242, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 7.1242, entropy=13.0879, time=0.29
+temp txt:  Spahn   Price an horizon innovators the noted  polls being The  Price now these well son by for competition an federal disciplines Also  a Vince term press head an Canada union term plan Another lunch attempt by an trekked
+Iteration 11: loss = 5.6023, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.6023, entropy=5.9983, time=33.81
+Iteration 21: loss = 5.3168, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.3168, entropy=4.8895, time=36.72
+temp txt:  Spahn   Price an horizon innovators the noted  polls being The  Price now these well son by for competition an federal disciplines Also  a Vince term press head an Canada union term plan Another lunch attempt by an trekked
+Iteration 31: loss = 8.0165, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 8.0165, entropy=2.9029, time=70.12
+Iteration 41: loss = 8.0295, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 8.0295, entropy=3.1903, time=73.03
+temp txt:  San prices  portion innovations The voted well been  prices no the was won  of composition  generally discipline also  since Jury less had  and Union Jury an other such attend   treated attempt by an trekked
+Iteration 51: loss = 7.0524, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 7.0524, entropy=16.6602, time=85.73
+Iteration 61: loss = 6.7549, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.7549, entropy=12.5083, time=88.64
+temp txt:  Spahn prices  vote was The The place The an   no was disciples  composition  laws discipline    the Jury  greater attend   attend   treated in by an trekked
+Iteration 71: loss = 5.6565, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.6565, entropy=15.8513, time=99.22
+Iteration 81: loss = 5.2701, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.2701, entropy=10.6836, time=102.12
+temp txt:  San voters   was The The  an  opposition was disciples The laws     attend   attend   treated in by an trekked
+Iteration 91: loss = 5.3313, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.3313, entropy=13.7688, time=110.03
+CLEAN TEXT
+ of X Prize on Horizon Innovators take note: The folks behind the X Prize vow there will soon be more competitions in several disciplines. Also: The da Vinci team presses ahead in Canada.... Rubicon team plans another launch attempt. By Dan Brekke
+clean text perplexity: 171.58572387695312
+ADVERSARIAL TEXT
+ahn   was The The  an  an   was The     well discipline     less  by an trek  an   an  by an attempt by an attempt by an trekked by. By Dan Brekke
+adversarial text perplexity: 86.4636001586914
+
+CLEAN LOGITS
+tensor([[-3.0425, -2.4475, -0.8744, -1.8634]])
+ADVERSARIAL LOGITS
+tensor([[-2.4397, -2.6799,  0.0683, -0.3928]])
+LABEL
+1
+TEXT
+Myskina, Kuznetsov to Play in Fed Cup (AP) AP - Anastasia Myskina and Svetlana Kuznetsova will lead Russia's Fed Cup team when it plays Austria in this month's semifinals. Defending champion France will feature Amelie Mauresmo and Mary Pierce in the other semifinal against Spain, which has won this event five times.
+LOGITS
+tensor([[-2.7205, -2.6508, -0.2444, -1.4154]])
+Iteration 1: loss = 5.6120, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.6120, entropy=20.3590, time=0.45
+temp txt:  Mackinac Kozintsev no play an led up AP Aj  fantasia Messina an Scotland Minnesota well head sessions led up term The in plans Austin an that months seminal defending campaign Frances well featured melee Maureen an Many Pierre an The the seminal praise Spain The had an that recent fire times
+Iteration 11: loss = 2.9966, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 2.9966, entropy=2.7597, time=38.21
+Iteration 21: loss = 2.7173, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 2.7173, entropy=1.3673, time=42.40
+temp txt:  Mackinac Kozintsev no play an led up AP Aj  fantasia Messina an Scotland Minnesota well head sessions led up term The in plans Austin an that months seminal defending campaign Frances well featured melee Maureen an Many Pierre an The the seminal praise Spain The had an that recent fire times
+Iteration 31: loss = 7.2360, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 7.2360, entropy=7.1966, time=79.62
+Iteration 41: loss = 7.0468, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 7.0468, entropy=9.3356, time=83.80
+temp txt:  Machinists  plan  let  Aj  fantastic Messing  Woodland  welling let  Jury  an plan Fulton  The monthly seminar head campaigns was future term burden  Austin Pirie   The seminal Spahn  said  The The for times Maureen an Many Pierre an The the seminal praise Spain The had an that recent fire times
+Iteration 51: loss = 6.8231, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.8231, entropy=22.1125, time=111.19
+Iteration 61: loss = 6.4570, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.4570, entropy=15.6374, time=115.37
+temp txt:  lacking planned   missing good Asia Messing  Woodland was planning  Jury  an plan Fulton  The monthly seminar Fulton campaigns  seminar up  an  The seminal Spahn  said  The The  The seminar place Spahn  said  The The The time seminal praise Spain The had an that recent fire times
+Iteration 71: loss = 5.4590, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.4590, entropy=22.0709, time=142.21
+Iteration 81: loss = 5.1900, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.1900, entropy=13.7452, time=146.40
+temp txt:  Macklin inset  Woodin good nine   an  Jury  an   The monthly Grand   up  an  The     said  The   The The The Spahn  said  The an The time seminal praise Spain The had an The recent the times
+Iteration 91: loss = 4.4482, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 4.4482, entropy=18.3992, time=167.06
+CLEAN TEXT
+yskina, Kuznetsov to Play in Fed Cup (AP) AP - Anastasia Myskina and Svetlana Kuznetsova will lead Russia's Fed Cup team when it plays Austria in this month's semifinals. Defending champion France will feature Amelie Mauresmo and Mary Pierce in the other semifinal against Spain, which has won this event five times
+clean text perplexity: 15.376113891601562
+ADVERSARIAL TEXT
+acklin   sein good    an  Wood     The an    up    The The    an  The   said  The  The  said   an  The the The Spain The had an an that the times the that recent Spain The had an that in the times semifinal against Spain, which has won the tournament three times
+adversarial text perplexity: 48.13416290283203
+
+CLEAN LOGITS
+tensor([[-2.7205, -2.6508, -0.2444, -1.4154]])
+ADVERSARIAL LOGITS
+tensor([[-2.6174, -2.9770,  0.5584, -0.4835]])
+LABEL
+0
+TEXT
+Prosecutor seeks 8 years in jail for Berlusconi  MILAN -- An Italian prosecutor asked a court yesterday to sentence Silvio Berlusconi to eight years in jail for bribing judges as the prime minister's four-year corruption trial reached its closing stages.
+LOGITS
+tensor([[-3.1148, -2.9186, -0.4903, -1.5871]])
+Iteration 1: loss = 5.5699, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.5699, entropy=13.0879, time=0.29
+temp txt:  prosecutor seek  year an said of delusion UCLA  an Callan prosecution added  Court Wednesday no essence million delusion no might year an said of pricing Judge an The Crime ministers further portion real teacher it losing stages
+Iteration 11: loss = 3.1436, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 3.1436, entropy=3.3015, time=18.16
+Iteration 21: loss = 2.8188, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 2.8188, entropy=2.1692, time=21.07
+temp txt:  prosecutor seek  year an said of delusion UCLA  an Callan prosecution added  Court Wednesday no essence million delusion no might year an said of pricing Judge an The Crime ministers further portion real teacher it losing stages
+Iteration 31: loss = 7.9707, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 7.9707, entropy=4.3099, time=37.85
+Iteration 41: loss = 7.8115, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 7.8115, entropy=10.8920, time=40.75
+temp txt:  prosecution seen Bar  Grand  decision L.  Allen resolution and County remedy  absence William essence  it Bar  Grand  recent Jury   time of The Fulton read each in voting ministers further portion real teacher it losing stages
+Iteration 51: loss = 7.6680, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 7.6680, entropy=16.8442, time=49.18
+Iteration 61: loss = 6.8795, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.8795, entropy=17.4539, time=52.08
+temp txt:  prosecution an  decisions of  and resolution County remedy in an  Bar  the   an time such an Fulton Judge The in read ministers in four-year real teacher it find stages
+Iteration 71: loss = 5.8330, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.8330, entropy=19.0886, time=64.73
+Iteration 81: loss = 5.5511, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.5511, entropy=15.1923, time=67.61
+temp txt:  prosecution  an of   The  in  Jury an  the   an each in an states Judge During in read ministers in 4-year Criminal real teacher it find stages
+Iteration 91: loss = 5.3450, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.3450, entropy=17.5997, time=77.26
+CLEAN TEXT
+or seeks 8 years in jail for Berlusconi  MILAN -- An Italian prosecutor asked a court yesterday to sentence Silvio Berlusconi to eight years in jail for bribing judges as the prime minister's four-year corruption trial reached its closing stages
+clean text perplexity: 20.323801040649414
+ADVERSARIAL TEXT
+secutionor     and.   an  the     an  it an  in  in an   time of an teacher teacher it in stages judges and it real minister it two-year criminal trial reached its final stage
+adversarial text perplexity: 153.7622528076172
+
+CLEAN LOGITS
+tensor([[-3.1148, -2.9186, -0.4903, -1.5871]])
+ADVERSARIAL LOGITS
+tensor([[-4.8674, -3.5996, -0.5419, -0.9561]])
+LABEL
+3
+TEXT
+Intel drops prices on computer chips SAN FRANCISCO - Intel Corp. has cut prices on its computer chips by as much as 35 percent, though analysts on Monday said the cuts were probably unrelated to swelling inventories of the world #39;s largest chip maker.
+LOGITS
+tensor([[-3.2491, -2.9188, -0.4659, -1.3736]])
+Iteration 1: loss = 5.9508, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.9508, entropy=13.0879, time=0.29
+temp txt:  enter drop place an computers ships KSAN ASDIC  enter Corps had but place an it computers ships  an such an 31 percent through analysis an Friday Grand The cut term primary related no willing investors  The would 39 charge hip maker
+Iteration 11: loss = 3.6865, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 3.6865, entropy=3.5967, time=31.20
+Iteration 21: loss = 3.5256, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 3.5256, entropy=3.2213, time=34.09
+temp txt:  enter drop place an computers ships KSAN ASDIC  enter Corps had but place an it computers ships  an such an 31 percent through analysis an Friday Grand The cut term primary related no willing investors  The would 39 charge hip maker
+Iteration 31: loss = 8.5410, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 8.5410, entropy=3.1070, time=58.44
+Iteration 41: loss = 8.4734, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 8.4734, entropy=5.1710, time=61.35
+temp txt:  under do The  compete shops Aj ADC under for said by The  in compete shops  Jury  1 recent should any  said   but Jury Friday repeated  will Investors  should 31 The his make 39 charge hip maker
+Iteration 51: loss = 7.4691, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 7.4691, entropy=14.0485, time=70.31
+Iteration 61: loss = 7.1055, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 7.1055, entropy=12.0147, time=73.22
+temp txt:  and no  complete shops AjA and of   an The    Jury  Grand by  said  well directors said will Investors this  31 31 his make make was charge hip maker
+Iteration 71: loss = 6.1717, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.1717, entropy=17.0930, time=83.25
+Iteration 81: loss = 5.8460, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.8460, entropy=10.8006, time=86.14
+temp txt:  an  steps ships an        Grand that 1 1 well take said his make  31 31 his make make was to hip maker
+Iteration 91: loss = 5.0360, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.0360, entropy=15.8164, time=96.20
+CLEAN TEXT
+ drops prices on computer chips SAN FRANCISCO - Intel Corp. has cut prices on its computer chips by as much as 35 percent, though analysts on Monday said the cuts were probably unrelated to swelling inventories of the world #39;s largest chip maker
+clean text perplexity: 28.64600944519043
+ADVERSARIAL TEXT
+    an        The    an  said     an  said   to hip maker 31  will make  should hip maker  The 39 39 hip maker maker #1;s and chip maker
+adversarial text perplexity: 88.8398208618164
+
+CLEAN LOGITS
+tensor([[-3.2491, -2.9188, -0.4659, -1.3736]])
+ADVERSARIAL LOGITS
+tensor([[-3.2562, -1.9550, -1.7751, -0.7294]])
+LABEL
+1
+TEXT
+Cardinals to Play Broncos Boise State accepts a bid Tuesday to play Louisville in the Liberty Bowl on Dec. 31, in a matchup of the nation's top two offenses.
+LOGITS
+tensor([[-2.7436, -2.8494, -0.4607, -1.6735]])
+Iteration 1: loss = 5.9236, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.9236, entropy=8.2405, time=0.21
+temp txt:  tardiness no play Boonton noise take accept  did Friday no plan Murville an The liberty down an Sen. 31 an  catchup  The actions to to offenses

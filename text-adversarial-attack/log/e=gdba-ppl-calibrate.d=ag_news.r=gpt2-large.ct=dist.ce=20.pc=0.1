@@ -1,0 +1,85 @@
+	adv_loss: cw
+	adv_samples_folder: adv_samples/
+	attack_target: premise
+	batch_size: 10
+	calibrate_every: 20
+	calibrate_type: dist
+	constraint: bertscore_idf
+	data_folder: ./data
+	dataset: ag_news
+	device: cuda
+	dump_path: 
+	embed_layer: -1
+	end_sample_cond: none
+	experiment: gdba-ppl-calibrate
+	finetune: True
+	gpt2_checkpoint_folder: result/
+	gumbel_samples: 10
+	init: origin
+	initial_coeff: 15
+	k_filter: 20
+	kappa: 5
+	lam_adv: -1
+	lam_perp: 1.0
+	lam_sim: -1
+	lr: 0.3
+	mlm_prob: 0.2
+	mnli_option: matched
+	model: dunn-gpt
+	num_iters: 100
+	num_samples: 50
+	p_assist: 0.5
+	p_cali: 0.1
+	print_every: 10
+	ref_model: gpt2-large
+	result_folder: result/
+	sample_algo: gumbel
+	start_index: 0
+ppl model parameters: 738.17 MB
+Outputting files to adv_samples/dunn-gpt_ag_news_finetune_0-50_iters=100_cw_kappa=5_lambda_sim=-1_lambda_perp=1.0_emblayer=-1_bertscore_idf.pth
+LABEL
+0
+TEXT
+India Warns U.S. on Arms Sales to Pakistan  WASHINGTON (Reuters) - India warned on Friday that new  American arms sales to Pakistan could harm improving New  Delhi-Washington ties as well as a promising dialogue between  the South Asia's two nuclear rivals.
+LOGITS
+tensor([[-3.2926,  2.8216, -0.7093,  0.5929]])
+Iteration 1: loss = 6.3609, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.3609, entropy=13.5727, time=0.30
+temp txt:  Ind. Wards . an Army sales no assistant NATO letters  Ind. and an said The no clerical farms takes no assistant would hard praise new Washington tied an was an  providing catalogue been The both Asians to clear rivals
+Iteration 11: loss = 4.1772, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 4.1772, entropy=3.4227, time=17.87
+Iteration 21: loss = 3.9738, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 3.9738, entropy=2.3860, time=20.79
+temp txt:  Ind. Wards . an Army sales no assistant NATO letters  Ind. and an said The no clerical farms takes no assistant would hard praise new Washington tied an was an  providing catalogue been The both Asians to clear rivals
+Iteration 31: loss = 7.8810, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 7.8810, entropy=3.3462, time=39.83
+Iteration 41: loss = 7.6540, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 7.6540, entropy=8.2401, time=42.76
+temp txt:  and Wards  my takes  assistance Ask matters and an  Grand   Friday Wards take  assistance should had place no asking the  an  provide Natalie The  of Asian no year rival catalogue been The both Asians to clear rivals
+Iteration 51: loss = 7.0428, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 7.0428, entropy=13.5910, time=55.06
+Iteration 61: loss = 6.7701, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.7701, entropy=12.3983, time=57.99
+temp txt:  an   by take evidence  manner an       can said said   should The  the  an sign  The  of The no of rival no year rival The both Asians to clear powers
+Iteration 71: loss = 5.5383, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.5383, entropy=18.8023, time=71.58
+Iteration 81: loss = 5.2209, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.2209, entropy=14.5172, time=74.53
+temp txt:   by said an   Grand  The   in    rural Bar    Asian no year of rival no year The The both Asians to clear powers
+Iteration 91: loss = 5.4121, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.4121, entropy=19.2013, time=84.42
+CLEAN TEXT
+India Warns U.S. on Arms Sales to Pakistan  WASHINGTON (Reuters) - India warned on Friday that new  American arms sales to Pakistan could harm improving New  Delhi-Washington ties as well as a promising dialogue between  the South Asia's two nuclear rivals.
+clean text perplexity: 40.651275634765625
+ADVERSARIAL TEXT
+ by said    Grand  The          said    year  the no no The    to clear powers of   year no The The Asians to clear both Asians to clear the the South Asia's two major powers sever
+adversarial text perplexity: 102.05268859863281
+
+CLEAN LOGITS
+tensor([[-3.2926,  2.8216, -0.7093,  0.5929]])
+ADVERSARIAL LOGITS
+tensor([[-2.6955,  2.1333, -2.1371,  1.3689]])
+LABEL
+2
+TEXT
+WTO rules against US, EU on sugar, cotton Latin America #39;s agricultural giant scored two trade victories Wednesday against rich countries #39; farm subsidies after the World Trade Organization agreed with Brazil 
+LOGITS
+tensor([[-3.6627,  2.3085, -0.8128, -0.5882]])
+Iteration 1: loss = 7.5302, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 7.5302, entropy=9.9371, time=0.24
+temp txt:  WAO sales praise US E. an sugar Cotton Martin American 39 agriculture grant score to take cities remedy praise which counties 39 farms outside often The world trade Navigation are City brazil
+Iteration 11: loss = 5.8922, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.8922, entropy=2.8092, time=16.46
+Iteration 21: loss = 5.7606, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.7606, entropy=2.4809, time=18.85
+temp txt:  WAO sales praise US E. an sugar Cotton Martin American 39 agriculture grant score to take cities remedy praise which counties 39 farms outside often The world trade Navigation are City brazil
+Iteration 31: loss = 9.0738, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 9.0738, entropy=2.9180, time=35.51
+Iteration 41: loss = 8.9523, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 8.9523, entropy=4.5152, time=37.92
+temp txt:  Aj takes place UN .  Edgar Cotten Marvin clerical 31 Legislature grand core no the citizens recent place The County 31 Wards outmoded of  would take resignation The County bail trade Navigation are City brazil

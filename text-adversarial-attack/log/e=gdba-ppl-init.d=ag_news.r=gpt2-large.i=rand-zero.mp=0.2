@@ -1,0 +1,1393 @@
+	adv_loss: cw
+	adv_samples_folder: adv_samples/
+	attack_target: premise
+	batch_size: 10
+	calibrate_every: 10
+	calibrate_type: none
+	constraint: bertscore_idf
+	data_folder: ./data
+	dataset: ag_news
+	device: cuda
+	dump_path: 
+	embed_layer: -1
+	end_sample_cond: none
+	experiment: gdba-ppl-init
+	finetune: True
+	gpt2_checkpoint_folder: result/
+	gumbel_samples: 10
+	init: rand-zero
+	initial_coeff: 15
+	k_filter: 20
+	kappa: 5
+	lam_adv: -1
+	lam_perp: 1.0
+	lam_sim: -1
+	lr: 0.3
+	mlm_prob: 0.2
+	mnli_option: matched
+	model: dunn-gpt
+	num_iters: 100
+	num_samples: 50
+	p_assist: 0.5
+	p_cali: 0.5
+	print_every: 10
+	ref_model: gpt2-large
+	result_folder: result/
+	sample_algo: gumbel
+	start_index: 0
+ppl model parameters: 738.17 MB
+Outputting files to adv_samples/dunn-gpt_ag_news_finetune_0-50_iters=100_cw_kappa=5_lambda_sim=-1_lambda_perp=1.0_emblayer=-1_bertscore_idf.pth
+LABEL
+0
+TEXT
+India Warns U.S. on Arms Sales to Pakistan  WASHINGTON (Reuters) - India warned on Friday that new  American arms sales to Pakistan could harm improving New  Delhi-Washington ties as well as a promising dialogue between  the South Asia's two nuclear rivals.
+LOGITS
+tensor([[-2.1810, -0.2897, -2.5310, -1.6504]])
+Iteration 1: loss = 8.8625, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 8.8625, entropy=129.9806, time=0.31
+Iteration 11: loss = 6.9282, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.9282, entropy=111.9415, time=3.29
+Iteration 21: loss = 6.5109, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.5109, entropy=101.3933, time=6.29
+Iteration 31: loss = 6.1584, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.1584, entropy=88.1561, time=9.29
+Iteration 41: loss = 5.8055, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.8055, entropy=73.4547, time=12.27
+Iteration 51: loss = 5.4834, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.4834, entropy=59.6741, time=15.26
+Iteration 61: loss = 5.4589, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.4589, entropy=44.0587, time=18.25
+Iteration 71: loss = 5.2045, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.2045, entropy=36.3914, time=21.25
+Iteration 81: loss = 4.8973, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 4.8973, entropy=26.5346, time=24.26
+Iteration 91: loss = 4.7781, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 4.7781, entropy=23.5224, time=27.27
+CLEAN TEXT
+India Warns U.S. on Arms Sales to Pakistan  WASHINGTON (Reuters) - India warned on Friday that new  American arms sales to Pakistan could harm improving New  Delhi-Washington ties as well as a promising dialogue between  the South Asia's two nuclear rivals.
+clean text perplexity: 40.651275634765625
+ADVERSARIAL TEXT
+India Warns U.K. on Arms Sales to Pakistan. WASHINGTON (Reuters) -cia would Hortonews that new year American arms sales to Pakistan could harm their New Islamabad Delhi-Washington ties as well as hurt military talks between both the South Asian countries two nuclear powers.
+adversarial text perplexity: 88.16835021972656
+
+CLEAN LOGITS
+tensor([[-2.1810, -0.2897, -2.5310, -1.6504]])
+ADVERSARIAL LOGITS
+tensor([[-1.9662, -0.1980, -2.2667, -1.5075]])
+LABEL
+2
+TEXT
+WTO rules against US, EU on sugar, cotton Latin America #39;s agricultural giant scored two trade victories Wednesday against rich countries #39; farm subsidies after the World Trade Organization agreed with Brazil 
+LOGITS
+tensor([[-2.2652,  0.2426, -2.9330, -2.0972]])
+Iteration 1: loss = 9.6010, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 9.6010, entropy=94.5974, time=0.24
+Iteration 11: loss = 8.0160, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 8.0160, entropy=82.2754, time=2.70
+Iteration 21: loss = 7.7227, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 7.7227, entropy=75.3867, time=5.15
+Iteration 31: loss = 7.5385, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 7.5385, entropy=67.2003, time=7.61
+Iteration 41: loss = 7.5379, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 7.5379, entropy=59.3224, time=10.07
+Iteration 51: loss = 7.2675, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 7.2675, entropy=52.1858, time=12.54
+Iteration 61: loss = 6.8695, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.8695, entropy=44.9997, time=15.00
+Iteration 71: loss = 6.5105, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.5105, entropy=38.8442, time=17.47
+Iteration 81: loss = 6.2360, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.2360, entropy=27.7500, time=19.93
+Iteration 91: loss = 5.9647, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.9647, entropy=19.4315, time=22.40
+CLEAN TEXT
+WTO rules against US, EU on sugar, cotton Latin America #39;s agricultural giant scored two trade victories Wednesday against rich countries #39; farm subsidies after the World Trade Organization agreed with Brazil 
+clean text perplexity: 275.2075500488281
+ADVERSARIAL TEXT
+WTO rules against US versus EU on sugar, wheat Latin America #39 frA agricultural trade t,s) - against rich countries #3901: trade after the World Trade Organization agreed to the 
+adversarial text perplexity: 354.2408447265625
+
+CLEAN LOGITS
+tensor([[-2.2652,  0.2426, -2.9330, -2.0972]])
+ADVERSARIAL LOGITS
+tensor([[-1.9265,  0.2879, -2.5516, -1.6501]])
+LABEL
+1
+TEXT
+Braves' Thomson Leaves Game 3 (AP) AP - Atlanta Braves starter John Thomson reaggravated a sore muscle on his left side and came out of Game 3 of the NL playoff series after just four pitches Saturday.
+LOGITS
+tensor([[-1.4503, -0.4155, -1.6987, -1.2042]])
+Iteration 1: loss = 8.8097, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 8.8097, entropy=106.1494, time=0.26
+Iteration 11: loss = 6.5313, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.5313, entropy=90.6170, time=2.86
+Iteration 21: loss = 6.1349, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.1349, entropy=82.1590, time=5.46
+Iteration 31: loss = 5.8549, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.8549, entropy=71.8146, time=8.06
+Iteration 41: loss = 5.7963, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.7963, entropy=61.3845, time=10.81
+Iteration 51: loss = 5.5263, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.5263, entropy=49.7366, time=13.42
+Iteration 61: loss = 5.3972, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.3972, entropy=39.0321, time=16.03
+Iteration 71: loss = 4.5540, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 4.5540, entropy=23.8577, time=18.64
+Iteration 81: loss = 4.2449, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 4.2449, entropy=13.6526, time=21.24
+Iteration 91: loss = 4.1585, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 4.1585, entropy=8.6535, time=23.85
+CLEAN TEXT
+Braves' Thomson Leaves Game 3 (AP) AP - Atlanta Braves starter John Thomson reaggravated a sore muscle on his left side and came out of Game 3 of the NL playoff series after just four pitches Saturday.
+clean text perplexity: 34.63150405883789
+ADVERSARIAL TEXT
+Brais) Thomson 3 Cleveland - (AP) Cleveland - Atlanta Giants pitcher John Thomson reaggravated a hamstring muscle in his left side and came out of Game 3 of the NL Championship series after just two innings Monday.
+adversarial text perplexity: 47.472328186035156
+
+CLEAN LOGITS
+tensor([[-1.4503, -0.4155, -1.6987, -1.2042]])
+ADVERSARIAL LOGITS
+tensor([[-1.5904, -0.3390, -1.8350, -1.2033]])
+LABEL
+0
+TEXT
+2 More Turkish Men Taken Hostage in Iraq (AP) AP - Armed assailants attacked a convoy of Turkish trucks delivering supplies to U.S. forces in Iraq and took two Turkish drivers hostage, their company said Monday.
+LOGITS
+tensor([[-1.8024, -0.3245, -2.2008, -1.3766]])
+Iteration 1: loss = 8.9120, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 8.9120, entropy=95.3245, time=0.25
+Iteration 11: loss = 6.5986, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.5986, entropy=81.6629, time=2.78
+Iteration 21: loss = 6.1884, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.1884, entropy=74.0943, time=5.31
+Iteration 31: loss = 5.9512, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.9512, entropy=64.1714, time=7.84
+Iteration 41: loss = 5.5384, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.5384, entropy=52.1059, time=10.38
+Iteration 51: loss = 5.0784, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.0784, entropy=43.2071, time=12.91
+Iteration 61: loss = 4.8449, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 4.8449, entropy=31.4365, time=15.44
+Iteration 71: loss = 4.6320, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 4.6320, entropy=24.1202, time=17.97
+Iteration 81: loss = 4.0449, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 4.0449, entropy=14.2432, time=20.51
+Iteration 91: loss = 3.7997, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 3.7997, entropy=6.5943, time=23.05
+CLEAN TEXT
+2 More Turkish Men Taken Hostage in Iraq (AP) AP - Armed assailants attacked a convoy of Turkish trucks delivering supplies to U.S. forces in Iraq and took two Turkish drivers hostage, their company said Monday.
+clean text perplexity: 25.878814697265625
+ADVERSARIAL TEXT
+2, Turkish Fighters Taken Hostage Alive Iraq (AP) AP - Iraqi militants attacked a convoy of Turkish aid workers were with U.S. troops in Iraq and took two Turkish soldiers hostage, security sources said..
+adversarial text perplexity: 33.88143539428711
+
+CLEAN LOGITS
+tensor([[-1.8024, -0.3245, -2.2008, -1.3766]])
+ADVERSARIAL LOGITS
+tensor([[-1.9695, -0.1046, -2.0495, -1.4727]])
+LABEL
+0
+TEXT
+Manmohan arrives in Manipur Imphal: Prime Minister Manmohan Singh today arrived in Manipur on a two-day visit to the state. Singh #39;s special Indian Air Force helicopter from Silchar in Assam landed at Jiribam, a border town, at 10.25 am.
+LOGITS
+tensor([[-1.7978, -0.0490, -2.1274, -1.1599]])
+Iteration 1: loss = 8.3607, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 8.3607, entropy=142.5020, time=0.34
+Iteration 11: loss = 6.1965, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.1965, entropy=121.5257, time=3.71
+Iteration 21: loss = 5.7619, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.7619, entropy=109.0240, time=7.09
+Iteration 31: loss = 5.5304, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.5304, entropy=93.8759, time=10.48
+Iteration 41: loss = 5.4059, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.4059, entropy=78.1640, time=13.86
+Iteration 51: loss = 5.1887, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.1887, entropy=63.9705, time=17.24
+Iteration 61: loss = 5.1083, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.1083, entropy=54.6081, time=20.63
+Iteration 71: loss = 4.8840, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 4.8840, entropy=42.1332, time=23.99
+Iteration 81: loss = 4.6486, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 4.6486, entropy=30.1858, time=27.36
+Iteration 91: loss = 4.5258, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 4.5258, entropy=20.7770, time=30.72
+CLEAN TEXT
+Manmohan arrives in Manipur Imphal: Prime Minister Manmohan Singh today arrived in Manipur on a two-day visit to the state. Singh #39;s special Indian Air Force helicopter from Silchar in Assam landed at Jiribam, a border town, at 10.25 am.
+clean text perplexity: 18.75394058227539
+ADVERSARIAL TEXT
+Manmohan Rai in Manipur Imphal: The Minister Manmohan Singh along arrived in Manipur upon a two-day tour to reach here-. Singh todayi.s special Indian Air Force flight from Silchar in Kashmir and landed at Jiribag, a small town, at 11 at midnight,.
+adversarial text perplexity: 72.80735778808594
+
+CLEAN LOGITS
+tensor([[-1.7978, -0.0490, -2.1274, -1.1599]])
+ADVERSARIAL LOGITS
+tensor([[-1.5297,  0.6717, -2.1824, -1.1473]])
+LABEL
+3
+TEXT
+Nortel delays financial restatements again Nortel Networks Corp. indicated that it won't be waking from its financial nightmare anytime soon when it delayed on Thursday the release of its financial statements for the third time because it found additional problems with its revenue reporting for past results.
+LOGITS
+tensor([[-1.8419, -0.2431, -2.4445, -1.5550]])
+Iteration 1: loss = 9.4678, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 9.4678, entropy=129.7382, time=0.30
+Iteration 11: loss = 7.8541, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 7.8541, entropy=113.2072, time=3.30
+Iteration 21: loss = 7.2936, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 7.2936, entropy=103.1082, time=6.31
+Iteration 31: loss = 7.0161, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 7.0161, entropy=90.5897, time=9.32
+Iteration 41: loss = 6.7371, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.7371, entropy=75.3131, time=12.34
+Iteration 51: loss = 6.4576, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.4576, entropy=61.3909, time=15.34
+Iteration 61: loss = 6.2057, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.2057, entropy=46.7562, time=18.34
+Iteration 71: loss = 5.8955, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.8955, entropy=31.0883, time=21.34
+Iteration 81: loss = 5.3416, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.3416, entropy=25.0739, time=24.34
+Iteration 91: loss = 4.8995, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 4.8995, entropy=20.6508, time=27.34
+CLEAN TEXT
+Nortel delays financial restatements again Nortel Networks Corp. indicated that it won't be waking from its financial nightmare anytime soon when it delayed on Thursday the release of its financial statements for the third time because it found additional problems with its revenue reporting for past results.
+clean text perplexity: 49.09779357910156
+ADVERSARIAL TEXT
+Nortel Artist financial restatement. Nortel Holdings Incorporated indicated that it intends't be awakening from its financial nightmare anytime soon when it delayed its its IPO release of its stock and after the first time, it found a problems with its financial reporting for this year.
+adversarial text perplexity: 96.45572662353516
+
+CLEAN LOGITS
+tensor([[-1.8419, -0.2431, -2.4445, -1.5550]])
+ADVERSARIAL LOGITS
+tensor([[-1.8359, -0.2194, -2.5440, -1.4882]])
+LABEL
+3
+TEXT
+Cingular to Upgrade Wireless Data Network  WASHINGTON (Reuters) - Cingular Wireless, the largest U.S.  wireless telephone company, said on Tuesday it would upgrade  its network next year to handle high-speed data transmissions.
+LOGITS
+tensor([[-2.0265, -0.3160, -2.5946, -1.6407]])
+Iteration 1: loss = 8.8211, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 8.8211, entropy=117.9438, time=0.27
+Iteration 11: loss = 6.8845, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.8845, entropy=102.7307, time=3.00
+Iteration 21: loss = 6.7414, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.7414, entropy=94.3199, time=5.73
+Iteration 31: loss = 6.4678, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.4678, entropy=84.3489, time=8.44
+Iteration 41: loss = 6.0349, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.0349, entropy=70.9907, time=11.16
+Iteration 51: loss = 5.7405, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.7405, entropy=61.8243, time=13.88
+Iteration 61: loss = 5.6490, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.6490, entropy=56.3277, time=16.61
+Iteration 71: loss = 5.4024, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.4024, entropy=46.9143, time=19.33
+Iteration 81: loss = 5.2928, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.2928, entropy=42.7434, time=22.05
+Iteration 91: loss = 5.3575, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.3575, entropy=34.0991, time=24.77
+CLEAN TEXT
+Cingular to Upgrade Wireless Data Network  WASHINGTON (Reuters) - Cingular Wireless, the largest U.S.  wireless telephone company, said on Tuesday it would upgrade  its network next year to handle high-speed data transmissions.
+clean text perplexity: 21.488737106323242
+ADVERSARIAL TEXT
+Cingular to Upgrade the Data Service: WASHINGTON (Reuters) -coxingular LLC, the largest United wrs.r- communications company, said on Tuesday it would sell its its operations in year to move its-powered data service longer
+adversarial text perplexity: 130.3025665283203
+
+CLEAN LOGITS
+tensor([[-2.0265, -0.3160, -2.5946, -1.6407]])
+ADVERSARIAL LOGITS
+tensor([[ 0.3287, -1.1827, -2.2548, -1.0724]])
+LABEL
+3
+TEXT
+Never away from the office Some people love their Research in Motion BlackBerrys. Some hate them. Still, countless federal employees think they must have one.
+LOGITS
+tensor([[-2.2419, -0.3243, -2.7264, -1.1750]])
+Iteration 1: loss = 9.4495, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 9.4495, entropy=70.7663, time=0.20
+Iteration 11: loss = 7.8664, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 7.8664, entropy=61.3228, time=2.18
+Iteration 21: loss = 7.3927, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 7.3927, entropy=55.6283, time=4.16
+Iteration 31: loss = 7.2191, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 7.2191, entropy=49.3570, time=6.15
+Iteration 41: loss = 6.6195, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.6195, entropy=42.4651, time=8.13
+Iteration 51: loss = 6.5531, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.5531, entropy=37.7151, time=10.11
+Iteration 61: loss = 6.6463, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.6463, entropy=35.6464, time=12.10
+Iteration 71: loss = 6.5252, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.5252, entropy=25.5340, time=14.08
+Iteration 81: loss = 6.2697, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.2697, entropy=18.0973, time=16.07
+Iteration 91: loss = 6.1475, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.1475, entropy=15.5415, time=18.05
+CLEAN TEXT
+Never away from the office Some people love their Research in Motion BlackBerrys. Some hate them. Still, countless federal employees think they must have one.
+clean text perplexity: 55.907997131347656
+ADVERSARIAL TEXT
+Never come from the office Some people love random accidents and public.s.... Some people the. And, I do not think they will have a.
+adversarial text perplexity: 194.2594451904297
+
+CLEAN LOGITS
+tensor([[-2.2419, -0.3243, -2.7264, -1.1750]])
+ADVERSARIAL LOGITS
+tensor([[-1.1277, -0.3905, -1.6994, -1.1327]])
+LABEL
+3
+TEXT
+Microsoft Patches the Patch Windows XP Service Pack 2 gets a  #39;hotfix #39; for VPNs, part of the never-ending process of software development. 
+LOGITS
+tensor([[-1.7484,  0.2991, -2.4788, -1.6521]])
+Iteration 1: loss = 8.9609, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 8.9609, entropy=83.0454, time=0.22
+Iteration 11: loss = 7.5742, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 7.5742, entropy=72.4602, time=2.42
+Iteration 21: loss = 7.1557, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 7.1557, entropy=64.4785, time=4.62
+Iteration 31: loss = 6.8925, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.8925, entropy=56.6151, time=6.82
+Iteration 41: loss = 6.5996, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.5996, entropy=47.5459, time=9.02
+Iteration 51: loss = 6.4638, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.4638, entropy=40.2916, time=11.21
+Iteration 61: loss = 6.0513, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.0513, entropy=31.8203, time=13.39
+Iteration 71: loss = 5.9520, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.9520, entropy=23.2851, time=15.58
+Iteration 81: loss = 5.4596, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.4596, entropy=18.9388, time=17.77
+Iteration 91: loss = 5.4791, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.4791, entropy=14.5967, time=19.96
+CLEAN TEXT
+Microsoft Patches the Patch Windows XP Service Pack 2 gets a  #39;hotfix #39; for VPNs, part of the never-ending process of software development. 
+clean text perplexity: 161.63381958007812
+ADVERSARIAL TEXT
+Microsoft watches the system Windows XP ServicePack 2 is patched. #3929hotfix #39ocalyptichot 8 version, 7 of the never-ending cycle of software patches. 
+adversarial text perplexity: 203.4656982421875
+
+CLEAN LOGITS
+tensor([[-1.7484,  0.2991, -2.4788, -1.6521]])
+ADVERSARIAL LOGITS
+tensor([[-1.7393,  0.2009, -2.8876, -1.7097]])
+LABEL
+0
+TEXT
+Russia May Pardon Colonel for Chechen Girl's Murder  MOSCOW (Reuters) - A Russian commission has backed a plea  for pardon by an army colonel jailed for 10 years for the  murder of a Chechen girl, prompting anger in the restive  province, Interfax news agency reported Friday.
+LOGITS
+tensor([[-2.0249, -0.4029, -2.3907, -1.6409]])
+Iteration 1: loss = 8.6239, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 8.6239, entropy=142.5020, time=0.33
+Iteration 11: loss = 6.8413, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.8413, entropy=123.2348, time=3.71
+Iteration 21: loss = 6.4728, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.4728, entropy=113.0530, time=7.09
+Iteration 31: loss = 6.2160, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.2160, entropy=99.9551, time=10.47
+Iteration 41: loss = 6.0036, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.0036, entropy=85.5327, time=13.84
+Iteration 51: loss = 5.7927, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.7927, entropy=73.2064, time=17.21
+Iteration 61: loss = 5.3345, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.3345, entropy=59.6939, time=20.58
+Iteration 71: loss = 4.9058, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 4.9058, entropy=43.1177, time=23.95
+Iteration 81: loss = 4.9668, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 4.9668, entropy=29.3420, time=27.31
+Iteration 91: loss = 4.6356, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 4.6356, entropy=25.0579, time=30.68
+CLEAN TEXT
+Russia May Pardon Colonel for Chechen Girl's Murder  MOSCOW (Reuters) - A Russian commission has backed a plea  for pardon by an army colonel jailed for 10 years for the  murder of a Chechen girl, prompting anger in the restive  province, Interfax news agency reported Friday.
+clean text perplexity: 31.397294998168945
+ADVERSARIAL TEXT
+Point May Pardon Colonel Ukrainian Chechen Woman's Murder by MangoCandy (Reuters) - A Russian court has rejected a plea ia gag that an army colonel jailed for 46 years for the 2007 murder involving a Chechen girl, but anger from some rest of ers, Interfax news agency reported Friday.
+adversarial text perplexity: 85.79097747802734
+
+CLEAN LOGITS
+tensor([[-2.0249, -0.4029, -2.3907, -1.6409]])
+ADVERSARIAL LOGITS
+tensor([[-1.9197, -0.2666, -2.4441, -1.6218]])
+LABEL
+0
+TEXT
+UN pullback in Sierra Leone moves to security handover in capital FREETOWN : UN peacekeepers were handing over charge of security for Freetown to Sierra Leone #39;s nascent police and armed forces, the latest step in a staggered withdrawal after a five-year mission to restore calm to the west African state.
+LOGITS
+tensor([[-1.8484, -0.2713, -2.2276, -1.5359]])
+Iteration 1: loss = 8.6958, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 8.6958, entropy=153.3269, time=0.35
+Iteration 11: loss = 6.8929, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.8929, entropy=134.4131, time=3.85
+Iteration 21: loss = 6.5160, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.5160, entropy=123.2729, time=7.34
+Iteration 31: loss = 6.2056, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.2056, entropy=110.3225, time=10.84
+Iteration 41: loss = 6.0254, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.0254, entropy=95.4617, time=14.33
+Iteration 51: loss = 5.8202, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.8202, entropy=80.9479, time=17.81
+Iteration 61: loss = 5.4029, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.4029, entropy=66.9964, time=21.29
+Iteration 71: loss = 5.0872, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.0872, entropy=58.4875, time=24.78
+Iteration 81: loss = 5.0886, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.0886, entropy=53.1047, time=28.27
+Iteration 91: loss = 4.9796, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 4.9796, entropy=47.3006, time=31.75
+CLEAN TEXT
+UN pullback in Sierra Leone moves to security handover in capital FREETOWN : UN peacekeepers were handing over charge of security for Freetown to Sierra Leone #39;s nascent police and armed forces, the latest step in a staggered withdrawal after a five-year mission to restore calm to the west African state.
+clean text perplexity: 59.84996032714844
+ADVERSARIAL TEXT
+ Kenya militias concessions in Sierra Leone moves to stopping hayover in capital FREETOWN - UN peacekeepers were handing over letters of security to Freetown to Sierra Leone:8:s nascent police and armed forces, the latest step in a gradual withdrawal from a two-year campaign to restore stability to the West African country glitter
+adversarial text perplexity: 104.73355865478516
+
+CLEAN LOGITS
+tensor([[-1.8484, -0.2713, -2.2276, -1.5359]])
+ADVERSARIAL LOGITS
+tensor([[ 0.4110, -1.4506, -0.6795, -0.6178]])
+LABEL
+1
+TEXT
+Arsenal extends record unbeaten run Arsenal extended its record league unbeaten streak to 44 games with a 4-1 victory Saturday at Norwich, and 18-year-old American defender Jonathan Spector made his Premier 
+LOGITS
+tensor([[-2.0497,  0.1187, -2.8914, -1.8533]])
+Iteration 1: loss = 8.7030, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 8.7030, entropy=94.3550, time=0.24
+Iteration 11: loss = 6.4323, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.4323, entropy=81.2351, time=2.68
+Iteration 21: loss = 6.2056, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.2056, entropy=73.9387, time=5.13
+Iteration 31: loss = 5.8197, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.8197, entropy=64.4417, time=7.57
+Iteration 41: loss = 5.5889, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.5889, entropy=52.5246, time=9.99
+Iteration 51: loss = 5.2420, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.2420, entropy=40.4992, time=12.43
+Iteration 61: loss = 5.3014, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.3014, entropy=32.3628, time=14.86
+Iteration 71: loss = 4.9204, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 4.9204, entropy=23.6219, time=17.29
+Iteration 81: loss = 4.4816, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 4.4816, entropy=14.8270, time=19.73
+Iteration 91: loss = 4.3144, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 4.3144, entropy=10.7962, time=22.16
+CLEAN TEXT
+Arsenal extends record unbeaten run Arsenal extended its record league unbeaten streak to 44 games with a 4-1 victory Saturday at Norwich, and 18-year-old American defender Jonathan Spector made his Premier 
+clean text perplexity: 44.802406311035156
+ADVERSARIAL TEXT
+Arsenal extends season unbeaten run Arsenal extended their home league unbeaten run to 11 games with a 2-0 win over at home, and bow-year-long American defender Jonathan Spector. 2 New 
+adversarial text perplexity: 58.19982147216797
+
+CLEAN LOGITS
+tensor([[-2.0497,  0.1187, -2.8914, -1.8533]])
+ADVERSARIAL LOGITS
+tensor([[-2.1432,  0.2458, -2.6437, -1.6007]])
+LABEL
+2
+TEXT
+Kernan Campaign Benefits from Jobs Announcement (Muncie) - Jobs remain the top issue in the race for governor, and Democrat Joe Kernan, who has been the target of criticism for his job creation efforts, is fighting back today on two fronts.
+LOGITS
+tensor([[-1.7334, -0.2775, -1.7020, -0.7013]])
+Iteration 1: loss = 8.7305, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 8.7305, entropy=118.6709, time=0.29
+Iteration 11: loss = 6.8842, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.8842, entropy=102.6411, time=3.26
+Iteration 21: loss = 6.5069, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.5069, entropy=93.9320, time=6.22
+Iteration 31: loss = 6.1553, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.1553, entropy=83.0865, time=9.17
+Iteration 41: loss = 5.9828, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.9828, entropy=71.4137, time=12.12
+Iteration 51: loss = 5.6758, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.6758, entropy=58.1378, time=15.08
+Iteration 61: loss = 5.6220, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.6220, entropy=48.2059, time=18.04
+Iteration 71: loss = 5.4269, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.4269, entropy=36.7433, time=21.00
+Iteration 81: loss = 4.9220, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 4.9220, entropy=28.3414, time=23.95
+Iteration 91: loss = 4.9486, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 4.9486, entropy=25.6479, time=26.91
+CLEAN TEXT
+Kernan Campaign Benefits from Jobs Announcement (Muncie) - Jobs remain the top issue in the race for governor, and Democrat Joe Kernan, who has been the target of criticism for his job creation efforts, is fighting back today on two fronts.
+clean text perplexity: 34.209407806396484
+ADVERSARIAL TEXT
+Kernan McAuliffe, Prosper- Announcement (Muncie) - JobsOhio, top issue in the race for governor, and Democrat Joe Kernan, who has proven the target of criticism for his job creation efforts, came fighting back today with his new111
+adversarial text perplexity: 94.87338256835938
+
+CLEAN LOGITS
+tensor([[-1.7334, -0.2775, -1.7020, -0.7013]])
+ADVERSARIAL LOGITS
+tensor([[-0.7352, -0.0902, -1.4914, -0.4311]])
+LABEL
+0
+TEXT
+Sharon #39;s Plan Israeli Prime Minister Ariel Sharon is pushing forward his unilateral  quot;disengagement quot; plan which calls for the withdrawal of Israeli forces and the dismantling of settlements in the Gaza strip and parts of the West Bank.
+LOGITS
+tensor([[-2.0338, -0.0180, -2.3790, -1.5089]])
+Iteration 1: loss = 8.9576, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 8.9576, entropy=117.9438, time=0.27
+Iteration 11: loss = 7.4551, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 7.4551, entropy=105.1142, time=3.00
+Iteration 21: loss = 7.1297, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 7.1297, entropy=99.0689, time=5.73
+Iteration 31: loss = 6.8800, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.8800, entropy=88.2578, time=8.45
+Iteration 41: loss = 6.6407, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.6407, entropy=74.7059, time=11.17
+Iteration 51: loss = 6.2679, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.2679, entropy=62.5911, time=13.89
+Iteration 61: loss = 6.2162, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.2162, entropy=54.8928, time=16.61
+Iteration 71: loss = 5.9307, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.9307, entropy=45.8925, time=19.32
+Iteration 81: loss = 5.6597, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.6597, entropy=37.6261, time=22.04
+Iteration 91: loss = 5.4495, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.4495, entropy=32.3667, time=24.76
+CLEAN TEXT
+Sharon #39;s Plan Israeli Prime Minister Ariel Sharon is pushing forward his unilateral  quot;disengagement quot; plan which calls for the withdrawal of Israeli forces and the dismantling of settlements in the Gaza strip and parts of the West Bank.
+clean text perplexity: 67.20377349853516
+ADVERSARIAL TEXT
+Sharon #39 peaces will Hamas Prime Sharon Prime Sharon is pushing forward plans destabilization op.disablagement of Tinker plan which calls for the withdrawal of Israel from and the dismantling of settlements in the Gaza Strip and parts of the West Bank signaling
+adversarial text perplexity: 222.14553833007812
+
+CLEAN LOGITS
+tensor([[-2.0338, -0.0180, -2.3790, -1.5089]])
+ADVERSARIAL LOGITS
+tensor([[-0.5795, -0.8174, -0.7953, -0.1831]])
+LABEL
+3
+TEXT
+Microsoft Unveils New Communication, Blog Tools (Reuters) Reuters - Microsoft Corp.  unveiled on\Wednesday a new set of Web-based services allowing users of its\MSN service to publish and track each other's blogs, or online\journals.
+LOGITS
+tensor([[-1.6636, -0.4212, -2.2923, -1.4893]])
+Iteration 1: loss = 9.4069, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 9.4069, entropy=118.4285, time=0.29
+Iteration 11: loss = 7.6263, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 7.6263, entropy=102.2530, time=3.25
+Iteration 21: loss = 7.2261, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 7.2261, entropy=95.2381, time=6.19
+Iteration 31: loss = 6.8534, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.8534, entropy=87.4153, time=9.12
+Iteration 41: loss = 6.5447, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.5447, entropy=73.4720, time=12.04
+Iteration 51: loss = 6.3399, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.3399, entropy=59.6422, time=14.97
+Iteration 61: loss = 6.0894, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.0894, entropy=51.5040, time=17.90
+Iteration 71: loss = 5.5298, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.5298, entropy=31.0480, time=20.82
+Iteration 81: loss = 4.9596, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 4.9596, entropy=20.0052, time=23.75
+Iteration 91: loss = 4.9181, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 4.9181, entropy=15.2213, time=26.68
+CLEAN TEXT
+Microsoft Unveils New Communication, Blog Tools (Reuters) Reuters - Microsoft Corp.  unveiled on\Wednesday a new set of Web-based services allowing users of its\MSN service to publish and track each other's blogs, or online\journals.
+clean text perplexity: 73.87622833251953
+ADVERSARIAL TEXT
+Microsoft Unveils New CMS, Blogging (Bloomberg) - - Microsoft quietly announced a unveiled on\ Wednesday a blog- of Web-based services allowing customers of web\e service to create and manage their \ \ blogs, or blogs\e\.
+adversarial text perplexity: 99.44322967529297
+
+CLEAN LOGITS
+tensor([[-1.6636, -0.4212, -2.2923, -1.4893]])
+ADVERSARIAL LOGITS
+tensor([[-0.7232, -0.5286, -2.2524, -1.3379]])
+LABEL
+0
+TEXT
+Bush spurs on Irish deal US President George Bush has personally intervened in the Northern Ireland peace process to spur on the new power-sharing deal. Mr Bush telephoned Dr Rev Ian Paisley, the leader of the Democratic Unionist 
+LOGITS
+tensor([[-2.0680,  0.2282, -2.8094, -1.8955]])
+Iteration 1: loss = 8.8635, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 8.8635, entropy=107.1189, time=0.27
+Iteration 11: loss = 6.9787, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.9787, entropy=93.5532, time=2.97
+Iteration 21: loss = 6.4696, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.4696, entropy=85.6225, time=5.66
+Iteration 31: loss = 5.9712, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.9712, entropy=73.9361, time=8.35
+Iteration 41: loss = 5.5998, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.5998, entropy=60.7789, time=11.05
+Iteration 51: loss = 5.3828, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.3828, entropy=48.2104, time=13.74
+Iteration 61: loss = 5.0416, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.0416, entropy=33.9440, time=16.44
+Iteration 71: loss = 4.6510, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 4.6510, entropy=23.6450, time=19.13
+Iteration 81: loss = 4.3433, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 4.3433, entropy=13.7071, time=21.83
+Iteration 91: loss = 4.2892, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 4.2892, entropy=8.2966, time=24.52
+CLEAN TEXT
+Bush spurs on Irish deal US President George Bush has personally intervened in the Northern Ireland peace process to spur on the new power-sharing deal. Mr Bush telephoned Dr Rev Ian Paisley, the leader of the Democratic Unionist 
+clean text perplexity: 20.060747146606445
+ADVERSARIAL TEXT
+Bush spurs on Irish deal with dictator George Bush has intervened diplomacy in the Northern Ireland peace process to spur down the Irish power-sharing deal. Mr, telephoned Mr Rev Ian Paisley, the president of the Democratic Unionist 
+adversarial text perplexity: 50.86396026611328
+
+CLEAN LOGITS
+tensor([[-2.0680,  0.2282, -2.8094, -1.8955]])
+ADVERSARIAL LOGITS
+tensor([[-2.0570,  0.2289, -2.8216, -1.8669]])
+LABEL
+2
+TEXT
+Fuel Costs Hurt American, United Airlines American Airlines and United Airlines became the latest carriers on Thursday to say sky-high oil costs are hurting them and worsening a three-year industry downturn.
+LOGITS
+tensor([[-1.8842, -0.2253, -2.5136, -1.2852]])
+Iteration 1: loss = 9.0108, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 9.0108, entropy=83.0454, time=0.22
+Iteration 11: loss = 6.8988, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.8988, entropy=70.9430, time=2.40
+Iteration 21: loss = 6.5019, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.5019, entropy=64.2166, time=4.57
+Iteration 31: loss = 5.9280, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.9280, entropy=57.3443, time=6.75
+Iteration 41: loss = 5.9030, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.9030, entropy=47.9152, time=8.93
+Iteration 51: loss = 5.5601, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.5601, entropy=38.8198, time=11.23
+Iteration 61: loss = 5.5362, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.5362, entropy=28.6112, time=13.41
+Iteration 71: loss = 4.7727, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 4.7727, entropy=19.9963, time=15.59
+Iteration 81: loss = 4.6725, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 4.6725, entropy=11.7016, time=17.77
+Iteration 91: loss = 4.5290, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 4.5290, entropy=9.8354, time=19.95
+CLEAN TEXT
+Fuel Costs Hurt American, United Airlines American Airlines and United Airlines became the latest carriers on Thursday to say sky-high oil costs are hurting them and worsening a three-year industry downturn.
+clean text perplexity: 38.783607482910156
+ADVERSARIAL TEXT
+Fuel Loss Hurt American, Canadian Airlines Canada Airlines and United Airlines became the latest airlines in Thursday to confess sky-high fuel prices are hurting them and prompting a three-year industry-.
+adversarial text perplexity: 86.0880355834961
+
+CLEAN LOGITS
+tensor([[-1.8842, -0.2253, -2.5136, -1.2852]])
+ADVERSARIAL LOGITS
+tensor([[-1.4146, -0.1571, -2.6848, -1.5297]])
+LABEL
+2
+TEXT
+Lenovo to buy IBM PC arm IBM said late Tuesday that it will sell its personal computer division, transferring an iconic brand to a Chinese rival that also will absorb about 2,000 local workers.
+LOGITS
+tensor([[-1.8490, -0.2041, -2.4583, -1.4545]])
+Iteration 1: loss = 8.6336, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 8.6336, entropy=83.5301, time=0.24
+Iteration 11: loss = 6.3319, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.3319, entropy=70.6903, time=2.64
+Iteration 21: loss = 6.0005, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.0005, entropy=63.3689, time=5.05
+Iteration 31: loss = 5.6553, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.6553, entropy=54.5254, time=7.45
+Iteration 41: loss = 5.4047, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.4047, entropy=44.4634, time=9.86
+Iteration 51: loss = 5.2702, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.2702, entropy=36.4123, time=12.26
+Iteration 61: loss = 5.1667, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.1667, entropy=28.8377, time=14.66
+Iteration 71: loss = 4.9754, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 4.9754, entropy=21.4792, time=17.06
+Iteration 81: loss = 4.8505, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 4.8505, entropy=14.9096, time=19.46
+Iteration 91: loss = 4.5479, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 4.5479, entropy=9.0272, time=21.86
+CLEAN TEXT
+Lenovo to buy IBM PC arm IBM said late Tuesday that it will sell its personal computer division, transferring an iconic brand to a Chinese rival that also will absorb about 2,000 local workers.
+clean text perplexity: 29.203535079956055
+ADVERSARIAL TEXT
+Lenovo Corporation buy IBM's subsidiary IBM said late Tuesday that it sold a Lenovo laptop computer division, transferring the iconic brand to a new company that under will absorb the 2,000 local employees.
+adversarial text perplexity: 58.22383499145508
+
+CLEAN LOGITS
+tensor([[-1.8490, -0.2041, -2.4583, -1.4545]])
+ADVERSARIAL LOGITS
+tensor([[-1.8028, -0.2120, -2.5329, -1.5033]])
+LABEL
+2
+TEXT
+Cincinnati Financial Raises Storm Losses Financial services and insurance company Cincinnati Financial Corp. estimated pretax losses of \$89 million, or 34 cents a share after tax, from catastrophic events in the third quarter, excluding Hurricane Jeanne.
+LOGITS
+tensor([[-1.9489, -0.1722, -2.7599, -1.5505]])
+Iteration 1: loss = 9.0263, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 9.0263, entropy=106.6342, time=0.26
+Iteration 11: loss = 7.2599, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 7.2599, entropy=91.4730, time=2.90
+Iteration 21: loss = 6.8508, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.8508, entropy=83.0181, time=5.53
+Iteration 31: loss = 6.5511, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.5511, entropy=72.1906, time=8.16
+Iteration 41: loss = 6.2217, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.2217, entropy=60.5375, time=10.79
+Iteration 51: loss = 5.9849, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.9849, entropy=51.0524, time=13.42
+Iteration 61: loss = 5.6904, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.6904, entropy=42.4565, time=16.05
+Iteration 71: loss = 5.7869, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.7869, entropy=36.4044, time=18.68
+Iteration 81: loss = 5.2633, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.2633, entropy=26.6990, time=21.32
+Iteration 91: loss = 4.8250, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 4.8250, entropy=17.2887, time=23.95
+CLEAN TEXT
+Cincinnati Financial Raises Storm Losses Financial services and insurance company Cincinnati Financial Corp. estimated pretax losses of \$89 million, or 34 cents a share after tax, from catastrophic events in the third quarter, excluding Hurricane Jeanne.
+clean text perplexity: 62.85862731933594
+ADVERSARIAL TEXT
+Cincinnati Financial Raises Analyst Losses Financial services and insurance company Cincinnati Financial Holdings reported net pretax earnings of roughly $500 million, or73 cents per share by $, on adverse events in the third quarter, and Hurricane Sandy.
+adversarial text perplexity: 76.32496643066406
+
+CLEAN LOGITS
+tensor([[-1.9489, -0.1722, -2.7599, -1.5505]])
+ADVERSARIAL LOGITS
+tensor([[-1.8435, -0.2058, -2.6195, -1.4547]])
+LABEL
+3
+TEXT
+Arctic thaw may open ship lanes, but risks high A faster-than-expected thaw of the Arctic is likely to open legendary short-cut routes between the Pacific and the Atlantic but experts say icebergs and high costs will prevent any trans-polar shipping boom.
+LOGITS
+tensor([[-1.7588, -0.2680, -2.1896, -1.3824]])
+Iteration 1: loss = 9.3772, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 9.3772, entropy=129.9806, time=0.30
+Iteration 11: loss = 7.1101, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 7.1101, entropy=110.7666, time=3.31
+Iteration 21: loss = 6.7529, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.7529, entropy=99.4914, time=6.32
+Iteration 31: loss = 6.2701, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.2701, entropy=85.5981, time=9.33
+Iteration 41: loss = 6.0209, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.0209, entropy=68.2611, time=12.34
+Iteration 51: loss = 5.5310, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.5310, entropy=51.2609, time=15.35
+Iteration 61: loss = 5.2903, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.2903, entropy=40.7392, time=18.37
+Iteration 71: loss = 5.0299, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.0299, entropy=30.3101, time=21.38
+Iteration 81: loss = 4.5729, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 4.5729, entropy=17.8399, time=24.40
+Iteration 91: loss = 4.4189, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 4.4189, entropy=7.8490, time=27.41
+CLEAN TEXT
+Arctic thaw may open ship lanes, but risks high A faster-than-expected thaw of the Arctic is likely to open legendary short-cut routes between the Pacific and the Atlantic but experts say icebergs and high costs will prevent any trans-polar shipping boom.
+clean text perplexity: 34.69892883300781
+ADVERSARIAL TEXT
+Arctic thaw exposes polar ship lanes, Arctic risks high gamble faster-than-expected thaw of Siberian Arctic is likely to open vast long-range routes between the Arctic and Northeast Atlantic but experts say that may are the risks risks to the ice-polar shipping lanes.
+adversarial text perplexity: 66.8525161743164
+
+CLEAN LOGITS
+tensor([[-1.7588, -0.2680, -2.1896, -1.3824]])
+ADVERSARIAL LOGITS
+tensor([[-1.8286, -0.1887, -2.3067, -1.4319]])
+LABEL
+1
+TEXT
+Sharapova fights off battling Hantuchova Wimbledon champion Maria Sharapova had to fight off a strong challenge from Daniela Hantuchova before reaching the quarter-finals of the \$1.
+LOGITS
+tensor([[-2.3860, -0.5173, -4.2558, -2.8261]])
+Iteration 1: loss = 9.2497, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 9.2497, entropy=95.0821, time=0.25
+Iteration 11: loss = 7.2609, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 7.2609, entropy=82.4825, time=2.75
+Iteration 21: loss = 6.8243, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.8243, entropy=76.6602, time=5.25
+Iteration 31: loss = 6.5380, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.5380, entropy=70.3514, time=7.76
+Iteration 41: loss = 6.2788, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.2788, entropy=62.1664, time=10.28
+Iteration 51: loss = 6.2203, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.2203, entropy=57.1510, time=12.79
+Iteration 61: loss = 6.0350, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.0350, entropy=49.4284, time=15.28
+Iteration 71: loss = 5.4736, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.4736, entropy=41.8672, time=17.79
+Iteration 81: loss = 4.9747, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 4.9747, entropy=28.3351, time=20.33
+Iteration 91: loss = 4.7229, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 4.7229, entropy=21.3284, time=22.86
+CLEAN TEXT
+Sharapova fights off battling Hantuchova Wimbledon champion Maria Sharapova had to fight off a strong challenge from Daniela Hantuchova before reaching the quarter-finals of the \$1.
+clean text perplexity: 18.956344604492188
+ADVERSARIAL TEXT
+ Front Mitova fights for against Hantuchova Wimbledon champion Maria Sharapova, herself fight off a tough challenge from Daniela McFantuchova before reaching the quarter-finals at the \$1.
+adversarial text perplexity: 96.46382904052734
+
+CLEAN LOGITS
+tensor([[-2.3860, -0.5173, -4.2558, -2.8261]])
+ADVERSARIAL LOGITS
+tensor([[-2.1670, -0.5052, -3.9812, -2.6314]])
+LABEL
+0
+TEXT
+Texas Challenger Links Opponent to Rather (AP) AP - A Texas congressional candidate has launched a television campaign ad linking his opponent to beleaguered CBS news anchor Dan Rather.
+LOGITS
+tensor([[-1.8601, -0.1581, -2.0159, -1.0269]])
+Iteration 1: loss = 9.6646, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 9.6646, entropy=82.5607, time=0.21
+Iteration 11: loss = 7.7815, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 7.7815, entropy=73.0065, time=2.36
+Iteration 21: loss = 7.6372, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 7.6372, entropy=67.0889, time=4.51
+Iteration 31: loss = 7.1702, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 7.1702, entropy=61.1782, time=6.66
+Iteration 41: loss = 7.0019, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 7.0019, entropy=58.0031, time=8.81
+Iteration 51: loss = 6.7958, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.7958, entropy=55.1776, time=10.96
+Iteration 61: loss = 6.6597, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.6597, entropy=53.1842, time=13.11
+Iteration 71: loss = 6.1826, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.1826, entropy=46.5717, time=15.26
+Iteration 81: loss = 5.8162, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.8162, entropy=34.9087, time=17.41
+Iteration 91: loss = 5.6158, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.6158, entropy=27.2985, time=19.56
+CLEAN TEXT
+Texas Challenger Links Opponent to Rather (AP) AP - A Texas congressional candidate has launched a television campaign ad linking his opponent to beleaguered CBS news anchor Dan Rather.
+clean text perplexity: 84.05720520019531
+ADVERSARIAL TEXT
+Texas Meeting Links Opponent to Kansas Voterss Wichita Republican - A Republican congressional candidate has launched a new campaign ad linking his opponent to apro the conservative' - - and.
+adversarial text perplexity: 222.56626892089844
+
+CLEAN LOGITS
+tensor([[-1.8601, -0.1581, -2.0159, -1.0269]])
+ADVERSARIAL LOGITS
+tensor([[-1.5140, -0.1664, -2.1847, -1.2837]])
+LABEL
+1
+TEXT
+US women into final The United States edged past world champions Germany in a dramatic 2-1 victory to seal their place in the women #39;s football final.
+LOGITS
+tensor([[-1.6272, -0.5608, -1.9151, -1.1214]])
+Iteration 1: loss = 9.5220, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 9.5220, entropy=71.4934, time=0.21
+Iteration 11: loss = 8.2191, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 8.2191, entropy=62.3349, time=2.32
+Iteration 21: loss = 7.9233, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 7.9233, entropy=58.4365, time=4.42
+Iteration 31: loss = 7.6420, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 7.6420, entropy=51.4220, time=6.53
+Iteration 41: loss = 7.3721, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 7.3721, entropy=44.3308, time=8.63
+Iteration 51: loss = 7.0409, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 7.0409, entropy=42.8710, time=10.74
+Iteration 61: loss = 6.7440, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.7440, entropy=33.4158, time=12.85
+Iteration 71: loss = 6.3848, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.3848, entropy=23.6730, time=14.95
+Iteration 81: loss = 5.9803, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.9803, entropy=17.5369, time=17.06
+Iteration 91: loss = 5.7421, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.7421, entropy=13.4850, time=19.16
+CLEAN TEXT
+US women into final The United States edged past world champions Germany in a dramatic 2-1 victory to seal their place in the women #39;s football final.
+clean text perplexity: 85.9149398803711
+ADVERSARIAL TEXT
+US women and women as United States edged out world champions Korea in expected dramatic 2-1 victory!!
+
+. place among the world #4 –s first game.
+adversarial text perplexity: 218.62234497070312
+
+CLEAN LOGITS
+tensor([[-1.6272, -0.5608, -1.9151, -1.1214]])
+ADVERSARIAL LOGITS
+tensor([[-1.8203, -0.1266, -2.3573, -1.2969]])
+LABEL
+2
+TEXT
+Cingular reaches deal with DOJ on AT amp;T Wireless takeover OCTOBER 25, 2004 (IDG NEWS SERVICE) - Cingular Wireless LLC will divest itself of wireless customers and other assets in 13 US markets as a requirement for its \$41 billion acquisition of AT amp;T Wireless Services Inc.
+LOGITS
+tensor([[-1.4179,  0.2043, -2.7668, -1.4828]])
+Iteration 1: loss = 9.0811, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 9.0811, entropy=142.5020, time=0.33
+Iteration 11: loss = 6.7928, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.7928, entropy=122.3778, time=3.70
+Iteration 21: loss = 6.3649, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.3649, entropy=110.9324, time=7.06
+Iteration 31: loss = 6.1174, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.1174, entropy=97.4307, time=10.43
+Iteration 41: loss = 5.9175, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.9175, entropy=82.1423, time=13.80
+Iteration 51: loss = 5.7456, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.7456, entropy=65.9351, time=17.18
+Iteration 61: loss = 5.4299, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.4299, entropy=54.2661, time=20.55
+Iteration 71: loss = 4.9638, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 4.9638, entropy=36.3818, time=23.92
+Iteration 81: loss = 4.9219, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 4.9219, entropy=27.0834, time=27.29
+Iteration 91: loss = 4.7652, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 4.7652, entropy=24.4877, time=30.66
+CLEAN TEXT
+Cingular reaches deal with DOJ on AT amp;T Wireless takeover OCTOBER 25, 2004 (IDG NEWS SERVICE) - Cingular Wireless LLC will divest itself of wireless customers and other assets in 13 US markets as a requirement for its \$41 billion acquisition of AT amp;T Wireless Services Inc.
+clean text perplexity: 65.60953521728516
+ADVERSARIAL TEXT
+Cingular reaches deal withcies industry AT THIS *.TOWER takeover OCTOBER 25, 1997 (IDGUS NEWS) - Cingular Holdings Inc will divest itself of Motorola spectrum and other assets in northeastern US markets as a condition for its planned$1 billion acquisition of AT&&&&T Wireless Services Inc.
+adversarial text perplexity: 104.57691955566406
+
+CLEAN LOGITS
+tensor([[-1.4179,  0.2043, -2.7668, -1.4828]])
+ADVERSARIAL LOGITS
+tensor([[-2.0817,  0.4616, -3.3764, -1.4849]])
+LABEL
+2
+TEXT
+UPDATE 1-Alliance Atlantis to refinance high yield debt Alliance Atlantis Communications Inc. (AACb.TO: Quote, Profile, Research) plans to refinance high yield debt, the Canadian television broadcaster, producer and film distributor said on Tuesday.
+LOGITS
+tensor([[-1.7043, -0.2617, -2.2845, -1.4490]])
+Iteration 1: loss = 9.2924, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 9.2924, entropy=118.1862, time=0.28
+Iteration 11: loss = 7.6062, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 7.6062, entropy=102.3667, time=3.02
+Iteration 21: loss = 7.3123, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 7.3123, entropy=92.9680, time=5.76
+Iteration 31: loss = 6.9493, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.9493, entropy=81.7605, time=8.51
+Iteration 41: loss = 6.7765, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.7765, entropy=68.2732, time=11.26
+Iteration 51: loss = 6.4846, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.4846, entropy=51.8874, time=14.01
+Iteration 61: loss = 6.1884, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.1884, entropy=41.9950, time=16.75
+Iteration 71: loss = 6.1730, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.1730, entropy=35.6965, time=19.50
+Iteration 81: loss = 5.8578, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.8578, entropy=27.7369, time=22.25
+Iteration 91: loss = 5.8357, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.8357, entropy=22.8021, time=25.00
+CLEAN TEXT
+UPDATE 1-Alliance Atlantis to refinance high yield debt Alliance Atlantis Communications Inc. (AACb.TO: Quote, Profile, Research) plans to refinance high yield debt, the Canadian television broadcaster, producer and film distributor said on Tuesday.
+clean text perplexity: 71.8126220703125
+ADVERSARIAL TEXT
+UPDATE 1-Alliance Atlantis expects refinance high yield debt.] Atlantis Communications Inc. (AIOb.TO: #, LLC, TM) intends to refinance high profile assets, the company cable network which producer and film distributor said yesterday,.
+adversarial text perplexity: 374.1063232421875
+
+CLEAN LOGITS
+tensor([[-1.7043, -0.2617, -2.2845, -1.4490]])
+ADVERSARIAL LOGITS
+tensor([[-1.4319,  0.5061, -2.6223, -1.4270]])
+LABEL
+0
+TEXT
+Beirut rejects UN resolution ahead of Lahoud vote BEIRUT : Beirut rejected a UN Security Council resolution calling for the withdrawal of foreign forces from Lebanon, as lawmakers prepared to vote to change the constitution to allow pro-Damascus president Emile Lahoud to serve another term.
+LOGITS
+tensor([[-1.8452, -0.2267, -2.2076, -1.4296]])
+Iteration 1: loss = 9.0677, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 9.0677, entropy=130.2229, time=0.30
+Iteration 11: loss = 7.7528, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 7.7528, entropy=113.6603, time=3.35
+Iteration 21: loss = 7.0443, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 7.0443, entropy=103.2378, time=6.39
+Iteration 31: loss = 6.7897, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.7897, entropy=91.6371, time=9.44
+Iteration 41: loss = 6.4057, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.4057, entropy=75.7021, time=12.49
+Iteration 51: loss = 6.1435, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.1435, entropy=59.0097, time=15.53
+Iteration 61: loss = 5.8372, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.8372, entropy=48.2434, time=18.58
+Iteration 71: loss = 5.3554, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.3554, entropy=32.6328, time=21.63
+Iteration 81: loss = 5.0360, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.0360, entropy=27.3545, time=24.67
+Iteration 91: loss = 4.8232, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 4.8232, entropy=17.7833, time=27.72
+CLEAN TEXT
+Beirut rejects UN resolution ahead of Lahoud vote BEIRUT : Beirut rejected a UN Security Council resolution calling for the withdrawal of foreign forces from Lebanon, as lawmakers prepared to vote to change the constitution to allow pro-Damascus president Emile Lahoud to serve another term.
+clean text perplexity: 20.93067741394043
+ADVERSARIAL TEXT
+Beirut rejects UN resolution on Switzerland Arab Valley vote BEIRUT – Lebanon Wall aye Security council resolution calling for the withdrawal of foreign forces in Lebanon, as lawmakers prepare to vote to change the constitution to enable Syrian-Damascus president Basharile Lahoud to serve another term.
+adversarial text perplexity: 89.66353607177734
+
+CLEAN LOGITS
+tensor([[-1.8452, -0.2267, -2.2076, -1.4296]])
+ADVERSARIAL LOGITS
+tensor([[-1.9995, -0.1395, -2.3629, -1.4902]])
+LABEL
+2
+TEXT
+Leading Indicators and Jobless Claims Dip A closely watched measure of future economic activity fell in July for the second consecutive month, reinforcing evidence that the nation's financial recovery is slackening.
+LOGITS
+tensor([[-1.9718, -0.1914, -2.6122, -1.2874]])
+Iteration 1: loss = 9.3694, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 9.3694, entropy=83.2878, time=0.22
+Iteration 11: loss = 7.7086, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 7.7086, entropy=71.4497, time=2.42
+Iteration 21: loss = 7.1378, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 7.1378, entropy=63.9537, time=4.61
+Iteration 31: loss = 6.7333, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.7333, entropy=55.6088, time=6.81
+Iteration 41: loss = 6.4464, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.4464, entropy=47.4400, time=9.01
+Iteration 51: loss = 6.0712, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.0712, entropy=39.1711, time=11.22
+Iteration 61: loss = 5.9656, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.9656, entropy=35.5428, time=13.42
+Iteration 71: loss = 5.7043, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.7043, entropy=25.9742, time=15.63
+Iteration 81: loss = 5.5678, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.5678, entropy=19.7460, time=17.83
+Iteration 91: loss = 5.4018, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.4018, entropy=16.8950, time=20.03
+CLEAN TEXT
+Leading Indicators and Jobless Claims Dip A closely watched measure of future economic activity fell in July for the second consecutive month, reinforcing evidence that the nation's financial recovery is slackening.
+clean text perplexity: 32.3003044128418
+ADVERSARIAL TEXT
+Leading Indicators and Chartless Claims Rise Aet by measure of global economic activity fell in July, the second consecutive month, as evidence of global demand's financial market is slackening.
+adversarial text perplexity: 140.59544372558594
+
+CLEAN LOGITS
+tensor([[-1.9718, -0.1914, -2.6122, -1.2874]])
+ADVERSARIAL LOGITS
+tensor([[-2.1131, -0.1450, -2.8469, -1.1764]])
+LABEL
+3
+TEXT
+NASA chief O #39;Keefe resigns NASA administrator Sean O #39;Keefe on Monday resigned after three years in charge of the US space agency which included the Columbia shuttle disaster, a NASA spokesman said.
+LOGITS
+tensor([[-1.6436, -0.2538, -2.2047, -1.4712]])
+Iteration 1: loss = 9.0447, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 9.0447, entropy=94.8398, time=0.24
+Iteration 11: loss = 7.4868, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 7.4868, entropy=83.4855, time=2.71
+Iteration 21: loss = 7.2930, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 7.2930, entropy=78.9635, time=5.18
+Iteration 31: loss = 7.1332, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 7.1332, entropy=71.4567, time=7.65
+Iteration 41: loss = 6.9204, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.9204, entropy=63.0321, time=10.12
+Iteration 51: loss = 6.8208, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.8208, entropy=51.9479, time=12.60
+Iteration 61: loss = 6.5967, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.5967, entropy=48.6431, time=15.07
+Iteration 71: loss = 6.4755, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.4755, entropy=41.0887, time=17.53
+Iteration 81: loss = 6.1331, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.1331, entropy=32.1503, time=20.01
+Iteration 91: loss = 5.7112, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.7112, entropy=23.6315, time=22.48
+CLEAN TEXT
+NASA chief O #39;Keefe resigns NASA administrator Sean O #39;Keefe on Monday resigned after three years in charge of the US space agency which included the Columbia shuttle disaster, a NASA spokesman said.
+clean text perplexity: 75.29718017578125
+ADVERSARIAL TEXT
+NASA said O';; wooKeefe resigns, director Sean O'4acceptableKeefe quit Monday shortly after three years as his of the NASA investigation agency which is the Columbia shuttle disaster, a NASA official saidParis
+adversarial text perplexity: 359.9679260253906
+
+CLEAN LOGITS
+tensor([[-1.6436, -0.2538, -2.2047, -1.4712]])
+ADVERSARIAL LOGITS
+tensor([[-0.3316, -0.2983, -0.6874, -0.6650]])
+LABEL
+2
+TEXT
+Google Up in Market Debut After Bumpy IPO  NEW YORK/SEATTLE (Reuters) - Google Inc. shares made their  long-awaited stock market debut on Thursday, rising sharply to  \$100 after an initial public offering marked by missteps and  lackluster market conditions.
+LOGITS
+tensor([[-2.0402, -0.2289, -2.8849, -1.6705]])
+Iteration 1: loss = 9.0273, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 9.0273, entropy=130.4653, time=0.32
+Iteration 11: loss = 7.0485, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 7.0485, entropy=112.2250, time=3.54
+Iteration 21: loss = 6.7184, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.7184, entropy=101.1321, time=6.76
+Iteration 31: loss = 6.3900, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.3900, entropy=87.9051, time=9.98
+Iteration 41: loss = 6.1633, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.1633, entropy=73.3867, time=13.20
+Iteration 51: loss = 5.9109, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.9109, entropy=61.1652, time=16.57
+Iteration 61: loss = 5.9783, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.9783, entropy=53.4967, time=19.79
+Iteration 71: loss = 5.5005, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.5005, entropy=43.2564, time=23.02
+Iteration 81: loss = 5.3375, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.3375, entropy=31.3677, time=26.24
+Iteration 91: loss = 5.3404, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.3404, entropy=24.6231, time=29.46
+CLEAN TEXT
+Google Up in Market Debut After Bumpy IPO  NEW YORK/SEATTLE (Reuters) - Google Inc. shares made their  long-awaited stock market debut on Thursday, rising sharply to  \$100 after an initial public offering marked by missteps and  lackluster market conditions.
+clean text perplexity: 63.18878173828125
+ADVERSARIAL TEXT
+Google's in Seattle:but After Bumpy Start and NEW YORK —SEATTLE (Reuters) — Google --. Google -- in first long-awaited stock market debut on Thursday afternoon dropped sharply to fresh levels $10 after an initial rocky debut marked by missteps and double Twitter...
+adversarial text perplexity: 148.89389038085938
+
+CLEAN LOGITS
+tensor([[-2.0402, -0.2289, -2.8849, -1.6705]])
+ADVERSARIAL LOGITS
+tensor([[-1.1576, -0.1749, -2.5288, -1.1457]])
+LABEL
+2
+TEXT
+Update 3: Commerzbank to Cut 900 Banking Workers Commerzbank AG said Tuesday it had narrowed its third-quarter net loss but was slashing 900 of the 2,000 jobs in its investment banking division, practically eliminating the unprofitable department.
+LOGITS
+tensor([[-1.8186, -0.2483, -2.5193, -1.5432]])
+Iteration 1: loss = 8.8393, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 8.8393, entropy=118.4285, time=0.29
+Iteration 11: loss = 7.0051, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 7.0051, entropy=102.0415, time=3.20
+Iteration 21: loss = 6.5391, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.5391, entropy=93.1832, time=6.12
+Iteration 31: loss = 6.2916, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.2916, entropy=81.8382, time=9.04
+Iteration 41: loss = 6.0280, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.0280, entropy=72.0771, time=11.96
+Iteration 51: loss = 5.8946, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.8946, entropy=61.1222, time=14.88
+Iteration 61: loss = 5.2840, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.2840, entropy=57.2671, time=17.80
+Iteration 71: loss = 4.7922, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 4.7922, entropy=44.8793, time=20.72
+Iteration 81: loss = 4.5614, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 4.5614, entropy=32.7823, time=23.64
+Iteration 91: loss = 4.3892, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 4.3892, entropy=26.7246, time=26.56
+CLEAN TEXT
+Update 3: Commerzbank to Cut 900 Banking Workers Commerzbank AG said Tuesday it had narrowed its third-quarter net loss but was slashing 900 of the 2,000 jobs in its investment banking division, practically eliminating the unprofitable department.
+clean text perplexity: 30.418855667114258
+ADVERSARIAL TEXT
+Update 3: Commerzbank has " for Banking subsidiary Commerzbank AG said Monday it had eliminated its third-quarter profit loss on said losses on of 600-,000 shares in its investment banking division, by eliminating the unprofitable " Tam
+adversarial text perplexity: 68.50006866455078
+
+CLEAN LOGITS
+tensor([[-1.8186, -0.2483, -2.5193, -1.5432]])
+ADVERSARIAL LOGITS
+tensor([[-0.7018,  0.2436, -3.1239, -1.2192]])
+LABEL
+1
+TEXT
+FSU-Miami Postponed Hurricane Frances forces the postponement of Monday's college football season opener between Florida State and Miami.
+LOGITS
+tensor([[-1.7074, -0.2011, -1.9891, -1.1924]])
+Iteration 1: loss = 9.0520, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 9.0520, entropy=59.2143, time=0.19
+Iteration 11: loss = 7.1508, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 7.1508, entropy=52.9153, time=2.06
+Iteration 21: loss = 6.7327, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.7327, entropy=49.9505, time=3.93
+Iteration 31: loss = 6.7141, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.7141, entropy=45.8103, time=5.80
+Iteration 41: loss = 6.3907, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.3907, entropy=39.9054, time=7.67
+Iteration 51: loss = 6.3428, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.3428, entropy=37.2836, time=9.54
+Iteration 61: loss = 6.1818, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.1818, entropy=32.0874, time=11.41
+Iteration 71: loss = 5.3779, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.3779, entropy=24.5393, time=13.29
+Iteration 81: loss = 5.3512, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.3512, entropy=19.4904, time=15.16
+Iteration 91: loss = 5.3633, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.3633, entropy=18.3715, time=17.03
+CLEAN TEXT
+FSU-Miami Postponed Hurricane Frances forces the postponement of Monday's college football season opener between Florida State and Miami.
+clean text perplexity: 37.16826629638672
+ADVERSARIAL TEXT
+FS Florida-Miami Postponed Hurricane Irma forces the cancelled cancellation of Monday's college football season opener between Florida State, and Inn
+adversarial text perplexity: 124.65829467773438
+
+CLEAN LOGITS
+tensor([[-1.7074, -0.2011, -1.9891, -1.1924]])
+ADVERSARIAL LOGITS
+tensor([[-1.0461, -0.0106, -2.5908, -1.4327]])
+LABEL
+1
+TEXT
+Ecuador stun world champion Brazil Ecuador #39;s 1-0 win over Brazil has ended the world champions #39; unbeaten run in the region #39;s World Cup qualifying competition.
+LOGITS
+tensor([[-1.4390, -0.5335, -1.6089, -0.9523]])
+Iteration 1: loss = 8.5801, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 8.5801, entropy=83.5301, time=0.24
+Iteration 11: loss = 6.7960, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.7960, entropy=71.7987, time=2.64
+Iteration 21: loss = 6.5628, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.5628, entropy=65.7572, time=5.04
+Iteration 31: loss = 6.2643, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.2643, entropy=58.4173, time=7.44
+Iteration 41: loss = 6.0280, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.0280, entropy=49.9159, time=9.84
+Iteration 51: loss = 5.9263, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.9263, entropy=39.8758, time=12.25
+Iteration 61: loss = 5.4694, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.4694, entropy=34.7586, time=14.65
+Iteration 71: loss = 5.5908, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.5908, entropy=27.8509, time=17.05
+Iteration 81: loss = 5.0707, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.0707, entropy=17.3204, time=19.46
+Iteration 91: loss = 4.4969, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 4.4969, entropy=10.7854, time=21.87
+CLEAN TEXT
+Ecuador stun world champion Brazil Ecuador #39;s 1-0 win over Brazil has ended the world champions #39; unbeaten run in the region #39;s World Cup qualifying competition.
+clean text perplexity: 90.60369873046875
+ADVERSARIAL TEXT
+Ecuador playing world champions Brazil, #3.s 1-0 win over Brazil beat # the world champions #39,e run in the tournament #8 describea World Cup final match.
+adversarial text perplexity: 120.47754669189453
+
+CLEAN LOGITS
+tensor([[-1.4390, -0.5335, -1.6089, -0.9523]])
+ADVERSARIAL LOGITS
+tensor([[-1.4392, -0.2448, -1.9956, -1.1968]])
+LABEL
+2
+TEXT
+Whirlpool 3Q Profit Falls 4 Percent Home appliance maker Whirlpool Corp. on Wednesday said third-quarter earnings fell, hurt by raw material cost increases and high oil prices, and guided its annual earnings estimate lower.
+LOGITS
+tensor([[-1.9341, -0.2689, -2.6734, -1.5032]])
+Iteration 1: loss = 9.0758, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 9.0758, entropy=106.1494, time=0.25
+Iteration 11: loss = 7.1298, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 7.1298, entropy=91.8313, time=2.84
+Iteration 21: loss = 6.6944, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.6944, entropy=83.5239, time=5.42
+Iteration 31: loss = 6.3636, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.3636, entropy=72.3130, time=8.01
+Iteration 41: loss = 5.9591, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.9591, entropy=59.9402, time=10.59
+Iteration 51: loss = 5.6720, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.6720, entropy=45.9553, time=13.18
+Iteration 61: loss = 5.1931, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.1931, entropy=34.3583, time=15.77
+Iteration 71: loss = 4.5508, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 4.5508, entropy=19.9308, time=18.36
+Iteration 81: loss = 4.4170, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 4.4170, entropy=17.8460, time=20.96
+Iteration 91: loss = 3.9423, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 3.9423, entropy=9.6842, time=23.55
+CLEAN TEXT
+Whirlpool 3Q Profit Falls 4 Percent Home appliance maker Whirlpool Corp. on Wednesday said third-quarter earnings fell, hurt by raw material cost increases and high oil prices, and guided its annual earnings estimate lower.
+clean text perplexity: 37.23423767089844
+ADVERSARIAL TEXT
+Whirlpool 3Q Quarterly Analysis With Retail Home appliance maker Whirlpool Corp. on Friday said it at quarterly profit fell, hurt by raw material cost increases and lower oil prices, and lowered its annual profit forecast lower.
+adversarial text perplexity: 48.98860549926758
+
+CLEAN LOGITS
+tensor([[-1.9341, -0.2689, -2.6734, -1.5032]])
+ADVERSARIAL LOGITS
+tensor([[-1.9553, -0.2117, -2.6917, -1.4491]])
+LABEL
+0
+TEXT
+Democrats Come to Observe Convention (AP) AP - The Democrats have come to town to prick rhetorical balloons at the Republican National Convention.
+LOGITS
+tensor([[-2.2849, -0.5030, -2.0010, -0.6511]])
+Iteration 1: loss = 9.6609, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 9.6609, entropy=59.4566, time=0.19
+Iteration 11: loss = 7.7500, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 7.7500, entropy=51.6802, time=2.08
+Iteration 21: loss = 7.4530, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 7.4530, entropy=47.2709, time=3.96
+Iteration 31: loss = 7.2167, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 7.2167, entropy=42.2443, time=5.85
+Iteration 41: loss = 6.9226, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.9226, entropy=36.3121, time=7.74
+Iteration 51: loss = 6.8949, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.8949, entropy=28.7121, time=9.63
+Iteration 61: loss = 6.4603, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.4603, entropy=24.9586, time=11.51
+Iteration 71: loss = 6.2628, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.2628, entropy=22.0335, time=13.40
+Iteration 81: loss = 5.9042, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.9042, entropy=20.3957, time=15.29
+Iteration 91: loss = 5.7303, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.7303, entropy=16.8849, time=17.18
+CLEAN TEXT
+Democrats Come to Observe Convention (AP) AP - The Democrats have come to town to prick rhetorical balloons at the Republican National Convention.
+clean text perplexity: 68.09867858886719
+ADVERSARIAL TEXT
+Democrats Come To Observe Convention (Video) Russia - The Democrats have come out, to take for and at Clinton' National Convention.
+adversarial text perplexity: 177.10301208496094
+
+CLEAN LOGITS
+tensor([[-2.2849, -0.5030, -2.0010, -0.6511]])
+ADVERSARIAL LOGITS
+tensor([[-2.1078, -0.2496, -2.1282, -0.7189]])
+LABEL
+2
+TEXT
+Cash America Sells 2 European Units Cash America International Inc., the world #39;s largest pawnshop operator, reported Wednesday that it sold the company #39;s two European units in a single transaction and agreed to purchase a 41-store pawnshop chain based in Las Vegas.
+LOGITS
+tensor([[-1.9101, -0.1859, -2.6334, -1.6119]])
+Iteration 1: loss = 8.6506, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 8.6506, entropy=130.2229, time=0.30
+Iteration 11: loss = 6.8737, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.8737, entropy=112.3449, time=3.34
+Iteration 21: loss = 6.5086, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.5086, entropy=102.8718, time=6.39
+Iteration 31: loss = 6.2290, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.2290, entropy=91.0582, time=9.43
+Iteration 41: loss = 6.0625, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.0625, entropy=77.5829, time=12.47
+Iteration 51: loss = 5.6321, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.6321, entropy=65.5778, time=15.52
+Iteration 61: loss = 5.6356, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.6356, entropy=55.1554, time=18.56
+Iteration 71: loss = 5.3467, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.3467, entropy=43.9659, time=21.60
+Iteration 81: loss = 5.0402, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.0402, entropy=36.4312, time=24.65
+Iteration 91: loss = 4.6588, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 4.6588, entropy=29.2386, time=27.69
+CLEAN TEXT
+Cash America Sells 2 European Units Cash America International Inc., the world #39;s largest pawnshop operator, reported Wednesday that it sold the company #39;s two European units in a single transaction and agreed to purchase a 41-store pawnshop chain based in Las Vegas.
+clean text perplexity: 74.67018127441406
+ADVERSARIAL TEXT
+bus Shares Sells Brands - Units - 1 Retail Inc. the worldís39Ss largest pawnshop operator, said today that it sold its company.2 traffics worth of units in a financing transaction and agreed to acquire a 33-unit retail retail chain based in Las Vegas.
+adversarial text perplexity: 138.85739135742188
+
+CLEAN LOGITS
+tensor([[-1.9101, -0.1859, -2.6334, -1.6119]])
+ADVERSARIAL LOGITS
+tensor([[-2.1156e+00,  1.3457e-03, -2.6910e+00, -1.2906e+00]])
+LABEL
+2
+TEXT
+IRS trying to ensure all get refunds The Internal Revenue Service is trying to make sure Pamela Bracey of Ocala receives her income tax refund check. She is one of about 80 other Marion County residents whose checks 
+LOGITS
+tensor([[-2.0641,  0.1307, -2.8524, -1.9211]])
+Iteration 1: loss = 9.2338, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 9.2338, entropy=95.3245, time=0.25
+Iteration 11: loss = 7.3604, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 7.3604, entropy=82.0013, time=2.76
+Iteration 21: loss = 7.0187, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 7.0187, entropy=74.3456, time=5.27
+Iteration 31: loss = 6.7628, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.7628, entropy=65.3690, time=7.78
+Iteration 41: loss = 6.5911, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.5911, entropy=56.0664, time=10.29
+Iteration 51: loss = 6.4428, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.4428, entropy=50.1259, time=12.80
+Iteration 61: loss = 6.1503, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.1503, entropy=41.5957, time=15.31
+Iteration 71: loss = 6.0056, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.0056, entropy=29.9805, time=17.82
+Iteration 81: loss = 5.7075, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.7075, entropy=25.8991, time=20.34
+Iteration 91: loss = 5.6377, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.6377, entropy=14.1734, time=22.85
+CLEAN TEXT
+IRS trying to ensure all get refunds The Internal Revenue Service is trying to make sure Pamela Bracey of Ocala receives her income tax refund check. She is one of about 80 other Marion County residents whose checks 
+clean text perplexity: 66.32078552246094
+ADVERSARIAL TEXT
+IRS -------- accountant and all get refunds. Internal Revenue Service (" trying to make sure, Ansley said Omer, and, income tax refund check. She is one of about 20 million Montgomery County residents whose income 
+adversarial text perplexity: 219.45968627929688
+
+CLEAN LOGITS
+tensor([[-2.0641,  0.1307, -2.8524, -1.9211]])
+ADVERSARIAL LOGITS
+tensor([[-1.8990,  0.2177, -2.8682, -1.7409]])
+LABEL
+1
+TEXT
+Mickelson Skips Ryder Cup Fever by Taking Day Off  BLOOMFIELD HILLS, Michigan (Reuters) - Twenty-three Ryder  Cup players went to work on their games on Wednesday at Oakland  Hills but one of the American trump cards was not among them.
+LOGITS
+tensor([[-1.5911, -0.3777, -2.1192, -1.3538]])
+Iteration 1: loss = 9.6897, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 9.6897, entropy=130.2229, time=0.30
+Iteration 11: loss = 8.0335, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 8.0335, entropy=112.9004, time=3.34
+Iteration 21: loss = 7.7458, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 7.7458, entropy=102.3486, time=6.38
+Iteration 31: loss = 7.3811, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 7.3811, entropy=92.0666, time=9.42
+Iteration 41: loss = 7.0815, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 7.0815, entropy=83.8765, time=12.46
+Iteration 51: loss = 6.7359, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.7359, entropy=71.9031, time=15.51
+Iteration 61: loss = 6.7250, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.7250, entropy=59.9846, time=18.55
+Iteration 71: loss = 6.1225, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.1225, entropy=41.5272, time=21.60
+Iteration 81: loss = 5.6025, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.6025, entropy=23.8082, time=24.64
+Iteration 91: loss = 5.3562, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.3562, entropy=19.3667, time=27.69
+CLEAN TEXT
+Mickelson Skips Ryder Cup Fever by Taking Day Off  BLOOMFIELD HILLS, Michigan (Reuters) - Twenty-three Ryder  Cup players went to work on their games on Wednesday at Oakland  Hills but one of the American trump cards was not among them.
+clean text perplexity: 76.98457336425781
+ADVERSARIAL TEXT
+Mickelson Winner's Ryder Cup victory by Taking Day Off and BLOATED!! HOT PLAYS!! Michigan (2) — Twenty-three of ive players went to bed before the games before the at Michigan �� but one of the big trump cards was not even in.
+adversarial text perplexity: 138.2190399169922
+
+CLEAN LOGITS
+tensor([[-1.5911, -0.3777, -2.1192, -1.3538]])
+ADVERSARIAL LOGITS
+tensor([[-1.7351, -0.2393, -1.9365, -0.9980]])
+LABEL
+2
+TEXT
+Oil continues to rally Oil prices made fresh gains Friday, after leaping almost \$2 a day earlier, as the US government said crude stocks sank for the sixth straight week last week and distillate fuels barely grew ahead of winter.
+LOGITS
+tensor([[-2.0442, -0.1397, -2.7394, -1.4231]])
+Iteration 1: loss = 8.7190, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 8.7190, entropy=106.6342, time=0.26
+Iteration 11: loss = 7.0365, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 7.0365, entropy=92.7727, time=2.89
+Iteration 21: loss = 6.6831, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.6831, entropy=86.0443, time=5.51
+Iteration 31: loss = 6.7082, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.7082, entropy=79.9425, time=8.14
+Iteration 41: loss = 6.3377, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.3377, entropy=71.5779, time=10.77
+Iteration 51: loss = 6.1907, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.1907, entropy=66.6169, time=13.40
+Iteration 61: loss = 5.8132, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.8132, entropy=58.8773, time=16.03
+Iteration 71: loss = 5.5370, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.5370, entropy=51.8425, time=18.66
+Iteration 81: loss = 5.2010, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.2010, entropy=44.1889, time=21.30
+Iteration 91: loss = 5.1590, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.1590, entropy=36.2170, time=23.93
+CLEAN TEXT
+Oil continues to rally Oil prices made fresh gains Friday, after leaping almost \$2 a day earlier, as the US government said crude stocks sank for the sixth straight week last week and distillate fuels barely grew ahead of winter.
+clean text perplexity: 66.85443115234375
+ADVERSARIAL TEXT
+ plunge. to rebound Oil prices made fresh gains Friday, after reaching almost \\.2 a day earlier, as the OPEC. said crude imports fell for the second straight week last week and distillate exports barely rose. a theocation
+adversarial text perplexity: 110.89839172363281
+
+CLEAN LOGITS
+tensor([[-2.0442, -0.1397, -2.7394, -1.4231]])
+ADVERSARIAL LOGITS
+tensor([[-1.4943,  0.1700, -3.1496, -1.1924]])
+LABEL
+3
+TEXT
+Cassini gets look at Titan Since it is the only moon in the entire solar system with its own atmosphere, Titan, which is perpetually shrouded by cloud layers, is the object of a good deal of curiosity on the part of NASA scientists.
+LOGITS
+tensor([[-1.6333, -0.2802, -2.4866, -1.4041]])
+Iteration 1: loss = 8.0969, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 8.0969, entropy=106.8765, time=0.26
+Iteration 11: loss = 6.2491, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.2491, entropy=92.2791, time=2.91
+Iteration 21: loss = 5.9831, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.9831, entropy=82.6634, time=5.56
+Iteration 31: loss = 5.5443, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.5443, entropy=73.0026, time=8.21
+Iteration 41: loss = 5.4005, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.4005, entropy=61.3335, time=10.86
+Iteration 51: loss = 5.2447, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.2447, entropy=49.8123, time=13.51
+Iteration 61: loss = 5.2182, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.2182, entropy=41.5975, time=16.16
+Iteration 71: loss = 4.9138, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 4.9138, entropy=29.4724, time=18.81
+Iteration 81: loss = 4.4209, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 4.4209, entropy=20.4763, time=21.46
+Iteration 91: loss = 4.3849, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 4.3849, entropy=15.6178, time=24.11
+CLEAN TEXT
+Cassini gets look at Titan Since it is the only moon in the entire solar system with its own atmosphere, Titan, which is perpetually shrouded by cloud layers, is the object of a good deal of curiosity on the part of NASA scientists.
+clean text perplexity: 16.477087020874023
+ADVERSARIAL TEXT
+Cassini was look at Saturn moon it is the only one in the entire solar hemisphere with its own atmosphere, Titan, which is made surrounded by cloud layers but is the dry. a good deal of resentment on the part of NASA scientists.
+adversarial text perplexity: 61.916595458984375
+
+CLEAN LOGITS
+tensor([[-1.6333, -0.2802, -2.4866, -1.4041]])
+ADVERSARIAL LOGITS
+tensor([[-1.2241, -0.0268, -2.2125, -1.3397]])
+LABEL
+2
+TEXT
+Parmalat sues ex-auditors Deloitte, Grant Thornton MILAN, Aug 18 (Reuters) - Parmalat sued its former auditors Deloitte  amp; Touche and Grant Thornton on Wednesday, broadening a legal battle to claw back billions of euros from ex-allies the food group says helped drive it into...
+LOGITS
+tensor([[-2.0176, -0.2022, -2.2876, -1.4917]])
+Iteration 1: loss = 9.1325, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 9.1325, entropy=165.6061, time=0.37
+Iteration 11: loss = 6.6907, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.6907, entropy=143.0154, time=4.07
+Iteration 21: loss = 6.2093, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.2093, entropy=129.5650, time=7.77
+Iteration 31: loss = 5.9243, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.9243, entropy=113.1749, time=11.47
+Iteration 41: loss = 5.7391, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.7391, entropy=92.7195, time=15.18
+Iteration 51: loss = 5.6545, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.6545, entropy=74.6480, time=18.89
+Iteration 61: loss = 5.4843, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.4843, entropy=63.7884, time=22.59
+Iteration 71: loss = 5.3770, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.3770, entropy=53.6580, time=26.30
+Iteration 81: loss = 5.2147, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.2147, entropy=42.8175, time=30.01
+Iteration 91: loss = 4.9378, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 4.9378, entropy=32.3742, time=33.72
+CLEAN TEXT
+Parmalat sues ex-auditors Deloitte, Grant Thornton MILAN, Aug 18 (Reuters) - Parmalat sued its former auditors Deloitte  amp; Touche and Grant Thornton on Wednesday, broadening a legal battle to claw back billions of euros from ex-allies the food group says helped drive it into...
+clean text perplexity: 43.107364654541016
+ADVERSARIAL TEXT
+Parella bailoutat sues ex-ellenitors Deloitte, Grant Thornton investigation euro euros Aug 19 (Reuters) - Parmalat sued its former auditors Deloitte, two, Touche and Grant Thornton on Wednesday, showering a writ demand to claw back the stolen euros from ex-allies the French group which helped it the into...
+adversarial text perplexity: 111.57494354248047
+
+CLEAN LOGITS
+tensor([[-2.0176, -0.2022, -2.2876, -1.4917]])
+ADVERSARIAL LOGITS
+tensor([[-2.2338, -0.4746, -2.5315, -1.9698]])
+LABEL
+0
+TEXT
+UN man backs Darfur autonomy The UN's refugee chief says Sudan should grant more autonomy to Darfur to try to end continuing violence.
+LOGITS
+tensor([[-1.8530, -0.1804, -2.1704, -1.3812]])
+Iteration 1: loss = 9.3526, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 9.3526, entropy=59.4566, time=0.19
+Iteration 11: loss = 7.6333, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 7.6333, entropy=52.0471, time=2.07
+Iteration 21: loss = 7.3871, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 7.3871, entropy=48.2910, time=3.96
+Iteration 31: loss = 7.0202, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 7.0202, entropy=44.5218, time=5.86
+Iteration 41: loss = 6.6616, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.6616, entropy=40.2598, time=7.75
+Iteration 51: loss = 6.3960, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.3960, entropy=32.3737, time=9.78
+Iteration 61: loss = 5.8886, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.8886, entropy=25.5673, time=11.69
+Iteration 71: loss = 5.5467, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.5467, entropy=17.3092, time=13.59
+Iteration 81: loss = 5.3977, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.3977, entropy=12.2187, time=15.49
+Iteration 91: loss = 5.2805, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.2805, entropy=10.5182, time=17.39
+CLEAN TEXT
+UN man backs Darfur autonomy The UN's refugee chief says Sudan should grant more autonomy to Darfur to try to end continuing violence.
+clean text perplexity: 52.08707809448242
+ADVERSARIAL TEXT
+UNIA wants Darfur: The UN's refugee coordinator says Sudan should grant more territory northern Darfur region aid to stop ethnic violence.
+adversarial text perplexity: 80.2437515258789
+
+CLEAN LOGITS
+tensor([[-1.8530, -0.1804, -2.1704, -1.3812]])
+ADVERSARIAL LOGITS
+tensor([[-1.9563,  0.0169, -2.4293, -1.4731]])
+LABEL
+2
+TEXT
+\$616m for Coles will silence the doubters JOHN Fletcher yesterday claimed Coles Myer #39;s \$616.5 million profit was  quot;the kind of result every CEO actually dreams about quot;.
+LOGITS
+tensor([[-1.4603, -0.2560, -2.2015, -1.5105]])
+Iteration 1: loss = 10.3978, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 10.3978, entropy=106.6342, time=0.26
+Iteration 11: loss = 8.8120, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 8.8120, entropy=92.5433, time=2.89
+Iteration 21: loss = 8.4549, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 8.4549, entropy=85.4899, time=5.51
+Iteration 31: loss = 8.2049, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 8.2049, entropy=75.5654, time=8.14
+Iteration 41: loss = 8.0196, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 8.0196, entropy=71.5221, time=10.77
+Iteration 51: loss = 7.6384, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 7.6384, entropy=68.2535, time=13.40
+Iteration 61: loss = 7.2260, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 7.2260, entropy=60.5345, time=16.03
+Iteration 71: loss = 6.8668, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.8668, entropy=47.2291, time=18.66
+Iteration 81: loss = 6.3997, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.3997, entropy=41.2330, time=21.28
+Iteration 91: loss = 6.1524, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.1524, entropy=29.7913, time=23.91
+CLEAN TEXT
+\$616m for Coles will silence the doubters JOHN Fletcher yesterday claimed Coles Myer #39;s \$616.5 million profit was  quot;the kind of result every CEO actually dreams about quot;.
+clean text perplexity: 576.041259765625
+ADVERSARIAL TEXT
+\$80m for Mercedes, will increase the″ (and! yesterday said that Walter theer ###################. \$616.5m profit. _____ _the kind of profit every man wants in of\..
+adversarial text perplexity: 442.2828063964844
+
+CLEAN LOGITS
+tensor([[-1.4603, -0.2560, -2.2015, -1.5105]])
+ADVERSARIAL LOGITS
+tensor([[-1.2574, -0.0583, -2.2417, -1.2747]])
+LABEL
+1
+TEXT
+NBA Roundup: Sonics fly high again in Philly PHILADELPHIA - Wide open or contested, the Seattle SuperSonics hit three-pointers from all over the court. Ray Allen scored a season-high 37 points, Rashard Lewis had 21 and Vladimir Radmanovic added 20, leading 
+LOGITS
+tensor([[-2.2892,  0.1658, -2.7351, -1.8968]])
+Iteration 1: loss = 8.6823, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 8.6823, entropy=142.0173, time=0.33
+Iteration 11: loss = 6.9323, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.9323, entropy=122.3576, time=3.64
+Iteration 21: loss = 6.4886, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.4886, entropy=112.6535, time=6.96
+Iteration 31: loss = 6.2178, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.2178, entropy=98.5324, time=10.28
+Iteration 41: loss = 6.0483, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.0483, entropy=82.6999, time=13.60
+Iteration 51: loss = 5.8583, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.8583, entropy=69.1119, time=16.92
+Iteration 61: loss = 5.7353, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.7353, entropy=60.6261, time=20.24
+Iteration 71: loss = 5.5216, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.5216, entropy=41.4009, time=23.57
+Iteration 81: loss = 5.2496, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.2496, entropy=31.2159, time=26.89
+Iteration 91: loss = 5.0511, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.0511, entropy=24.6329, time=30.21
+CLEAN TEXT
+NBA Roundup: Sonics fly high again in Philly PHILADELPHIA - Wide open or contested, the Seattle SuperSonics hit three-pointers from all over the court. Ray Allen scored a season-high 37 points, Rashard Lewis had 21 and Vladimir Radmanovic added 20, leading 
+clean text perplexity: 21.84300994873047
+ADVERSARIAL TEXT
+NBA Replay: Sonics Get high again
+ !!! OMGILGHELPHIA!! Wideouts, 49, everywhere Seattle SuperSonics hit three shots in from the over Vegas court. Ray Allen scored a career-high 34 points, Rashard Lewis tallied 22 and Vladimir Radmanovic added 20 apiece. 
+adversarial text perplexity: 115.06067657470703
+
+CLEAN LOGITS
+tensor([[-2.2892,  0.1658, -2.7351, -1.8968]])
+ADVERSARIAL LOGITS
+tensor([[-1.8986,  0.2208, -2.2042, -1.5036]])
+LABEL
+1
+TEXT
+Belichick adjusts as coordinator takes Notre Dame job Bill Belichick took a few minutes Monday to convey his congratulations to his offensive coordinator on becoming Notre Dame #39;s head coach.
+LOGITS
+tensor([[-1.4511, -0.1620, -1.2759, -0.8629]])
+Iteration 1: loss = 9.5377, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 9.5377, entropy=82.5607, time=0.21
+Iteration 11: loss = 7.5785, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 7.5785, entropy=71.5700, time=2.34
+Iteration 21: loss = 7.2887, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 7.2887, entropy=64.6023, time=4.47
+Iteration 31: loss = 7.0147, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 7.0147, entropy=57.1002, time=6.60
+Iteration 41: loss = 6.8757, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.8757, entropy=49.3328, time=8.74
+Iteration 51: loss = 6.6127, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.6127, entropy=43.6680, time=10.87
+Iteration 61: loss = 6.3593, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.3593, entropy=43.9305, time=13.00
+Iteration 71: loss = 6.2629, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.2629, entropy=35.1801, time=15.13
+Iteration 81: loss = 5.9896, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.9896, entropy=28.6007, time=17.26
+Iteration 91: loss = 6.0229, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.0229, entropy=20.5393, time=19.40
+CLEAN TEXT
+Belichick adjusts as coordinator takes Notre Dame job Bill Belichick took a few minutes Monday to convey his congratulations to his offensive coordinator on becoming Notre Dame #39;s head coach.
+clean text perplexity: 89.99919128417969
+ADVERSARIAL TEXT
+Belichick laughs as Belichick for Notre Dame job Coach Belichick took a pounding shot to fully relay his congratulations to his son coordinator on becoming Notre Dame-S--, head coach.
+adversarial text perplexity: 279.8160400390625
+
+CLEAN LOGITS
+tensor([[-1.4511, -0.1620, -1.2759, -0.8629]])
+ADVERSARIAL LOGITS
+tensor([[-1.3246, -0.1701, -1.4113, -0.8618]])
+LABEL
+0
+TEXT
+All Eyes On Nigeria As Oil Price Bounces Oil prices bounced higher on Friday after two days of sharp declines that came on the heels of rising inventories of crude in the US and a move by China to cool its economy.
+LOGITS
+tensor([[-1.9639, -0.2403, -2.5105, -1.3690]])
+Iteration 1: loss = 9.0183, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 9.0183, entropy=106.1494, time=0.25
+Iteration 11: loss = 6.9403, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.9403, entropy=91.8920, time=2.84
+Iteration 21: loss = 6.5068, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.5068, entropy=83.8351, time=5.42
+Iteration 31: loss = 6.1863, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.1863, entropy=75.7392, time=8.01
+Iteration 41: loss = 5.8371, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.8371, entropy=65.4282, time=10.60
+Iteration 51: loss = 5.3997, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.3997, entropy=50.6510, time=13.19
+Iteration 61: loss = 5.2969, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.2969, entropy=37.2429, time=15.78
+Iteration 71: loss = 4.7706, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 4.7706, entropy=25.3234, time=18.38
+Iteration 81: loss = 4.4133, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 4.4133, entropy=14.4949, time=20.97
+Iteration 91: loss = 4.2736, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 4.2736, entropy=10.9983, time=23.56
+CLEAN TEXT
+All Eyes On Nigeria As Oil Price Bounces Oil prices bounced higher on Friday after two days of sharp declines that came on the heels of rising inventories of crude in the US and a move by China to cool its economy.
+clean text perplexity: 20.615131378173828
+ADVERSARIAL TEXT
+All Eyes On You OPEC Oil Price Bounces Back Prices bounced back on Friday after unexpectedly Friday trading sharp declines that came on the heels of rising crude prices in what from the US and a move by China to boost its economy.
+adversarial text perplexity: 47.02495574951172
+
+CLEAN LOGITS
+tensor([[-1.9639, -0.2403, -2.5105, -1.3690]])
+ADVERSARIAL LOGITS
+tensor([[-1.4047, -0.0431, -2.3905, -1.1501]])
+LABEL
+2
+TEXT
+Update 4: Crude Oil Prices Trade Below \$49 a Barrel Crude oil futures traded below \$49 a barrel Monday following a steep runup on Friday that was prompted by persistent concerns about winter fuel supplies.
+LOGITS
+tensor([[-2.1216, -0.0987, -2.8011, -1.3661]])
+Iteration 1: loss = 9.3543, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 9.3543, entropy=95.3245, time=0.25
+Iteration 11: loss = 7.5450, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 7.5450, entropy=82.3450, time=2.76
+Iteration 21: loss = 7.0581, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 7.0581, entropy=74.8980, time=5.28
+Iteration 31: loss = 6.8235, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.8235, entropy=65.6948, time=7.79
+Iteration 41: loss = 6.5394, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.5394, entropy=55.8831, time=10.31
+Iteration 51: loss = 6.2547, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.2547, entropy=47.1085, time=12.83
+Iteration 61: loss = 5.9994, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.9994, entropy=41.4950, time=15.35
+Iteration 71: loss = 5.8588, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.8588, entropy=29.5721, time=17.87
+Iteration 81: loss = 5.3997, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.3997, entropy=19.7290, time=20.39
+Iteration 91: loss = 5.0223, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.0223, entropy=12.7508, time=22.90
+CLEAN TEXT
+Update 4: Crude Oil Prices Trade Below \$49 a Barrel Crude oil futures traded below \$49 a barrel Monday following a steep runup on Friday that was prompted by persistent concerns about winter fuel supplies.
+clean text perplexity: 33.94017791748047
+ADVERSARIAL TEXT
+Update 2: OPEC's Oil Prices Trade at \$100 a Barrel Crude oil futures traded above above 223$ a barrel yesterday following a strong run up on Friday. was prompted by renewed concerns about winter fuel supplies.
+adversarial text perplexity: 70.75521850585938
+
+CLEAN LOGITS
+tensor([[-2.1216, -0.0987, -2.8011, -1.3661]])
+ADVERSARIAL LOGITS
+tensor([[-1.8764,  0.0421, -2.7657, -1.1169]])
+LABEL
+0
+TEXT
+Ecstasy link to Europe gang war THREE massive seizures of ecstasy over the past six months, including a record 820kg bust on Saturday, could stem from a war among European organised criminals trying to carve out a market in Australia.
+LOGITS
+tensor([[-1.5748, -0.3080, -2.0478, -1.2830]])
+Iteration 1: loss = 8.8711, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 8.8711, entropy=106.1494, time=0.25
+Iteration 11: loss = 6.8623, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.8623, entropy=92.3163, time=2.84
+Iteration 21: loss = 6.4905, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.4905, entropy=83.3134, time=5.43
+Iteration 31: loss = 6.1320, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.1320, entropy=72.4248, time=8.02
+Iteration 41: loss = 6.1103, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.1103, entropy=61.3626, time=10.61
+Iteration 51: loss = 5.7574, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.7574, entropy=49.2824, time=13.20
+Iteration 61: loss = 5.4604, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.4604, entropy=38.5603, time=15.78
+Iteration 71: loss = 5.1424, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.1424, entropy=28.6025, time=18.37
+Iteration 81: loss = 4.8674, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 4.8674, entropy=21.0803, time=20.96
+Iteration 91: loss = 4.4828, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 4.4828, entropy=14.4040, time=23.55
+CLEAN TEXT
+Ecstasy link to Europe gang war THREE massive seizures of ecstasy over the past six months, including a record 820kg bust on Saturday, could stem from a war among European organised criminals trying to carve out a market in Australia.
+clean text perplexity: 43.98189926147461
+ADVERSARIAL TEXT
+Ecstasy tablet as Europe drug war THREE massive seizures of methamphetamine over the past six months, including a record 80kg acid cannabis pills, could be from illegal outbreaks among the organised criminals trying to wipe out the market in drugs.
+adversarial text perplexity: 81.16962432861328
+
+CLEAN LOGITS
+tensor([[-1.5748, -0.3080, -2.0478, -1.2830]])
+ADVERSARIAL LOGITS
+tensor([[-1.6808, -0.2865, -2.1011, -1.3025]])
+LABEL
+3
+TEXT
+NASA X-43A Mach 10 Mission Scrubbed NASA #39;s third X-43A hypersonic research mission has been scrubbed for today due to technical glitches with X-43A instrumentation.
+LOGITS
+tensor([[-1.4456, -0.2542, -1.9393, -1.2693]])
+Iteration 1: loss = 8.4163, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 8.4163, entropy=95.3245, time=0.25
+Iteration 11: loss = 6.5978, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.5978, entropy=82.2786, time=2.76
+Iteration 21: loss = 6.1648, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.1648, entropy=75.0542, time=5.28
+Iteration 31: loss = 5.9923, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.9923, entropy=66.0674, time=7.79
+Iteration 41: loss = 5.7847, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.7847, entropy=56.5567, time=10.31
+Iteration 51: loss = 5.6646, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.6646, entropy=45.9148, time=12.83
+Iteration 61: loss = 5.4640, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.4640, entropy=38.9035, time=15.35
+Iteration 71: loss = 5.1754, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.1754, entropy=30.7215, time=17.86
+Iteration 81: loss = 5.1833, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.1833, entropy=21.9099, time=20.38
+Iteration 91: loss = 4.9173, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 4.9173, entropy=19.4005, time=22.90
+CLEAN TEXT
+NASA X-43A Mach 10 Mission Scrubbed NASA #39;s third X-43A hypersonic research mission has been scrubbed for today due to technical glitches with X-43A instrumentation.
+clean text perplexity: 36.046207427978516
+ADVERSARIAL TEXT
+NASA X-43A Intercept 3 Mission Scrubbed By #11 -JulyThe X-43A hypersonic research mission has been scrub () for flight.. to technical problems with X-43A andation.
+adversarial text perplexity: 96.17768859863281
+
+CLEAN LOGITS
+tensor([[-1.4456, -0.2542, -1.9393, -1.2693]])
+ADVERSARIAL LOGITS
+tensor([[-1.5449, -0.1894, -2.3116, -1.3803]])
+LABEL
+0
+TEXT
+Bird flu claims its 30th human victim in Asia Vietnam confirmed a new bird flu death to bring Asia #39;s human toll to 30 yesterday, while Thailand rued its flawed efforts to control the epidemic after reporting its first likely case of the virus jumping from one person to another.
+LOGITS
+tensor([[-1.8954, -0.2870, -2.3739, -1.5723]])
+Iteration 1: loss = 9.4599, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 9.4599, entropy=130.2229, time=0.30
+Iteration 11: loss = 7.9402, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 7.9402, entropy=113.5153, time=3.34
+Iteration 21: loss = 7.5479, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 7.5479, entropy=105.9538, time=6.38
+Iteration 31: loss = 7.2648, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 7.2648, entropy=97.6930, time=9.43
+Iteration 41: loss = 7.0080, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 7.0080, entropy=89.0013, time=12.47
+Iteration 51: loss = 6.7367, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.7367, entropy=81.6117, time=15.52
+Iteration 61: loss = 6.6129, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.6129, entropy=69.5373, time=18.56
+Iteration 71: loss = 6.2070, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.2070, entropy=54.2453, time=21.61
+Iteration 81: loss = 5.8172, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.8172, entropy=44.7314, time=24.65
+Iteration 91: loss = 5.9366, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 5.9366, entropy=39.8710, time=27.70
+CLEAN TEXT
+Bird flu claims its 30th human victim in Asia Vietnam confirmed a new bird flu death to bring Asia #39;s human toll to 30 yesterday, while Thailand rued its flawed efforts to control the epidemic after reporting its first likely case of the virus jumping from one person to another.
+clean text perplexity: 98.53893280029297
+ADVERSARIAL TEXT
+ meals fentanyl was its 30th simultaneous victim in Australia today to leth new syndrome flu, to bring forth #39,s human toll to 30. afternoon, the rumbled its frantic efforts to control the epidemic, reporting its first reported case of the virus jumping from one victim to another session
+adversarial text perplexity: 299.79522705078125
+
+CLEAN LOGITS
+tensor([[-1.8954, -0.2870, -2.3739, -1.5723]])
+ADVERSARIAL LOGITS
+tensor([[-0.4173, -0.3230, -1.5712, -0.5811]])
+LABEL
+3
+TEXT
+Where's the spark on power line Net? The NYT has an optimistic overview on broadband over power lines, calling it "the ultimate plug and play." Broadband Blog
+LOGITS
+tensor([[-1.5898,  0.1478, -2.5572, -1.0853]])
+Iteration 1: loss = 9.4612, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 9.4612, entropy=71.4934, time=0.21
+Iteration 11: loss = 8.0420, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 8.0420, entropy=62.4210, time=2.29
+Iteration 21: loss = 7.8687, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 7.8687, entropy=58.3470, time=4.38
+Iteration 31: loss = 7.5092, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 7.5092, entropy=53.5469, time=6.47
+Iteration 41: loss = 7.2733, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 7.2733, entropy=45.7208, time=8.56
+Iteration 51: loss = 7.3701, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 7.3701, entropy=44.4844, time=10.64
+Iteration 61: loss = 6.7055, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.7055, entropy=42.5145, time=12.73
+Iteration 71: loss = 6.5245, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.5245, entropy=31.7861, time=14.82
+Iteration 81: loss = 6.3483, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.3483, entropy=22.7410, time=16.91
+Iteration 91: loss = 6.2911, adv_loss = 0.0000, ref_loss = 0.0000, perp_loss = 6.2911, entropy=21.3305, time=18.99
+CLEAN TEXT
+Where's the spark on power line Net? The NYT has an optimistic overview on broadband over power lines, calling it "the ultimate plug and play." Broadband Blog
+clean text perplexity: 138.4447021484375
+ADVERSARIAL TEXT
+Where lawmakers has advice on power line coverage. The NYT has an excellent primer on the Internet power lines, as mine—the ultimate plug and paper, Broadband Blog
+adversarial text perplexity: 204.8873291015625
+
+CLEAN LOGITS
+tensor([[-1.5898,  0.1478, -2.5572, -1.0853]])
+ADVERSARIAL LOGITS
+tensor([[-0.6334, -0.3085, -1.5085, -0.6004]])
+Token Error Rate: 0.0181 (over 500 tokens)
