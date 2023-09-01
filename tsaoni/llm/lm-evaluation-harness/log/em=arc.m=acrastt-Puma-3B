@@ -1,0 +1,542 @@
+Selected Tasks: ['arc_challenge']
+Task: arc_challenge; number of docs: 1172
+Task: arc_challenge; document 0; context prompt (starting on next line):
+Question: Many stars can be seen in the sky at night. Which statement best explains why the Sun appears brighter than the stars seen in the night sky?
+Answer: The Sun is closer to Earth than the stars seen in the night sky.
+
+Question: Which process in plants is most similar to sexual reproduction in vertebrates?
+Answer: cross-pollination
+
+Question: John was using his mp3 player when it suddenly stopped working. What is the first thing John should do to try correcting the problem?
+Answer: recharge the battery
+
+Question: The heart is the major organ of the circulatory system. Which part of the body is responsible for delivering de-oxygenated blood to the heart?
+Answer: veins
+
+Question: Which is true about reproduction for both an amoeba and a paramecium?
+Answer: A paramecium can conjugate, but an amoeba cannot.
+
+Question: A student plans to design a new toothpaste tube that will give the same amount of toothpaste every time it is squeezed. Which should the student do first when designing the new tube?
+Answer: draw a few possible solutions
+
+Question: Which term best describes the life cycle of an insect that reaches the adult stage without being a pupa?
+Answer: incomplete metamorphosis
+
+Question: Many common hand tools create a mechanical advantage by using the basic principles found in simple machines. For example, a screwdriver uses the principles of the wheel and axle. In order to increase gripping force, pliers use the principle demonstrated in the
+Answer: lever.
+
+Question: A student adds water and detergent to a cup of soil. The mixture is shaken and allowed to settle. The student observes that silt particles stay suspended long after the other particles form layers at the bottom of the jar. The most likely explanation is that the silt particles are
+Answer: less dense.
+
+Question: A tuna is an ocean fish that is well adapted to catching small, fast-moving prey. Which of the following adaptations most helps a tuna swim fast to catch its prey?
+Answer: large fins
+
+Question: The students observed a large crack found in a boulder with a tree growing out of it. Which process were the students observing?
+Answer: weathering
+
+Question: Which event occurs every day?
+Answer: Sun rising and setting
+
+Question: The weight of heavy machinery compacts soil, especially when it is wet. Why do farmers avoid driving their machinery across wet ground?
+Answer: Plants cannot grow when soil is compacted.
+
+Question: Four identical candles are set on a safe surface and lit. One is covered with a small-sized jar, one is covered with a large-sized jar, and one candle is left in the open. A fourth lit candle is placed in a vacuum. Which candle will most likely stay lit the longest?
+Answer: the candle left out in the open
+
+Question: A student gives a red toy car a push on a wooden floor. The student then pushes the same red toy car on a cement floor. Which question is the student most likely investigating?
+Answer: Which surface allows a toy car to roll farther?
+
+Question: Which is true about the Sun and Earth?
+Answer: The Sun gives light and heat energy to Earth.
+
+Question: How do the sprouts of seeds buried in complete dark in the soil find their way to the surface of the soil?
+Answer: They grow opposite the direction of the pull of gravity.
+
+Question: Felicia noticed how air temperatures were cooler and there were fewer hours of daylight during some of the seasons. Which of the following contributes to these seasonal changes?
+Answer: Earth revolves around the Sun.
+
+Question: Which of the following distinguishes the organisms in the kingdom Fungi from other eukaryotic organisms?
+Answer: Fungi obtain nutrients by absorption.
+
+Question: Which is true of the seasonal weather patterns of places that are at the same latitude?
+Answer: They have the same intensity of sunlight.
+
+Question: The gravitational force of the Sun affects the planets in our solar system. Which of these is influenced the most by this force?
+Answer: orbital path
+
+Question: Which term is used to describe a physical property of a mineral?
+Answer: solid
+
+Question: Small mammals have many adaptations that keep them warm in winter. Which would not help conserve heat?
+Answer: running
+
+Question: The Ohio state tree is the buckeye. Which of these is a trait that is inherited by the buckeye tree in the reproduction process?
+Answer: change in leaf color during the autumn season
+
+Question: Which statement best describes a neutron?
+Answer: It adds mass to the nucleus.
+
+Question: Cities control the amount of pollution that is allowed to come from cars. How does this most likely help people?
+Answer:
+(end of prompt on previous line)
+Requests: [Req_loglikelihood('Question: Many stars can be seen in the sky at night. Which statement best explains why the Sun appears brighter than the stars seen in the night sky?\nAnswer: The Sun is closer to Earth than the stars seen in the night sky.\n\nQuestion: Which process in plants is most similar to sexual reproduction in vertebrates?\nAnswer: cross-pollination\n\nQuestion: John was using his mp3 player when it suddenly stopped working. What is the first thing John should do to try correcting the problem?\nAnswer: recharge the battery\n\nQuestion: The heart is the major organ of the circulatory system. Which part of the body is responsible for delivering de-oxygenated blood to the heart?\nAnswer: veins\n\nQuestion: Which is true about reproduction for both an amoeba and a paramecium?\nAnswer: A paramecium can conjugate, but an amoeba cannot.\n\nQuestion: A student plans to design a new toothpaste tube that will give the same amount of toothpaste every time it is squeezed. Which should the student do first when designing the new tube?\nAnswer: draw a few possible solutions\n\nQuestion: Which term best describes the life cycle of an insect that reaches the adult stage without being a pupa?\nAnswer: incomplete metamorphosis\n\nQuestion: Many common hand tools create a mechanical advantage by using the basic principles found in simple machines. For example, a screwdriver uses the principles of the wheel and axle. In order to increase gripping force, pliers use the principle demonstrated in the\nAnswer: lever.\n\nQuestion: A student adds water and detergent to a cup of soil. The mixture is shaken and allowed to settle. The student observes that silt particles stay suspended long after the other particles form layers at the bottom of the jar. The most likely explanation is that the silt particles are\nAnswer: less dense.\n\nQuestion: A tuna is an ocean fish that is well adapted to catching small, fast-moving prey. Which of the following adaptations most helps a tuna swim fast to catch its prey?\nAnswer: large fins\n\nQuestion: The students observed a large crack found in a boulder with a tree growing out of it. Which process were the students observing?\nAnswer: weathering\n\nQuestion: Which event occurs every day?\nAnswer: Sun rising and setting\n\nQuestion: The weight of heavy machinery compacts soil, especially when it is wet. Why do farmers avoid driving their machinery across wet ground?\nAnswer: Plants cannot grow when soil is compacted.\n\nQuestion: Four identical candles are set on a safe surface and lit. One is covered with a small-sized jar, one is covered with a large-sized jar, and one candle is left in the open. A fourth lit candle is placed in a vacuum. Which candle will most likely stay lit the longest?\nAnswer: the candle left out in the open\n\nQuestion: A student gives a red toy car a push on a wooden floor. The student then pushes the same red toy car on a cement floor. Which question is the student most likely investigating?\nAnswer: Which surface allows a toy car to roll farther?\n\nQuestion: Which is true about the Sun and Earth?\nAnswer: The Sun gives light and heat energy to Earth.\n\nQuestion: How do the sprouts of seeds buried in complete dark in the soil find their way to the surface of the soil?\nAnswer: They grow opposite the direction of the pull of gravity.\n\nQuestion: Felicia noticed how air temperatures were cooler and there were fewer hours of daylight during some of the seasons. Which of the following contributes to these seasonal changes?\nAnswer: Earth revolves around the Sun.\n\nQuestion: Which of the following distinguishes the organisms in the kingdom Fungi from other eukaryotic organisms?\nAnswer: Fungi obtain nutrients by absorption.\n\nQuestion: Which is true of the seasonal weather patterns of places that are at the same latitude?\nAnswer: They have the same intensity of sunlight.\n\nQuestion: The gravitational force of the Sun affects the planets in our solar system. Which of these is influenced the most by this force?\nAnswer: orbital path\n\nQuestion: Which term is used to describe a physical property of a mineral?\nAnswer: solid\n\nQuestion: Small mammals have many adaptations that keep them warm in winter. Which would not help conserve heat?\nAnswer: running\n\nQuestion: The Ohio state tree is the buckeye. Which of these is a trait that is inherited by the buckeye tree in the reproduction process?\nAnswer: change in leaf color during the autumn season\n\nQuestion: Which statement best describes a neutron?\nAnswer: It adds mass to the nucleus.\n\nQuestion: Cities control the amount of pollution that is allowed to come from cars. How does this most likely help people?\nAnswer:', ' The air stays cleaner.')[0]
+, Req_loglikelihood('Question: Many stars can be seen in the sky at night. Which statement best explains why the Sun appears brighter than the stars seen in the night sky?\nAnswer: The Sun is closer to Earth than the stars seen in the night sky.\n\nQuestion: Which process in plants is most similar to sexual reproduction in vertebrates?\nAnswer: cross-pollination\n\nQuestion: John was using his mp3 player when it suddenly stopped working. What is the first thing John should do to try correcting the problem?\nAnswer: recharge the battery\n\nQuestion: The heart is the major organ of the circulatory system. Which part of the body is responsible for delivering de-oxygenated blood to the heart?\nAnswer: veins\n\nQuestion: Which is true about reproduction for both an amoeba and a paramecium?\nAnswer: A paramecium can conjugate, but an amoeba cannot.\n\nQuestion: A student plans to design a new toothpaste tube that will give the same amount of toothpaste every time it is squeezed. Which should the student do first when designing the new tube?\nAnswer: draw a few possible solutions\n\nQuestion: Which term best describes the life cycle of an insect that reaches the adult stage without being a pupa?\nAnswer: incomplete metamorphosis\n\nQuestion: Many common hand tools create a mechanical advantage by using the basic principles found in simple machines. For example, a screwdriver uses the principles of the wheel and axle. In order to increase gripping force, pliers use the principle demonstrated in the\nAnswer: lever.\n\nQuestion: A student adds water and detergent to a cup of soil. The mixture is shaken and allowed to settle. The student observes that silt particles stay suspended long after the other particles form layers at the bottom of the jar. The most likely explanation is that the silt particles are\nAnswer: less dense.\n\nQuestion: A tuna is an ocean fish that is well adapted to catching small, fast-moving prey. Which of the following adaptations most helps a tuna swim fast to catch its prey?\nAnswer: large fins\n\nQuestion: The students observed a large crack found in a boulder with a tree growing out of it. Which process were the students observing?\nAnswer: weathering\n\nQuestion: Which event occurs every day?\nAnswer: Sun rising and setting\n\nQuestion: The weight of heavy machinery compacts soil, especially when it is wet. Why do farmers avoid driving their machinery across wet ground?\nAnswer: Plants cannot grow when soil is compacted.\n\nQuestion: Four identical candles are set on a safe surface and lit. One is covered with a small-sized jar, one is covered with a large-sized jar, and one candle is left in the open. A fourth lit candle is placed in a vacuum. Which candle will most likely stay lit the longest?\nAnswer: the candle left out in the open\n\nQuestion: A student gives a red toy car a push on a wooden floor. The student then pushes the same red toy car on a cement floor. Which question is the student most likely investigating?\nAnswer: Which surface allows a toy car to roll farther?\n\nQuestion: Which is true about the Sun and Earth?\nAnswer: The Sun gives light and heat energy to Earth.\n\nQuestion: How do the sprouts of seeds buried in complete dark in the soil find their way to the surface of the soil?\nAnswer: They grow opposite the direction of the pull of gravity.\n\nQuestion: Felicia noticed how air temperatures were cooler and there were fewer hours of daylight during some of the seasons. Which of the following contributes to these seasonal changes?\nAnswer: Earth revolves around the Sun.\n\nQuestion: Which of the following distinguishes the organisms in the kingdom Fungi from other eukaryotic organisms?\nAnswer: Fungi obtain nutrients by absorption.\n\nQuestion: Which is true of the seasonal weather patterns of places that are at the same latitude?\nAnswer: They have the same intensity of sunlight.\n\nQuestion: The gravitational force of the Sun affects the planets in our solar system. Which of these is influenced the most by this force?\nAnswer: orbital path\n\nQuestion: Which term is used to describe a physical property of a mineral?\nAnswer: solid\n\nQuestion: Small mammals have many adaptations that keep them warm in winter. Which would not help conserve heat?\nAnswer: running\n\nQuestion: The Ohio state tree is the buckeye. Which of these is a trait that is inherited by the buckeye tree in the reproduction process?\nAnswer: change in leaf color during the autumn season\n\nQuestion: Which statement best describes a neutron?\nAnswer: It adds mass to the nucleus.\n\nQuestion: Cities control the amount of pollution that is allowed to come from cars. How does this most likely help people?\nAnswer:', ' Cars can travel at faster speeds.')[0]
+, Req_loglikelihood('Question: Many stars can be seen in the sky at night. Which statement best explains why the Sun appears brighter than the stars seen in the night sky?\nAnswer: The Sun is closer to Earth than the stars seen in the night sky.\n\nQuestion: Which process in plants is most similar to sexual reproduction in vertebrates?\nAnswer: cross-pollination\n\nQuestion: John was using his mp3 player when it suddenly stopped working. What is the first thing John should do to try correcting the problem?\nAnswer: recharge the battery\n\nQuestion: The heart is the major organ of the circulatory system. Which part of the body is responsible for delivering de-oxygenated blood to the heart?\nAnswer: veins\n\nQuestion: Which is true about reproduction for both an amoeba and a paramecium?\nAnswer: A paramecium can conjugate, but an amoeba cannot.\n\nQuestion: A student plans to design a new toothpaste tube that will give the same amount of toothpaste every time it is squeezed. Which should the student do first when designing the new tube?\nAnswer: draw a few possible solutions\n\nQuestion: Which term best describes the life cycle of an insect that reaches the adult stage without being a pupa?\nAnswer: incomplete metamorphosis\n\nQuestion: Many common hand tools create a mechanical advantage by using the basic principles found in simple machines. For example, a screwdriver uses the principles of the wheel and axle. In order to increase gripping force, pliers use the principle demonstrated in the\nAnswer: lever.\n\nQuestion: A student adds water and detergent to a cup of soil. The mixture is shaken and allowed to settle. The student observes that silt particles stay suspended long after the other particles form layers at the bottom of the jar. The most likely explanation is that the silt particles are\nAnswer: less dense.\n\nQuestion: A tuna is an ocean fish that is well adapted to catching small, fast-moving prey. Which of the following adaptations most helps a tuna swim fast to catch its prey?\nAnswer: large fins\n\nQuestion: The students observed a large crack found in a boulder with a tree growing out of it. Which process were the students observing?\nAnswer: weathering\n\nQuestion: Which event occurs every day?\nAnswer: Sun rising and setting\n\nQuestion: The weight of heavy machinery compacts soil, especially when it is wet. Why do farmers avoid driving their machinery across wet ground?\nAnswer: Plants cannot grow when soil is compacted.\n\nQuestion: Four identical candles are set on a safe surface and lit. One is covered with a small-sized jar, one is covered with a large-sized jar, and one candle is left in the open. A fourth lit candle is placed in a vacuum. Which candle will most likely stay lit the longest?\nAnswer: the candle left out in the open\n\nQuestion: A student gives a red toy car a push on a wooden floor. The student then pushes the same red toy car on a cement floor. Which question is the student most likely investigating?\nAnswer: Which surface allows a toy car to roll farther?\n\nQuestion: Which is true about the Sun and Earth?\nAnswer: The Sun gives light and heat energy to Earth.\n\nQuestion: How do the sprouts of seeds buried in complete dark in the soil find their way to the surface of the soil?\nAnswer: They grow opposite the direction of the pull of gravity.\n\nQuestion: Felicia noticed how air temperatures were cooler and there were fewer hours of daylight during some of the seasons. Which of the following contributes to these seasonal changes?\nAnswer: Earth revolves around the Sun.\n\nQuestion: Which of the following distinguishes the organisms in the kingdom Fungi from other eukaryotic organisms?\nAnswer: Fungi obtain nutrients by absorption.\n\nQuestion: Which is true of the seasonal weather patterns of places that are at the same latitude?\nAnswer: They have the same intensity of sunlight.\n\nQuestion: The gravitational force of the Sun affects the planets in our solar system. Which of these is influenced the most by this force?\nAnswer: orbital path\n\nQuestion: Which term is used to describe a physical property of a mineral?\nAnswer: solid\n\nQuestion: Small mammals have many adaptations that keep them warm in winter. Which would not help conserve heat?\nAnswer: running\n\nQuestion: The Ohio state tree is the buckeye. Which of these is a trait that is inherited by the buckeye tree in the reproduction process?\nAnswer: change in leaf color during the autumn season\n\nQuestion: Which statement best describes a neutron?\nAnswer: It adds mass to the nucleus.\n\nQuestion: Cities control the amount of pollution that is allowed to come from cars. How does this most likely help people?\nAnswer:', ' The skills of the drivers improve.')[0]
+, Req_loglikelihood('Question: Many stars can be seen in the sky at night. Which statement best explains why the Sun appears brighter than the stars seen in the night sky?\nAnswer: The Sun is closer to Earth than the stars seen in the night sky.\n\nQuestion: Which process in plants is most similar to sexual reproduction in vertebrates?\nAnswer: cross-pollination\n\nQuestion: John was using his mp3 player when it suddenly stopped working. What is the first thing John should do to try correcting the problem?\nAnswer: recharge the battery\n\nQuestion: The heart is the major organ of the circulatory system. Which part of the body is responsible for delivering de-oxygenated blood to the heart?\nAnswer: veins\n\nQuestion: Which is true about reproduction for both an amoeba and a paramecium?\nAnswer: A paramecium can conjugate, but an amoeba cannot.\n\nQuestion: A student plans to design a new toothpaste tube that will give the same amount of toothpaste every time it is squeezed. Which should the student do first when designing the new tube?\nAnswer: draw a few possible solutions\n\nQuestion: Which term best describes the life cycle of an insect that reaches the adult stage without being a pupa?\nAnswer: incomplete metamorphosis\n\nQuestion: Many common hand tools create a mechanical advantage by using the basic principles found in simple machines. For example, a screwdriver uses the principles of the wheel and axle. In order to increase gripping force, pliers use the principle demonstrated in the\nAnswer: lever.\n\nQuestion: A student adds water and detergent to a cup of soil. The mixture is shaken and allowed to settle. The student observes that silt particles stay suspended long after the other particles form layers at the bottom of the jar. The most likely explanation is that the silt particles are\nAnswer: less dense.\n\nQuestion: A tuna is an ocean fish that is well adapted to catching small, fast-moving prey. Which of the following adaptations most helps a tuna swim fast to catch its prey?\nAnswer: large fins\n\nQuestion: The students observed a large crack found in a boulder with a tree growing out of it. Which process were the students observing?\nAnswer: weathering\n\nQuestion: Which event occurs every day?\nAnswer: Sun rising and setting\n\nQuestion: The weight of heavy machinery compacts soil, especially when it is wet. Why do farmers avoid driving their machinery across wet ground?\nAnswer: Plants cannot grow when soil is compacted.\n\nQuestion: Four identical candles are set on a safe surface and lit. One is covered with a small-sized jar, one is covered with a large-sized jar, and one candle is left in the open. A fourth lit candle is placed in a vacuum. Which candle will most likely stay lit the longest?\nAnswer: the candle left out in the open\n\nQuestion: A student gives a red toy car a push on a wooden floor. The student then pushes the same red toy car on a cement floor. Which question is the student most likely investigating?\nAnswer: Which surface allows a toy car to roll farther?\n\nQuestion: Which is true about the Sun and Earth?\nAnswer: The Sun gives light and heat energy to Earth.\n\nQuestion: How do the sprouts of seeds buried in complete dark in the soil find their way to the surface of the soil?\nAnswer: They grow opposite the direction of the pull of gravity.\n\nQuestion: Felicia noticed how air temperatures were cooler and there were fewer hours of daylight during some of the seasons. Which of the following contributes to these seasonal changes?\nAnswer: Earth revolves around the Sun.\n\nQuestion: Which of the following distinguishes the organisms in the kingdom Fungi from other eukaryotic organisms?\nAnswer: Fungi obtain nutrients by absorption.\n\nQuestion: Which is true of the seasonal weather patterns of places that are at the same latitude?\nAnswer: They have the same intensity of sunlight.\n\nQuestion: The gravitational force of the Sun affects the planets in our solar system. Which of these is influenced the most by this force?\nAnswer: orbital path\n\nQuestion: Which term is used to describe a physical property of a mineral?\nAnswer: solid\n\nQuestion: Small mammals have many adaptations that keep them warm in winter. Which would not help conserve heat?\nAnswer: running\n\nQuestion: The Ohio state tree is the buckeye. Which of these is a trait that is inherited by the buckeye tree in the reproduction process?\nAnswer: change in leaf color during the autumn season\n\nQuestion: Which statement best describes a neutron?\nAnswer: It adds mass to the nucleus.\n\nQuestion: Cities control the amount of pollution that is allowed to come from cars. How does this most likely help people?\nAnswer:', ' It becomes safer to drive on the roads.')[0]
+]
+Running loglikelihood requests
+attack infos:  {'mod_type': 'tgt_question'}
+prepare attack data... 
+Attack(
+  (search_method): GreedyWordSwapWIR(
+    (wir_method):  unk
+  )
+  (goal_function):  LLMGoalFunction
+  (transformation):  WordSwapMaskedLM(
+    (method):  bert-attack
+    (masked_lm_name):  BertForMaskedLM
+    (max_length):  512
+    (max_candidates):  48
+    (min_confidence):  0.0005
+  )
+  (constraints): 
+    (0): MaxWordsPerturbed(
+        (max_percent):  0.4
+        (compare_against_original):  True
+      )
+    (1): UniversalSentenceEncoder(
+        (metric):  cosine
+        (threshold):  0.2
+        (window_size):  inf
+        (skip_text_shorter_than_window):  False
+        (compare_against_original):  True
+      )
+    (2): RepeatModification
+    (3): StopwordModification
+  (is_black_box):  True
+) 
+
+--------------------------------------------- Result 1 ---------------------------------------------
+[[0 (99%)]] --> [[1 (53%)]]
+
+[[Cities]] control the amount of pollution that is allowed to come from cars. How does this most likely [[help]] people?
+
+[[would]] control the amount of pollution that is allowed to come from cars. How does this most likely [[bother]] people?
+
+
+--------------------------------------------- Result 2 ---------------------------------------------
+[[1 (100%)]] --> [[0 (58%)]]
+
+Which statement correctly describes a physical [[characteristic]] of the Moon?
+
+Which statement correctly describes a physical [[formation]] of the Moon?
+
+
+--------------------------------------------- Result 3 ---------------------------------------------
+[[1 (38%)]] --> [[[SKIPPED]]]
+
+Which object in the solar system is orbited by a belt of asteroids?
+
+
+--------------------------------------------- Result 4 ---------------------------------------------
+[[3 (98%)]] --> [[[SKIPPED]]]
+
+Light waves that cross from an air medium to a water medium will
+
+
+--------------------------------------------- Result 5 ---------------------------------------------
+[[0 (34%)]] --> [[[SKIPPED]]]
+
+How many valence electrons does selenium have?
+
+
+--------------------------------------------- Result 6 ---------------------------------------------
+[[2 (81%)]] --> [[1 (68%)]]
+
+As a warm [[moist]] air mass moving northward collides with a strong cold air mass moving southward, what observations will most likely be made?
+
+As a warm [[temperate]] air mass moving northward collides with a strong cold air mass moving southward, what observations will most likely be made?
+
+
+--------------------------------------------- Result 7 ---------------------------------------------
+[[0 (93%)]] --> [[[SKIPPED]]]
+
+Chemical weathering occurs when minerals in rocks are changed chemically. Which of these will most likely change the rate of chemical weathering on a rock?
+
+
+--------------------------------------------- Result 8 ---------------------------------------------
+[[1 (77%)]] --> [[[SKIPPED]]]
+
+A toy truck rolls over a smooth surface. If the surface is covered with sand, the truck will most likely roll
+
+
+--------------------------------------------- Result 9 ---------------------------------------------
+[[1 (100%)]] --> [[[SKIPPED]]]
+
+A town in northern Arkansas experienced colder than normal temperatures during part of the winter. Which change was most likely responsible for this?
+
+
+--------------------------------------------- Result 10 ---------------------------------------------
+[[2 (49%)]] --> [[[SKIPPED]]]
+
+How much time is required for a bicycle to travel a distance of 100 m at an average speed of 2 m/s?
+
+
+--------------------------------------------- Result 11 ---------------------------------------------
+[[0 (97%)]] --> [[[SKIPPED]]]
+
+Which traits would a species of nocturnal predators most likely develop over time to survive in the wild?
+
+
+--------------------------------------------- Result 12 ---------------------------------------------
+[[2 (61%)]] --> [[[SKIPPED]]]
+
+22 Sandy is conducting an investigation to find out which food his dog likes best. Which is the manipulated variable in his investigation?
+
+
+--------------------------------------------- Result 13 ---------------------------------------------
+[[1 (88%)]] --> [[[SKIPPED]]]
+
+Fossil bones and teeth of dinosaurs have been researched for the last century. Recent discoveries of fossilized dinosaurs have also revealed details of soft tissues, such as skin. Which is best for a scientist to do when reporting research on dinosaurs now?
+
+
+--------------------------------------------- Result 14 ---------------------------------------------
+[[0 (51%)]] --> [[[SKIPPED]]]
+
+Nearly 100 years ago, a large volcano erupted in the South Pacific. The following year, Boston recorded measurable snow every month of the year, and most of the Northern Hemisphere experienced a cold summer. Which explains how these two events were related?
+
+
+--------------------------------------------- Result 15 ---------------------------------------------
+[[1 (96%)]] --> [[[SKIPPED]]]
+
+Nick is making a model to show how human skin covers the body. What material would work best?
+
+
+--------------------------------------------- Result 16 ---------------------------------------------
+[[2 (81%)]] --> [[[SKIPPED]]]
+
+Some animals have adapted colors and patterns that allow them to blend into their environment. Animals most likely adapted this characteristic to
+
+
+--------------------------------------------- Result 17 ---------------------------------------------
+[[1 (53%)]] --> [[[SKIPPED]]]
+
+What is the voltage in a circuit with a current of 3 ohms and a total resistance of 12?
+
+
+--------------------------------------------- Result 18 ---------------------------------------------
+[[2 (74%)]] --> [[[SKIPPED]]]
+
+If an ion has three more electrons than protons, it has a
+
+
+--------------------------------------------- Result 19 ---------------------------------------------
+[[0 (94%)]] --> [[1 (38%)]]
+
+Which alternative energy resource is produced from [[plants]]?
+
+Which alternative energy resource is produced from [[them]]?
+
+
+--------------------------------------------- Result 20 ---------------------------------------------
+[[1 (98%)]] --> [[[SKIPPED]]]
+
+A duck and turtle are different types of animals. In which way are the duck and the turtle alike?
+
+
+--------------------------------------------- Result 21 ---------------------------------------------
+[[1 (83%)]] --> [[[SKIPPED]]]
+
+In which way is the Sun different from Earth?
+
+
+--------------------------------------------- Result 22 ---------------------------------------------
+[[1 (88%)]] --> [[[SKIPPED]]]
+
+The morning temperature in a city is 41°F. If a sunny, mild day is forecast, which temperature is most likely for 2:00 p.m.?
+
+
+--------------------------------------------- Result 23 ---------------------------------------------
+[[0 (44%)]] --> [[1 (57%)]]
+
+[[Water]], ice, and steam all have different temperatures. What is the order from coldest to hottest?
+
+[[a]], ice, and steam all have different temperatures. What is the order from coldest to hottest?
+
+
+--------------------------------------------- Result 24 ---------------------------------------------
+[[1 (81%)]] --> [[[SKIPPED]]]
+
+In a forest ecosystem, the niche of a squirrel population is
+
+
+--------------------------------------------- Result 25 ---------------------------------------------
+[[3 (88%)]] --> [[[SKIPPED]]]
+
+The waves that are produced by a person's voice are similar to the waves produced by an earthquake because both are
+
+
+--------------------------------------------- Result 26 ---------------------------------------------
+[[0 (85%)]] --> [[1 (46%)]]
+
+Which activity is an example of [[conserving]] nonrenewable resources?
+
+Which activity is an example of [[conser]]: nonrenewable resources?
+
+
+--------------------------------------------- Result 27 ---------------------------------------------
+[[1 (100%)]] --> [[[SKIPPED]]]
+
+Which pair of organisms benefits each other the most?
+
+
+--------------------------------------------- Result 28 ---------------------------------------------
+[[2 (83%)]] --> [[[SKIPPED]]]
+
+An astronaut drops a 1.0 kg object and a 5.0 kg object on the Moon. Both objects fall a total distance of 2.0 m vertically. Which of the following best describes the objects after they have fallen a distance of 1.0 m?
+
+
+--------------------------------------------- Result 29 ---------------------------------------------
+[[1 (100%)]] --> [[[SKIPPED]]]
+
+What is the best way to model the effect of wind on sand dunes?
+
+
+--------------------------------------------- Result 30 ---------------------------------------------
+[[3 (89%)]] --> [[[SKIPPED]]]
+
+Some paper mills use machines that make paper without any wood called "wood-free" paper. These machines make paper from materials such as cotton and rice waste. Which problem does using wood-free paper affect most?
+
+
+--------------------------------------------- Result 31 ---------------------------------------------
+[[0 (96%)]] --> [[[SKIPPED]]]
+
+A student is investigating how light behaves when it strikes different surfaces. She has a frosted window glass pane, a clear window glass pane, a mirror, and a piece of cardboard. Which of these objects will scatter the most light?
+
+
+--------------------------------------------- Result 32 ---------------------------------------------
+[[2 (47%)]] --> [[[SKIPPED]]]
+
+A student shines a flashlight on different colors of paper. Which color of paper will absorb the most light?
+
+
+--------------------------------------------- Result 33 ---------------------------------------------
+[[3 (67%)]] --> [[0 (56%)]]
+
+In the life cycle of a [[frog]], which of the following best describes what happens after the tadpole stage?
+
+In the life cycle of a [[rana]], which of the following best describes what happens after the tadpole stage?
+
+
+--------------------------------------------- Result 34 ---------------------------------------------
+[[1 (56%)]] --> [[[SKIPPED]]]
+
+On cold days, snakes usually lie very still and eat little or nothing, while birds usually move around and eat a lot of food. Which statement best explains this?
+
+
+--------------------------------------------- Result 35 ---------------------------------------------
+[[3 (50%)]] --> [[[SKIPPED]]]
+
+Which of these do all cells release?
+
+
+--------------------------------------------- Result 36 ---------------------------------------------
+[[0 (39%)]] --> [[[SKIPPED]]]
+
+Coal is a natural material, formed from ancient organic compounds. Which element is least likely to be found in a sample of coal?
+
+
+--------------------------------------------- Result 37 ---------------------------------------------
+[[0 (61%)]] --> [[[SKIPPED]]]
+
+A student ran around a circular track. Which statement best describes the motion of the student while running?
+
+
+--------------------------------------------- Result 38 ---------------------------------------------
+[[0 (99%)]] --> [[3 (68%)]]
+
+Sound is able to travel faster in solids than in air because the [[molecules]] in a [[solid]] are
+
+Sound is able to travel faster in solids than in air because the [[is]] in a [[flowing]] are
+
+
+--------------------------------------------- Result 39 ---------------------------------------------
+[[1 (81%)]] --> [[[SKIPPED]]]
+
+Two identical sheets of paper are used in an experiment; one is crumpled into a ball and the other is flat. What will most likely happen when they are dropped at the same time from the same height?
+
+
+--------------------------------------------- Result 40 ---------------------------------------------
+[[3 (75%)]] --> [[[SKIPPED]]]
+
+Over which of the following components of smog do humans have the least control?
+
+
+--------------------------------------------- Result 41 ---------------------------------------------
+[[1 (82%)]] --> [[[SKIPPED]]]
+
+Tanya investigates which household objects are attracted to magnets. Which will help her make a conclusion?
+
+
+--------------------------------------------- Result 42 ---------------------------------------------
+[[0 (100%)]] --> [[1 (67%)]]
+
+In the design process, a [[trade-off]] occurs when a [[problem]] is solved but a [[feature]] is sacrificed. Which of the following is an example of a trade-off?
+
+In the design process, a [[trade-]]. occurs when a [[mission]] is solved but a [[design]] is sacrificed. Which of the following is an example of a trade-off?
+
+
+--------------------------------------------- Result 43 ---------------------------------------------
+[[2 (93%)]] --> [[1 (70%)]]
+
+Some marine organisms living deep in the ocean can produce their own light. The light they produce is most likely [[used]] for which of these [[activities]]?
+
+Some marine organisms living deep in the ocean can produce their own light. The light they produce is most likely [[energy]] for which of these [[activity]]?
+
+
+--------------------------------------------- Result 44 ---------------------------------------------
+[[3 (97%)]] --> [[[SKIPPED]]]
+
+When a layer of sediment is deposited on the ocean floor, what is the next step in the formation of sedimentary rocks?
+
+
+--------------------------------------------- Result 45 ---------------------------------------------
+[[2 (86%)]] --> [[[SKIPPED]]]
+
+Anna ran 100 meters in 20 seconds. What was her average speed?
+
+
+--------------------------------------------- Result 46 ---------------------------------------------
+[[0 (93%)]] --> [[1 (35%)]]
+
+[[A]] science class is divided into two groups. [[The]] first [[group]] plays loud music in a room that has thick carpet on the ceiling, walls, and floor. [[The]] second group is outside of the room but does not hear the music because the sound was
+
+[[what]] science class is divided into two groups. [[which]] first [[order]] plays loud music in a room that has thick carpet on the ceiling, walls, and floor. [[who]] second group is outside of the room but does not hear the music because the sound was
+
+
+--------------------------------------------- Result 47 ---------------------------------------------
+[[2 (55%)]] --> [[[SKIPPED]]]
+
+A simple machine makes work easier because using it ___.
+
+
+--------------------------------------------- Result 48 ---------------------------------------------
+[[3 (62%)]] --> [[[SKIPPED]]]
+
+Some students are performing hardness tests on several substances. X scratches Y. Y scratches Z. Z scratches W. Which of these statements best describes substance W's hardness?
+
+
+--------------------------------------------- Result 49 ---------------------------------------------
+[[1 (55%)]] --> [[2 (51%)]]
+
+Some factories release pollutants into the air that form acid rain. What [[determines]] where the acid rain is most likely to fall?
+
+Some factories release pollutants into the air that form acid rain. What [[defines]] where the acid rain is most likely to fall?
+
+
+--------------------------------------------- Result 50 ---------------------------------------------
+[[0 (94%)]] --> [[[SKIPPED]]]
+
+Which example best demonstrates the process of conduction?
+
+
+--------------------------------------------- Result 51 ---------------------------------------------
+[[2 (98%)]] --> [[1 (38%)]]
+
+Which statement is true about [[rocks]]?
+
+Which statement is true about [[stones]]?
+
+
+--------------------------------------------- Result 52 ---------------------------------------------
+[[0 (100%)]] --> [[2 (86%)]]
+
+Which tool would a student use to measure the [[mass]] of a brick?
+
+Which tool would a student use to measure the [[time]] of a brick?
+
+
+--------------------------------------------- Result 53 ---------------------------------------------
+[[3 (87%)]] --> [[[SKIPPED]]]
+
+In 1995, a private bus company in Washington, D.C., introduced a program to run all its tour buses with fuel obtained from soybeans. The buses are powered by
+
+
+--------------------------------------------- Result 54 ---------------------------------------------
+[[0 (40%)]] --> [[1 (33%)]]
+
+In addition to light, which other form of energy does a lightbulb [[produce]]?
+
+In addition to light, which other form of energy does a lightbulb [[producing]]?
+
+
+--------------------------------------------- Result 55 ---------------------------------------------
+[[0 (69%)]] --> [[[SKIPPED]]]
+
+Which characteristic is least likely to be affected by an individual's environment?
+
+
+--------------------------------------------- Result 56 ---------------------------------------------
+[[1 (77%)]] --> [[2 (48%)]]
+
+If you place a thermometer into a glass of [[ice]] water, what temperature should the thermometer read?
+
+If you place a thermometer into a glass of [[a]] water, what temperature should the thermometer read?
+
+
+--------------------------------------------- Result 57 ---------------------------------------------
+[[1 (52%)]] --> [[[SKIPPED]]]
+
+Where in the periodic table would shiny, malleable materials used in making jewelry be found?
+
+
+--------------------------------------------- Result 58 ---------------------------------------------
+[[3 (72%)]] --> [[[SKIPPED]]]
+
+A compass can be made by magnetizing a needle and setting it on a floating cork. The cork will turn so that the needle is pointed north. Which statement explains why the needle points north?
+
+
+--------------------------------------------- Result 59 ---------------------------------------------
+[[1 (88%)]] --> [[[SKIPPED]]]
+
+Mr. Fernandez's class is studying solutions. Which statement best describes a solution?
+
+
+--------------------------------------------- Result 60 ---------------------------------------------
+[[2 (53%)]] --> [[[SKIPPED]]]
+
+During which phase of meiosis does the separation of homologous chromosomes occur?
+
+
+--------------------------------------------- Result 61 ---------------------------------------------
+[[0 (41%)]] --> [[[SKIPPED]]]
+
+The gallbladder stores bile, a fluid that aids in digestion of fat. Which of the following types of food should be avoided by a person whose gallbladder has been removed?
+
+
+--------------------------------------------- Result 62 ---------------------------------------------
+[[1 (100%)]] --> [[[SKIPPED]]]
+
+The primary cause of continental drift, earthquakes, and volcanic eruptions is
+
+
+--------------------------------------------- Result 63 ---------------------------------------------
+[[2 (100%)]] --> [[1 (59%)]]
+
+Scientists studying a group of young sage grouse discovered a large percentage were infected with blood parasites. How will these blood parasites most likely [[affect]] the young birds?
+
+Scientists studying a group of young sage grouse discovered a large percentage were infected with blood parasites. How will these blood parasites most likely [[enter]] the young birds?
+
+
+--------------------------------------------- Result 64 ---------------------------------------------
+[[0 (56%)]] --> [[[SKIPPED]]]
+
+Which of the following statements is a scientific hypothesis?
+
+
+--------------------------------------------- Result 65 ---------------------------------------------
+[[3 (99%)]] --> [[[SKIPPED]]]
+
+A chemical change happens when
+
+

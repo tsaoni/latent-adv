@@ -1,0 +1,686 @@
+--------------------------------------------- Result 1 ---------------------------------------------
+[[0 (99%)]] --> [[1 (53%)]]
+
+[[Cities]] control the amount of pollution that is allowed to come from cars. How does this most likely [[help]] people?
+
+[[would]] control the amount of pollution that is allowed to come from cars. How does this most likely [[bother]] people?
+--------------------------------------------- Result 2 ---------------------------------------------
+[[1 (100%)]] --> [[0 (58%)]]
+
+Which statement correctly describes a physical [[characteristic]] of the Moon?
+
+Which statement correctly describes a physical [[formation]] of the Moon?
+--------------------------------------------- Result 3 ---------------------------------------------
+[[1 (38%)]] --> [[[SKIPPED]]]
+
+Which object in the solar system is orbited by a belt of asteroids?
+--------------------------------------------- Result 4 ---------------------------------------------
+[[3 (98%)]] --> [[[SKIPPED]]]
+
+Light waves that cross from an air medium to a water medium will
+--------------------------------------------- Result 5 ---------------------------------------------
+[[0 (34%)]] --> [[[SKIPPED]]]
+
+How many valence electrons does selenium have?
+--------------------------------------------- Result 6 ---------------------------------------------
+[[2 (81%)]] --> [[1 (68%)]]
+
+As a warm [[moist]] air mass moving northward collides with a strong cold air mass moving southward, what observations will most likely be made?
+
+As a warm [[temperate]] air mass moving northward collides with a strong cold air mass moving southward, what observations will most likely be made?
+--------------------------------------------- Result 7 ---------------------------------------------
+[[0 (93%)]] --> [[[SKIPPED]]]
+
+Chemical weathering occurs when minerals in rocks are changed chemically. Which of these will most likely change the rate of chemical weathering on a rock?
+--------------------------------------------- Result 8 ---------------------------------------------
+[[1 (77%)]] --> [[[SKIPPED]]]
+
+A toy truck rolls over a smooth surface. If the surface is covered with sand, the truck will most likely roll
+--------------------------------------------- Result 9 ---------------------------------------------
+[[1 (100%)]] --> [[[SKIPPED]]]
+
+A town in northern Arkansas experienced colder than normal temperatures during part of the winter. Which change was most likely responsible for this?
+--------------------------------------------- Result 10 ---------------------------------------------
+[[2 (49%)]] --> [[[SKIPPED]]]
+
+How much time is required for a bicycle to travel a distance of 100 m at an average speed of 2 m/s?
+--------------------------------------------- Result 11 ---------------------------------------------
+[[0 (97%)]] --> [[[SKIPPED]]]
+
+Which traits would a species of nocturnal predators most likely develop over time to survive in the wild?
+--------------------------------------------- Result 12 ---------------------------------------------
+[[2 (61%)]] --> [[[SKIPPED]]]
+
+22 Sandy is conducting an investigation to find out which food his dog likes best. Which is the manipulated variable in his investigation?
+--------------------------------------------- Result 13 ---------------------------------------------
+[[1 (88%)]] --> [[[SKIPPED]]]
+
+Fossil bones and teeth of dinosaurs have been researched for the last century. Recent discoveries of fossilized dinosaurs have also revealed details of soft tissues, such as skin. Which is best for a scientist to do when reporting research on dinosaurs now?
+--------------------------------------------- Result 14 ---------------------------------------------
+[[0 (51%)]] --> [[[SKIPPED]]]
+
+Nearly 100 years ago, a large volcano erupted in the South Pacific. The following year, Boston recorded measurable snow every month of the year, and most of the Northern Hemisphere experienced a cold summer. Which explains how these two events were related?
+--------------------------------------------- Result 15 ---------------------------------------------
+[[1 (96%)]] --> [[[SKIPPED]]]
+
+Nick is making a model to show how human skin covers the body. What material would work best?
+--------------------------------------------- Result 16 ---------------------------------------------
+[[2 (81%)]] --> [[[SKIPPED]]]
+
+Some animals have adapted colors and patterns that allow them to blend into their environment. Animals most likely adapted this characteristic to
+--------------------------------------------- Result 17 ---------------------------------------------
+[[1 (53%)]] --> [[[SKIPPED]]]
+
+What is the voltage in a circuit with a current of 3 ohms and a total resistance of 12?
+--------------------------------------------- Result 18 ---------------------------------------------
+[[2 (74%)]] --> [[[SKIPPED]]]
+
+If an ion has three more electrons than protons, it has a
+--------------------------------------------- Result 19 ---------------------------------------------
+[[0 (94%)]] --> [[1 (38%)]]
+
+Which alternative energy resource is produced from [[plants]]?
+
+Which alternative energy resource is produced from [[them]]?
+--------------------------------------------- Result 20 ---------------------------------------------
+[[1 (98%)]] --> [[[SKIPPED]]]
+
+A duck and turtle are different types of animals. In which way are the duck and the turtle alike?
+--------------------------------------------- Result 21 ---------------------------------------------
+[[1 (83%)]] --> [[[SKIPPED]]]
+
+In which way is the Sun different from Earth?
+--------------------------------------------- Result 22 ---------------------------------------------
+[[1 (88%)]] --> [[[SKIPPED]]]
+
+The morning temperature in a city is 41°F. If a sunny, mild day is forecast, which temperature is most likely for 2:00 p.m.?
+--------------------------------------------- Result 23 ---------------------------------------------
+[[0 (44%)]] --> [[1 (57%)]]
+
+[[Water]], ice, and steam all have different temperatures. What is the order from coldest to hottest?
+
+[[a]], ice, and steam all have different temperatures. What is the order from coldest to hottest?
+--------------------------------------------- Result 24 ---------------------------------------------
+[[1 (81%)]] --> [[[SKIPPED]]]
+
+In a forest ecosystem, the niche of a squirrel population is
+--------------------------------------------- Result 25 ---------------------------------------------
+[[3 (88%)]] --> [[[SKIPPED]]]
+
+The waves that are produced by a person's voice are similar to the waves produced by an earthquake because both are
+--------------------------------------------- Result 26 ---------------------------------------------
+[[0 (85%)]] --> [[1 (46%)]]
+
+Which activity is an example of [[conserving]] nonrenewable resources?
+
+Which activity is an example of [[conser]]: nonrenewable resources?
+--------------------------------------------- Result 27 ---------------------------------------------
+[[1 (100%)]] --> [[[SKIPPED]]]
+
+Which pair of organisms benefits each other the most?
+--------------------------------------------- Result 28 ---------------------------------------------
+[[2 (83%)]] --> [[[SKIPPED]]]
+
+An astronaut drops a 1.0 kg object and a 5.0 kg object on the Moon. Both objects fall a total distance of 2.0 m vertically. Which of the following best describes the objects after they have fallen a distance of 1.0 m?
+--------------------------------------------- Result 29 ---------------------------------------------
+[[1 (100%)]] --> [[[SKIPPED]]]
+
+What is the best way to model the effect of wind on sand dunes?
+--------------------------------------------- Result 30 ---------------------------------------------
+[[3 (89%)]] --> [[[SKIPPED]]]
+
+Some paper mills use machines that make paper without any wood called "wood-free" paper. These machines make paper from materials such as cotton and rice waste. Which problem does using wood-free paper affect most?
+--------------------------------------------- Result 31 ---------------------------------------------
+[[0 (96%)]] --> [[[SKIPPED]]]
+
+A student is investigating how light behaves when it strikes different surfaces. She has a frosted window glass pane, a clear window glass pane, a mirror, and a piece of cardboard. Which of these objects will scatter the most light?
+--------------------------------------------- Result 32 ---------------------------------------------
+[[2 (47%)]] --> [[[SKIPPED]]]
+
+A student shines a flashlight on different colors of paper. Which color of paper will absorb the most light?
+--------------------------------------------- Result 33 ---------------------------------------------
+[[3 (67%)]] --> [[0 (56%)]]
+
+In the life cycle of a [[frog]], which of the following best describes what happens after the tadpole stage?
+
+In the life cycle of a [[rana]], which of the following best describes what happens after the tadpole stage?
+--------------------------------------------- Result 34 ---------------------------------------------
+[[1 (56%)]] --> [[[SKIPPED]]]
+
+On cold days, snakes usually lie very still and eat little or nothing, while birds usually move around and eat a lot of food. Which statement best explains this?
+--------------------------------------------- Result 35 ---------------------------------------------
+[[3 (50%)]] --> [[[SKIPPED]]]
+
+Which of these do all cells release?
+--------------------------------------------- Result 36 ---------------------------------------------
+[[0 (39%)]] --> [[[SKIPPED]]]
+
+Coal is a natural material, formed from ancient organic compounds. Which element is least likely to be found in a sample of coal?
+--------------------------------------------- Result 37 ---------------------------------------------
+[[0 (61%)]] --> [[[SKIPPED]]]
+
+A student ran around a circular track. Which statement best describes the motion of the student while running?
+--------------------------------------------- Result 38 ---------------------------------------------
+[[0 (99%)]] --> [[3 (68%)]]
+
+Sound is able to travel faster in solids than in air because the [[molecules]] in a [[solid]] are
+
+Sound is able to travel faster in solids than in air because the [[is]] in a [[flowing]] are
+--------------------------------------------- Result 39 ---------------------------------------------
+[[1 (81%)]] --> [[[SKIPPED]]]
+
+Two identical sheets of paper are used in an experiment; one is crumpled into a ball and the other is flat. What will most likely happen when they are dropped at the same time from the same height?
+--------------------------------------------- Result 40 ---------------------------------------------
+[[3 (75%)]] --> [[[SKIPPED]]]
+
+Over which of the following components of smog do humans have the least control?
+--------------------------------------------- Result 41 ---------------------------------------------
+[[1 (82%)]] --> [[[SKIPPED]]]
+
+Tanya investigates which household objects are attracted to magnets. Which will help her make a conclusion?
+--------------------------------------------- Result 42 ---------------------------------------------
+[[0 (100%)]] --> [[1 (67%)]]
+
+In the design process, a [[trade-off]] occurs when a [[problem]] is solved but a [[feature]] is sacrificed. Which of the following is an example of a trade-off?
+
+In the design process, a [[trade-]]. occurs when a [[mission]] is solved but a [[design]] is sacrificed. Which of the following is an example of a trade-off?
+--------------------------------------------- Result 43 ---------------------------------------------
+[[2 (93%)]] --> [[1 (70%)]]
+
+Some marine organisms living deep in the ocean can produce their own light. The light they produce is most likely [[used]] for which of these [[activities]]?
+
+Some marine organisms living deep in the ocean can produce their own light. The light they produce is most likely [[energy]] for which of these [[activity]]?
+--------------------------------------------- Result 44 ---------------------------------------------
+[[3 (97%)]] --> [[[SKIPPED]]]
+
+When a layer of sediment is deposited on the ocean floor, what is the next step in the formation of sedimentary rocks?
+--------------------------------------------- Result 45 ---------------------------------------------
+[[2 (86%)]] --> [[[SKIPPED]]]
+
+Anna ran 100 meters in 20 seconds. What was her average speed?
+--------------------------------------------- Result 46 ---------------------------------------------
+[[0 (93%)]] --> [[1 (35%)]]
+
+[[A]] science class is divided into two groups. [[The]] first [[group]] plays loud music in a room that has thick carpet on the ceiling, walls, and floor. [[The]] second group is outside of the room but does not hear the music because the sound was
+
+[[what]] science class is divided into two groups. [[which]] first [[order]] plays loud music in a room that has thick carpet on the ceiling, walls, and floor. [[who]] second group is outside of the room but does not hear the music because the sound was
+--------------------------------------------- Result 47 ---------------------------------------------
+[[2 (55%)]] --> [[[SKIPPED]]]
+
+A simple machine makes work easier because using it ___.
+--------------------------------------------- Result 48 ---------------------------------------------
+[[3 (62%)]] --> [[[SKIPPED]]]
+
+Some students are performing hardness tests on several substances. X scratches Y. Y scratches Z. Z scratches W. Which of these statements best describes substance W's hardness?
+--------------------------------------------- Result 49 ---------------------------------------------
+[[1 (55%)]] --> [[2 (51%)]]
+
+Some factories release pollutants into the air that form acid rain. What [[determines]] where the acid rain is most likely to fall?
+
+Some factories release pollutants into the air that form acid rain. What [[defines]] where the acid rain is most likely to fall?
+--------------------------------------------- Result 50 ---------------------------------------------
+[[0 (94%)]] --> [[[SKIPPED]]]
+
+Which example best demonstrates the process of conduction?
+--------------------------------------------- Result 51 ---------------------------------------------
+[[2 (98%)]] --> [[1 (38%)]]
+
+Which statement is true about [[rocks]]?
+
+Which statement is true about [[stones]]?
+--------------------------------------------- Result 52 ---------------------------------------------
+[[0 (100%)]] --> [[2 (86%)]]
+
+Which tool would a student use to measure the [[mass]] of a brick?
+
+Which tool would a student use to measure the [[time]] of a brick?
+--------------------------------------------- Result 53 ---------------------------------------------
+[[3 (87%)]] --> [[[SKIPPED]]]
+
+In 1995, a private bus company in Washington, D.C., introduced a program to run all its tour buses with fuel obtained from soybeans. The buses are powered by
+--------------------------------------------- Result 54 ---------------------------------------------
+[[0 (40%)]] --> [[1 (33%)]]
+
+In addition to light, which other form of energy does a lightbulb [[produce]]?
+
+In addition to light, which other form of energy does a lightbulb [[producing]]?
+--------------------------------------------- Result 55 ---------------------------------------------
+[[0 (69%)]] --> [[[SKIPPED]]]
+
+Which characteristic is least likely to be affected by an individual's environment?
+--------------------------------------------- Result 56 ---------------------------------------------
+[[1 (77%)]] --> [[2 (48%)]]
+
+If you place a thermometer into a glass of [[ice]] water, what temperature should the thermometer read?
+
+If you place a thermometer into a glass of [[a]] water, what temperature should the thermometer read?
+--------------------------------------------- Result 57 ---------------------------------------------
+[[1 (52%)]] --> [[[SKIPPED]]]
+
+Where in the periodic table would shiny, malleable materials used in making jewelry be found?
+--------------------------------------------- Result 58 ---------------------------------------------
+[[3 (72%)]] --> [[[SKIPPED]]]
+
+A compass can be made by magnetizing a needle and setting it on a floating cork. The cork will turn so that the needle is pointed north. Which statement explains why the needle points north?
+--------------------------------------------- Result 59 ---------------------------------------------
+[[1 (88%)]] --> [[[SKIPPED]]]
+
+Mr. Fernandez's class is studying solutions. Which statement best describes a solution?
+--------------------------------------------- Result 60 ---------------------------------------------
+[[2 (53%)]] --> [[[SKIPPED]]]
+
+During which phase of meiosis does the separation of homologous chromosomes occur?
+--------------------------------------------- Result 61 ---------------------------------------------
+[[0 (41%)]] --> [[[SKIPPED]]]
+
+The gallbladder stores bile, a fluid that aids in digestion of fat. Which of the following types of food should be avoided by a person whose gallbladder has been removed?
+--------------------------------------------- Result 62 ---------------------------------------------
+[[1 (100%)]] --> [[[SKIPPED]]]
+
+The primary cause of continental drift, earthquakes, and volcanic eruptions is
+--------------------------------------------- Result 63 ---------------------------------------------
+[[2 (100%)]] --> [[1 (59%)]]
+
+Scientists studying a group of young sage grouse discovered a large percentage were infected with blood parasites. How will these blood parasites most likely [[affect]] the young birds?
+
+Scientists studying a group of young sage grouse discovered a large percentage were infected with blood parasites. How will these blood parasites most likely [[enter]] the young birds?
+--------------------------------------------- Result 64 ---------------------------------------------
+[[0 (56%)]] --> [[[SKIPPED]]]
+
+Which of the following statements is a scientific hypothesis?
+--------------------------------------------- Result 65 ---------------------------------------------
+[[3 (99%)]] --> [[[SKIPPED]]]
+
+A chemical change happens when
+--------------------------------------------- Result 66 ---------------------------------------------
+[[1 (99%)]] --> [[2 (55%)]]
+
+An [[atom]] can best be described as
+
+An [[electron]] can best be described as
+--------------------------------------------- Result 67 ---------------------------------------------
+[[1 (72%)]] --> [[[SKIPPED]]]
+
+Three identical seeds are planted and grown in identical pots of soil. All three pots receive equal amounts of sunlight. The plants are watered once each day. Plant A is given 10 milliliters (mL) of water. Plant B is given 20 mL of water. Plant C is given 30 mL of water. The height of each plant is measured and recorded after ten days. Which question could be answered by this experiment?
+--------------------------------------------- Result 68 ---------------------------------------------
+[[0 (60%)]] --> [[[SKIPPED]]]
+
+A researcher notices differences in the shapes of leaves on different trees of the same species. Which of these is the most accurate way to record these differences?
+--------------------------------------------- Result 69 ---------------------------------------------
+[[1 (45%)]] --> [[[SKIPPED]]]
+
+Which of the following is least likely to allow electricity to flow?
+--------------------------------------------- Result 70 ---------------------------------------------
+[[1 (55%)]] --> [[[SKIPPED]]]
+
+The voltage is held constant in an electric circuit. What will happen to the current in this circuit if the resistance is doubled?
+--------------------------------------------- Result 71 ---------------------------------------------
+[[1 (51%)]] --> [[[SKIPPED]]]
+
+Morning glories are plants that have a large amount of variation in the genes for flower color. When a white flower appears in a population independent of the trait for white flower color, what is the most likely source?
+--------------------------------------------- Result 72 ---------------------------------------------
+[[2 (52%)]] --> [[[SKIPPED]]]
+
+A student studied the growth of plants in different soil types. The best way to organize the data is by
+--------------------------------------------- Result 73 ---------------------------------------------
+[[1 (93%)]] --> [[0 (59%)]]
+
+You are getting up to go to school in Louisiana; a student on the other side of [[Earth]] is getting ready for bed. What is the [[reason]] for this?
+
+You are getting up to go to school in Louisiana; a student on the other side of [[mercury]] is getting ready for bed. What is the [[system]] for this?
+--------------------------------------------- Result 74 ---------------------------------------------
+[[3 (80%)]] --> [[2 (50%)]]
+
+A fossilized seashell is found on a [[mountain]]. This seashell [[shows]] that the mountain was once ___.
+
+A fossilized seashell is found on a [[ridge]]. This seashell [[reads]] that the mountain was once ___.
+--------------------------------------------- Result 75 ---------------------------------------------
+[[0 (35%)]] --> [[1 (37%)]]
+
+Sally placed electrodes into a beaker containing a solution and connected the electrodes to a batter. Part of Sally's report stated "Bubbles were given off at one of the electrodes." [[The]] statement is
+
+Sally placed electrodes into a beaker containing a solution and connected the electrodes to a batter. Part of Sally's report stated "Bubbles were given off at one of the electrodes." [[the]] statement is
+--------------------------------------------- Result 76 ---------------------------------------------
+[[0 (99%)]] --> [[[SKIPPED]]]
+
+A pharmaceutical company developed a drug to help relieve headaches. Recently, the pharmaceutical company discovered that the drug may cause nausea in a small number of people who might take the drug. Which is the most ethical course of action that the drug company could take?
+--------------------------------------------- Result 77 ---------------------------------------------
+[[0 (81%)]] --> [[[SKIPPED]]]
+
+Which change makes a new material?
+--------------------------------------------- Result 78 ---------------------------------------------
+[[1 (98%)]] --> [[2 (58%)]]
+
+Which of these do scientists most likely do when [[studying]] the interaction of [[animals]] in their natural habitat?
+
+Which of these do scientists most likely do when [[about]] the interaction of [[fish]] in their natural habitat?
+--------------------------------------------- Result 79 ---------------------------------------------
+[[2 (98%)]] --> [[1 (63%)]]
+
+Winds blowing inland from oceans tend to have greater moisture than winds blowing over land. [[How]] does the high moisture content affect the coastal [[area]] climate?
+
+Winds blowing inland from oceans tend to have greater moisture than winds blowing over land. [[the]] does the high moisture content affect the coastal [[human]] climate?
+--------------------------------------------- Result 80 ---------------------------------------------
+[[1 (97%)]] --> [[0 (77%)]]
+
+Patrick broke his wrist skateboarding. The doctor told Patrick to eat foods rich in vitamin [[D]] while his wrist heals. Which type of food will help Patrick's wrist heal?
+
+Patrick broke his wrist skateboarding. The doctor told Patrick to eat foods rich in vitamin [[k]] while his wrist heals. Which type of food will help Patrick's wrist heal?
+--------------------------------------------- Result 81 ---------------------------------------------
+[[0 (79%)]] --> [[1 (87%)]]
+
+A scientist is performing an experiment to determine the melting point of a new substance. Which [[action]] could increase the likelihood of obtaining accurate results?
+
+A scientist is performing an experiment to determine the melting point of a new substance. Which [[thing]] could increase the likelihood of obtaining accurate results?
+--------------------------------------------- Result 82 ---------------------------------------------
+[[0 (52%)]] --> [[[SKIPPED]]]
+
+Which of the following would most likely form a fossil?
+--------------------------------------------- Result 83 ---------------------------------------------
+[[1 (99%)]] --> [[3 (60%)]]
+
+An astronomer collects data from observations of a star. The astronomer thinks the data indicate that a large planet orbits the star. How should the astronomer [[report]] the findings to best [[support]] the scientific reliability of the data?
+
+An astronomer collects data from observations of a star. The astronomer thinks the data indicate that a large planet orbits the star. How should the astronomer [[view]] the findings to best [[determine]] the scientific reliability of the data?
+--------------------------------------------- Result 84 ---------------------------------------------
+[[0 (87%)]] --> [[[SKIPPED]]]
+
+One characteristic that is unique to water is that it
+--------------------------------------------- Result 85 ---------------------------------------------
+[[2 (55%)]] --> [[[SKIPPED]]]
+
+Molly was making iced tea by putting tea bags in boiling water. She needed to cool the hot tea quickly, so she poured it into a pitcher full of ice. Which best describes the flow of thermal energy?
+--------------------------------------------- Result 86 ---------------------------------------------
+[[2 (100%)]] --> [[[SKIPPED]]]
+
+In the equatorial Pacific Ocean, upwelling moves cold, deep sea water to the surface. This water is rich in nutrients and dissolved carbon dioxide gas. During an El Niño event, upwelling declines. This causes surface waters to rise in temperature. Which of the following is most likely to occur in the equatorial Pacific Ocean during an El Niño year?
+--------------------------------------------- Result 87 ---------------------------------------------
+[[0 (97%)]] --> [[[SKIPPED]]]
+
+Missy and Ethan discussed examples of the types of changes in matter. In which example is a chemical change taking place?
+--------------------------------------------- Result 88 ---------------------------------------------
+[[0 (94%)]] --> [[[SKIPPED]]]
+
+Which nonrenewable resource is used extensively in computers and electronics?
+--------------------------------------------- Result 89 ---------------------------------------------
+[[0 (81%)]] --> [[2 (62%)]]
+
+Which is an example of a learned [[behavior]]?
+
+Which is an example of a learned [[trait]]?
+--------------------------------------------- Result 90 ---------------------------------------------
+[[2 (97%)]] --> [[[SKIPPED]]]
+
+The Earth's Moon is
+--------------------------------------------- Result 91 ---------------------------------------------
+[[2 (54%)]] --> [[3 (51%)]]
+
+Oak tree decline is linked to the effects of pathogenic fungi, insect defoliation, soil [[chemical]] stress, and microorganism activity. Which factor is an abiotic condition that is affecting oak tree decline?
+
+Oak tree decline is linked to the effects of pathogenic fungi, insect defoliation, soil [[chemicals]] stress, and microorganism activity. Which factor is an abiotic condition that is affecting oak tree decline?
+--------------------------------------------- Result 92 ---------------------------------------------
+[[2 (82%)]] --> [[1 (79%)]]
+
+A light-year is the measure of how far light can travel in one year. How long has the light from a star 125,[[000]] light-years away been traveling to reach Earth?
+
+A light-year is the measure of how far light can travel in one year. How long has the light from a star 125,[[700]] light-years away been traveling to reach Earth?
+--------------------------------------------- Result 93 ---------------------------------------------
+[[2 (52%)]] --> [[[SKIPPED]]]
+
+One example of a living thing is
+--------------------------------------------- Result 94 ---------------------------------------------
+[[0 (95%)]] --> [[[SKIPPED]]]
+
+In science class, a student obtains 20 mL of an acid solution. A small amount of acid is added to a substance to detect the presence of copper. What should be done with the excess acid solution?
+--------------------------------------------- Result 95 ---------------------------------------------
+[[1 (60%)]] --> [[[SKIPPED]]]
+
+During which stage of its life cycle does a butterfly spend the most time eating plant leaves?
+--------------------------------------------- Result 96 ---------------------------------------------
+[[3 (100%)]] --> [[[SKIPPED]]]
+
+Which example shows a relationship between a living thing and a nonliving thing?
+--------------------------------------------- Result 97 ---------------------------------------------
+[[0 (58%)]] --> [[3 (51%)]]
+
+Which natural event [[occurs]] with the most frequency?
+
+Which natural event [[occurring]] with the most frequency?
+--------------------------------------------- Result 98 ---------------------------------------------
+[[0 (86%)]] --> [[1 (88%)]]
+
+Which of the following is the most important function of the [[research]] and development department of a large corporation?
+
+Which of the following is the most important function of the [[the]] and development department of a large corporation?
+--------------------------------------------- Result 99 ---------------------------------------------
+[[3 (97%)]] --> [[[SKIPPED]]]
+
+All galaxies in the universe
+--------------------------------------------- Result 100 ---------------------------------------------
+[[1 (47%)]] --> [[2 (51%)]]
+
+The average temperatures over a four-month period were 31, 24, 18, and [[12]] degrees Celsius. What is the median temperature for these four months?
+
+The average temperatures over a four-month period were 31, 24, 18, and [[twelve]] degrees Celsius. What is the median temperature for these four months?
+--------------------------------------------- Result 101 ---------------------------------------------
+[[0 (84%)]] --> [[[SKIPPED]]]
+
+Each student in Ms. Jordan's science class was given a beaker containing several substances that had been stirred thoroughly. Maxwell must classify the contents of his beaker as either a compound or a mixture. Which of the following would indicate that the beaker contains a mixture?
+--------------------------------------------- Result 102 ---------------------------------------------
+[[2 (91%)]] --> [[1 (99%)]]
+
+What do [[stems]] do for plants?
+
+What do [[plants]] do for plants?
+--------------------------------------------- Result 103 ---------------------------------------------
+[[0 (100%)]] --> [[[SKIPPED]]]
+
+Few flowers are able to grow on the northern arctic tundra. Those that do grow there have very short stems. How is this an adaptation to help them survive in the arctic climate?
+--------------------------------------------- Result 104 ---------------------------------------------
+[[0 (69%)]] --> [[1 (67%)]]
+
+Which of these factors [[causes]] water to evaporate the fastest?
+
+Which of these factors [[conducts]] water to evaporate the fastest?
+--------------------------------------------- Result 105 ---------------------------------------------
+[[0 (89%)]] --> [[[SKIPPED]]]
+
+Which is caused by the tilt of Earth on its axis?
+--------------------------------------------- Result 106 ---------------------------------------------
+[[0 (59%)]] --> [[2 (50%)]]
+
+Anna is holding an ice cube. Why does the [[ice]] cube melt in her hand?
+
+Anna is holding an ice cube. Why does the [[iced]] cube melt in her hand?
+--------------------------------------------- Result 107 ---------------------------------------------
+[[0 (91%)]] --> [[[SKIPPED]]]
+
+Which of the following must get nutrients from a transport system?
+--------------------------------------------- Result 108 ---------------------------------------------
+[[3 (100%)]] --> [[[SKIPPED]]]
+
+Tapeworms live in the intestines of dogs and absorb nutrients from food the dog eats. Which best describes the outcome of this relationship?
+--------------------------------------------- Result 109 ---------------------------------------------
+[[0 (86%)]] --> [[[SKIPPED]]]
+
+Bison are grazing animals. They travel across a prairie, eating grass. If there were too many bison in an area, there would probably be
+--------------------------------------------- Result 110 ---------------------------------------------
+[[3 (56%)]] --> [[[SKIPPED]]]
+
+Which statement best describes the effect of the Sun on the oceans?
+--------------------------------------------- Result 111 ---------------------------------------------
+[[2 (93%)]] --> [[[SKIPPED]]]
+
+What can cause an offspring to have a physical trait neither of its parents has?
+--------------------------------------------- Result 112 ---------------------------------------------
+[[0 (99%)]] --> [[[SKIPPED]]]
+
+Balsam fir trees in Maine have similar needle length. Why do the trees have similar needle length?
+--------------------------------------------- Result 113 ---------------------------------------------
+[[2 (100%)]] --> [[[FAILED]]]
+
+What is the role of decomposers in a food web?
+--------------------------------------------- Result 114 ---------------------------------------------
+[[1 (95%)]] --> [[[SKIPPED]]]
+
+A student uses a bar graph to display the amount of rainfall per week over a 3-month period. Which other method of presentation is appropriate for the data?
+--------------------------------------------- Result 115 ---------------------------------------------
+[[0 (78%)]] --> [[1 (100%)]]
+
+[[Gravity]] on Earth is caused by
+
+[[ll]] on Earth is caused by
+--------------------------------------------- Result 116 ---------------------------------------------
+[[0 (100%)]] --> [[[SKIPPED]]]
+
+Monica grows vegetable plants in her garden. The plants have holes in their leaves and look unhealthy. Which task should Monica do first to solve this problem?
+--------------------------------------------- Result 117 ---------------------------------------------
+[[0 (99%)]] --> [[2 (60%)]]
+
+[[Although]] a model for the [[passing]] of genetic traits was proposed in the 19th century, it wasn't until the 20th century that scientists learned the role of [[DNA]] and genes in trait inheritance. This advance in scientific understanding most likely resulted from which of the [[following]]?
+
+[[originally]] a model for the [[mean]] of genetic traits was proposed in the 19th century, it wasn't until the 20th century that scientists learned the role of [[genes]] and genes in trait inheritance. This advance in scientific understanding most likely resulted from which of the [[p]]?
+--------------------------------------------- Result 118 ---------------------------------------------
+[[3 (46%)]] --> [[0 (75%)]]
+
+An atom of beryllium has 4 protons, 4 electrons, and 5 neutrons. What is its [[mass]] number?
+
+An atom of beryllium has 4 protons, 4 electrons, and 5 neutrons. What is its [[the]] number?
+--------------------------------------------- Result 119 ---------------------------------------------
+[[0 (100%)]] --> [[[SKIPPED]]]
+
+What happens to a wooden log when it is burned?
+--------------------------------------------- Result 120 ---------------------------------------------
+[[3 (82%)]] --> [[[SKIPPED]]]
+
+Electricians wear rubber boots and gloves while working with circuits. The main reason for this is because
+--------------------------------------------- Result 121 ---------------------------------------------
+[[0 (94%)]] --> [[1 (84%)]]
+
+Which best explains why it is [[important]] to perform repeated trials of an experiment?
+
+Which best explains why it is [[different]] to perform repeated trials of an experiment?
+--------------------------------------------- Result 122 ---------------------------------------------
+[[2 (94%)]] --> [[0 (50%)]]
+
+Nevada's annual precipitation averages between 21 and 24 cm. In comparison, Washington state averages between 96 and 97 cm of precipitation per year. [[Which]] of these factors has the greatest impact on the [[difference]] in [[precipitation]] between these two states?
+
+Nevada's annual precipitation averages between 21 and 24 cm. In comparison, Washington state averages between 96 and 97 cm of precipitation per year. [[have]] of these factors has the greatest impact on the [[differences]] in [[climate]] between these two states?
+--------------------------------------------- Result 123 ---------------------------------------------
+[[1 (100%)]] --> [[0 (100%)]]
+
+Which [[method]] should be used to determine the [[type]] of popcorn that produces the greatest number of popped kernels?
+
+Which [[point]] should be used to determine the [[route]] of popcorn that produces the greatest number of popped kernels?
+--------------------------------------------- Result 124 ---------------------------------------------
+[[1 (82%)]] --> [[0 (52%)]]
+
+A mouse is placed at one end of a cardboard maze that has a piece of cheese at the other end. The mouse smells the [[cheese]] and learns how to [[find]] it. The mouse is using an
+
+A mouse is placed at one end of a cardboard maze that has a piece of cheese at the other end. The mouse smells the [[place]] and learns how to [[identify]] it. The mouse is using an
+--------------------------------------------- Result 125 ---------------------------------------------
+[[3 (55%)]] --> [[[SKIPPED]]]
+
+Ethanol is a type of alcohol made from plants. Sugarcane and corn, which are both used in foods such as cereals and breads, are used to make ethanol. Burning ethanol provides a clean source of energy because the products of ethanol are water and carbon dioxide. Therefore, mixing ethanol with gasoline reduces harmful waste products. In the 1970s, many Brazilians drove cars with engines that used an ethanol gasoline mixture. This alternative fuel conserved the limited supply of gasoline available at that time. In the 1990s, gasoline became cheaper than ethanol, and Brazilians returned to driving more gasoline-fueled cars. Recently, Brazilians started driving more cars that use an ethanol-gasoline mixture. Which group would benefit most if drivers in the United States fueled their vehicles with an ethanol-gasoline mixture?
+--------------------------------------------- Result 126 ---------------------------------------------
+[[0 (95%)]] --> [[3 (64%)]]
+
+Which of these is a [[way]] that sunglasses help protect the eyes?
+
+Which of these is a [[if]] that sunglasses help protect the eyes?
+--------------------------------------------- Result 127 ---------------------------------------------
+[[3 (71%)]] --> [[[SKIPPED]]]
+
+Scientists studied largemouth bass populations in several different geographic locations. They recorded information about the size, number, and weight of fish in each population. Which of the following will be best suited for recording these data?
+--------------------------------------------- Result 128 ---------------------------------------------
+[[3 (96%)]] --> [[2 (55%)]]
+
+Students conduct an investigation with 20 of the same tomato plants. Each plant receives the same amount of water but different amounts of sunlight. The students measure the number of fruits on each plant every day. What is the [[dependent]] variable in this investigation?
+
+Students conduct an investigation with 20 of the same tomato plants. Each plant receives the same amount of water but different amounts of sunlight. The students measure the number of fruits on each plant every day. What is the [[depend]] variable in this investigation?
+--------------------------------------------- Result 129 ---------------------------------------------
+[[0 (74%)]] --> [[3 (53%)]]
+
+What is the major process of surface rock formation on [[volcanoes]]?
+
+What is the major process of surface rock formation on [[eruptions]]?
+--------------------------------------------- Result 130 ---------------------------------------------
+[[0 (100%)]] --> [[[FAILED]]]
+
+Which is an example of a physical change?
+--------------------------------------------- Result 131 ---------------------------------------------
+[[0 (63%)]] --> [[[SKIPPED]]]
+
+A predator is an animal that feeds on other animals. Which of these is a predator?
+--------------------------------------------- Result 132 ---------------------------------------------
+[[0 (54%)]] --> [[[SKIPPED]]]
+
+When estimating amounts of building supplies, it is better to allow for some waste and error rather than to cause delays by not ordering sufficient supplies. An engineer is estimating the number of bundles of shingles needed for a roof area of approximately 2000 sq. ft. In roofing, a square is 100 sq. ft., and each bundle covers one-third of a square. Which of the following is closest to the number of bundles that the engineer should order?
+--------------------------------------------- Result 133 ---------------------------------------------
+[[2 (96%)]] --> [[[SKIPPED]]]
+
+The radiant energy that comes to Earth from the Sun is
+--------------------------------------------- Result 134 ---------------------------------------------
+[[1 (91%)]] --> [[[SKIPPED]]]
+
+Which item can safely be reused after an investigation?
+--------------------------------------------- Result 135 ---------------------------------------------
+[[2 (73%)]] --> [[[SKIPPED]]]
+
+Students shake salt into a jar of water, and they shake pepper into a second jar of water. Which statement best compares the two jars?
+--------------------------------------------- Result 136 ---------------------------------------------
+[[0 (47%)]] --> [[[SKIPPED]]]
+
+Two identical containers each hold one liter of water. One container is kept at room temperature as a liquid. The other container is placed in a freezer and kept as a solid. Which property is most likely to be the same in both states of matter?
+--------------------------------------------- Result 137 ---------------------------------------------
+[[1 (95%)]] --> [[[SKIPPED]]]
+
+To determine how closely related organisms are, scientists consider all of the following except
+--------------------------------------------- Result 138 ---------------------------------------------
+[[1 (100%)]] --> [[[SKIPPED]]]
+
+What role do ribosomes play in the central dogma of molecular biology?
+--------------------------------------------- Result 139 ---------------------------------------------
+[[1 (96%)]] --> [[[SKIPPED]]]
+
+Energy changes form or is transferred through the action of forces. An example of kinetic energy changing to potential energy is
+--------------------------------------------- Result 140 ---------------------------------------------
+[[1 (40%)]] --> [[0 (35%)]]
+
+Based on its position in the Periodic Table of the Elements, how many valence electrons does [[phosphorus]] (atomic number 15) have?
+
+Based on its position in the Periodic Table of the Elements, how many valence electrons does [[p]] (atomic number 15) have?
+--------------------------------------------- Result 141 ---------------------------------------------
+[[0 (68%)]] --> [[[SKIPPED]]]
+
+As the human population grows, the demand for natural resources increases. Which activity wastes a natural resource?
+--------------------------------------------- Result 142 ---------------------------------------------
+[[2 (85%)]] --> [[0 (56%)]]
+
+Naomi has a [[pet]] dog. Which of the following characteristics did the dog most [[likely]] inherit from its parents?
+
+Naomi has a [[large]] dog. Which of the following characteristics did the dog most [[suggest]] inherit from its parents?
+--------------------------------------------- Result 143 ---------------------------------------------
+[[0 (70%)]] --> [[2 (60%)]]
+
+A fish in a pond has longer protective spines than any other fish of its species. The spines keep the fish safe from predators. The fish has many offspring, which also have long spines. Which statement best [[describes]] what happened?
+
+A fish in a pond has longer protective spines than any other fish of its species. The spines keep the fish safe from predators. The fish has many offspring, which also have long spines. Which statement best [[explain]] what happened?
+--------------------------------------------- Result 144 ---------------------------------------------
+[[0 (98%)]] --> [[[SKIPPED]]]
+
+Gas and oil come from deposits of petroleum deep within the earth. What caused these deposits to form?
+--------------------------------------------- Result 145 ---------------------------------------------
+[[1 (83%)]] --> [[[SKIPPED]]]
+
+Which of these describes the property of being a thermal insulator?
+--------------------------------------------- Result 146 ---------------------------------------------
+[[0 (62%)]] --> [[[SKIPPED]]]
+
+Which describes only a physical change?
+--------------------------------------------- Result 147 ---------------------------------------------
+[[3 (94%)]] --> [[1 (65%)]]
+
+Hydrogen has an atomic mass of 1, and oxygen has an atomic mass of 16. When a water molecule forms, two hydrogen atoms combine with one oxygen atom. What is the [[mass]] of a water molecule?
+
+Hydrogen has an atomic mass of 1, and oxygen has an atomic mass of 16. When a water molecule forms, two hydrogen atoms combine with one oxygen atom. What is the [[gravity]] of a water molecule?
